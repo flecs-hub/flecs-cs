@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <!-- MSBuild settings -->
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <!-- flecs: bindings + native library -->
+    <Import Project="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)/../../../../flecs.props'))" />
+
+</Project>

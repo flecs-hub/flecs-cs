@@ -1,0 +1,10 @@
+{
+    "directory": "./ast",
+    "c": {
+      "input_file": "./ext/flecs/include/flecs.h",
+      "platforms": {
+        "aarch64-apple-darwin": {},
+        "x86_64-apple-darwin": {}
+      }
+    }
+}

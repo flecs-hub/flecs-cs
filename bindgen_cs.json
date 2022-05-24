@@ -1,0 +1,12 @@
+{
+  "directory": "./ast",
+  "cs": {
+    "output_file": "./src/cs/production/flecs/flecs.cs",
+    "namespace": "flecs_hub",
+    "library_name": "flecs",
+    "ignored_names": [
+      "FLECS_FLOAT",
+      "ECS_FUNC_NAME_BACK"
+    ]
+  }
+}

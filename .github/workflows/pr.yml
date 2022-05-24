@@ -1,0 +1,21 @@
+name: "Pull request"
+
+on:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+    paths-ignore:
+      - '**.md'
+
+jobs:
+
+  bindgen-job:
+    uses: "./.github/workflows/bindgen.yml"
+
+  commit-job:
+    needs: [bindgen-job]
+    if: github.actor == 'dependabot[bot]'
+    uses: "./.github/workflows/commit.yml"
+
+  build-job:
+    needs: [bindgen-job]
+    uses: "./.github/workflows/build.yml"

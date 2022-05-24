@@ -1,0 +1,3 @@
+[submodule "ext/flecs"]
+	path = ext/flecs
+	url = https://github.com/SanderMertens/flecs
