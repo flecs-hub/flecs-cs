@@ -17,5 +17,6 @@ jobs:
     uses: "./.github/workflows/commit.yml"
 
   build-job:
-    needs: [bindgen-job]
+    needs: [bindgen-job, commit-job]
+    if: always()
     uses: "./.github/workflows/build.yml"
