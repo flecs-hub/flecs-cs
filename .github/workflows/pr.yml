@@ -11,12 +11,11 @@ jobs:
   bindgen-job:
     uses: "./.github/workflows/bindgen.yml"
 
-  commit-job:
+  build-job:
     needs: [bindgen-job]
+    uses: "./.github/workflows/build.yml"
+
+  commit-job:
+    needs: [bindgen-job, build-job]
     if: github.actor == 'dependabot[bot]'
     uses: "./.github/workflows/commit.yml"
-
-  build-job:
-    needs: [bindgen-job, commit-job]
-    if: always()
-    uses: "./.github/workflows/build.yml"
