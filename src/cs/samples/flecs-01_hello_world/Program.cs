@@ -1,12 +1,4 @@
-﻿// Copyright (c) Bottlenose Labs Inc. (https://github.com/bottlenoselabs). All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
-
-using System;
-using System.Runtime.InteropServices;
-using static bottlenoselabs.flecs;
-using static bottlenoselabs.flecs.Runtime;
-
-internal static unsafe class Program
+﻿internal static unsafe class Program
 {
     private static int Main(string[] args)
     {
@@ -41,7 +33,7 @@ internal static unsafe class Program
 
     private static class Components
     {
-        [StructLayout(LayoutKind.Sequential)] // Necessary so C# is not allowed to reorganize the struct
+        [StructLayout(LayoutKind.Sequential)] // Necessary so the C# compiler is not allowed to reorganize the struct
         public struct Position
         {
             public double X;

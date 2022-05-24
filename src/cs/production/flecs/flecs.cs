@@ -14,9 +14,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-using static bottlenoselabs.flecs.Runtime;
+using static flecs_hub.flecs.Runtime;
 
-namespace bottlenoselabs
+namespace flecs_hub
 {
     public static unsafe partial class flecs
     {

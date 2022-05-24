@@ -6,9 +6,9 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using static bottlenoselabs.flecs.Runtime;
+using static flecs_hub.flecs.Runtime;
 
-namespace bottlenoselabs
+namespace flecs_hub
 {
     public static unsafe partial class flecs
     {
@@ -21,7 +21,7 @@ namespace bottlenoselabs
         }
 
         public static ecs_entity_t ecs_entity_init(
-            ecs_world_t* world, CString name, Span<ecs_id_t> componentIds)
+            ecs_world_t* world, Runtime.CString name, Span<ecs_id_t> componentIds)
         {
             var entityDescriptor = new ecs_entity_desc_t
             {
@@ -54,7 +54,7 @@ namespace bottlenoselabs
         {
             var componentType = typeof(TComponent);
             var componentName = componentType.Name;
-            var componentNameC = CStrings.String(componentName);
+            var componentNameC = Runtime.CStrings.String(componentName);
             var structLayoutAttribute = componentType.StructLayoutAttribute;
             CheckStructLayout(structLayoutAttribute);
             var structAlignment = structLayoutAttribute!.Pack;
