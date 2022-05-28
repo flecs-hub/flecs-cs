@@ -5,7 +5,7 @@
     <_GitDirectoryPath>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), .gitignore))/</_GitDirectoryPath>
     <_LibraryDirectoryPath>$(_GitDirectoryPath)/lib</_LibraryDirectoryPath>
     <_SourceCodeDirectoryPath>$(_GitDirectoryPath)/src/cs/production/$(_LibraryName)/</_SourceCodeDirectoryPath>
-    <_LinkDirectoryPath>flecs_hub/$(_LibraryName)/</_LinkDirectoryPath>
+    <_LinkDirectoryPath>$(_LibraryName)/</_LinkDirectoryPath>
   </PropertyGroup>
 
   <!-- C# source code-->
@@ -18,6 +18,7 @@
     <Compile Remove="$(_SourceCodeDirectoryPath)/bin/**/*.cs" />
   </ItemGroup>
 
+  <!-- Implicit global usings-->
   <ItemGroup Condition=" '$(ImplicitUsings)' == 'true' ">
     <Using Include="System.Runtime.InteropServices" />
     <Using Include="flecs_hub" />

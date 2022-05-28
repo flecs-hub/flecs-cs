@@ -43,6 +43,6 @@
 
     private static class Entities
     {
-        public static readonly CString MyEntity = "MyEntity";
+        public static readonly flecs.Runtime.CString MyEntity = "MyEntity";
     }
 }
