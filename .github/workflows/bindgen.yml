@@ -38,13 +38,13 @@ jobs:
 
       - name: "Read C code"
         shell: bash
-        run: c2cs c --configurationFilePath "./bindgen_ast_${{ matrix.platform.rid }}.json"
+        run: c2cs c --configurationFilePath "./bindgen/ast_${{ matrix.platform.rid }}.json"
 
       - name: "Upload C code abstract syntax trees"
         uses: actions/upload-artifact@v2
         with:
           name: "ast-${{ matrix.platform.rid }}"
-          path: "./ast"
+          path: "./bindgen/ast"
 
   bindgen-cs-job:
     name: "Bindgen C#"
@@ -61,19 +61,19 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: "ast-win"
-          path: "./ast"
+          path: "./bindgen/ast"
 
       - name: "Download C code abstrast syntax trees (osx)"
         uses: actions/download-artifact@v1
         with:
           name: "ast-osx"
-          path: "./ast"
+          path: "./bindgen/ast"
 
       - name: "Download C code abstrast syntax trees (linux)"
         uses: actions/download-artifact@v1
         with:
           name: "ast-linux"
-          path: "./ast"
+          path: "./bindgen/ast"
 
       - name: "Install .NET"
         uses: actions/setup-dotnet@v1
@@ -87,7 +87,7 @@ jobs:
 
       - name: "Generate C# code"
         shell: bash
-        run: c2cs cs --configurationFilePath "./bindgen_cs.json"
+        run: c2cs cs --configurationFilePath "./bindgen/cs.json"
 
       - name: "Upload generated C# code"
         uses: actions/upload-artifact@v2

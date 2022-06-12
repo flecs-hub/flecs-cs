@@ -16,7 +16,7 @@ namespace flecs_hub
         {
             var argv = CStrings.CStringArray(args);
             var world = ecs_init_w_args(args.Length, argv);
-            Runtime.CStrings.FreeCStrings(argv, args.Length);
+            CStrings.FreeCStrings(argv, args.Length);
             return world;
         }
 
@@ -89,13 +89,13 @@ namespace flecs_hub
             return ref Unsafe.AsRef<T>(pointer);
         }
 
-        // public static Span<T> ecs_term<T>(ecs_iter_t* it, int index)
-        //     where T : unmanaged
-        // {
-        //     var structSize = Unsafe.SizeOf<T>();
-        //     var pointer = ecs_term_w_size(it, (ulong) structSize, index);
-        //     return new Span<T>(pointer, it->count);
-        // }
+        public static Span<T> ecs_term<T>(ecs_iter_t* it, int index)
+            where T : unmanaged
+        {
+            var structSize = Unsafe.SizeOf<T>();
+            var pointer = ecs_term_w_size(it, (ulong) structSize, index);
+            return new Span<T>(pointer, it->count);
+        }
 
         private static void CheckStructLayout(StructLayoutAttribute? structLayoutAttribute)
         {
