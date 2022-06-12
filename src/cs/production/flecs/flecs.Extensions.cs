@@ -63,8 +63,11 @@ namespace flecs_hub
             var componentDescriptor = new ecs_component_desc_t
             {
                 entity = { name = componentNameC },
-                size = (ulong)structSize,
-                alignment = (ulong)structAlignment
+                type = new ecs_type_info_t
+                {
+                    size = structSize,
+                    alignment = structAlignment
+                }
             };
 
             return ecs_component_init(world, &componentDescriptor);
