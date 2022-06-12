@@ -8,7 +8,9 @@
         <ImplicitUsings>true</ImplicitUsings>
     </PropertyGroup>
 
-    <!-- flecs: bindings + native library -->
-    <Import Project="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)/../../../../flecs.props'))" />
+    <!-- Project references -->
+    <ItemGroup>
+      <ProjectReference Include="../../production/flecs/flecs.csproj" />
+    </ItemGroup>
 
 </Project>
