@@ -54,7 +54,7 @@ namespace flecs_hub
         {
             var componentType = typeof(TComponent);
             var componentName = componentType.Name;
-            var componentNameC = Runtime.CStrings.String(componentName);
+            var componentNameC = CStrings.String(componentName);
             var structLayoutAttribute = componentType.StructLayoutAttribute;
             CheckStructLayout(structLayoutAttribute);
             var structAlignment = structLayoutAttribute!.Pack;
@@ -62,12 +62,12 @@ namespace flecs_hub
 
             var componentDescriptor = new ecs_component_desc_t
             {
-                entity = { name = componentNameC },
-                type = new ecs_type_info_t
+                entity =
                 {
-                    size = structSize,
-                    alignment = structAlignment
-                }
+                    name = componentNameC,
+                },
+                size = (ulong)structSize,
+                alignment = (ulong)structAlignment
             };
 
             return ecs_component_init(world, &componentDescriptor);

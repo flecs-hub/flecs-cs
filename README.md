@@ -12,7 +12,7 @@ Automatically updated C# bindings for https://github.com/SanderMertens/flecs wit
 4. Import the MSBuild `flecs.props` file which is located in the root of this directory to your `.csproj` file to setup everything you need. See the [hello world sample](src/cs/examples/flecs-01_hello_world/flecs-01_hello_world.csproj) for an example of how to do this.
 ```xml
 <!-- flecs: bindings + native library -->
-<Import Project="$([System.IO.Path]::GetFullPath('path/to/flecs.props'))" />
+<Import Project="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)relative/path/to/flecs.props'))" />
 ```
 
 ## Developers: Documentation

@@ -1,5 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <ItemGroup>
+        <None Include="*.cs" />
+        <Compile Remove="*.cs" />
+    </ItemGroup>
+    
+    <Import Project="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../../../flecs.props'))" />
+    
     <!-- MSBuild settings -->
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
