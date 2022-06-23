@@ -1,4 +1,7 @@
-﻿internal static unsafe class Program
+﻿using System.Runtime.InteropServices;
+using static flecs_hub.flecs;
+
+internal static unsafe class Program
 { 
     /* Move system implementation. System callbacks may be called multiple times,
      * as entities are grouped by which components they have, and each group has
@@ -69,6 +72,6 @@
 
     private static class Entities
     {
-        public static readonly flecs.Runtime.CString MyEntity = "MyEntity";
+        public static readonly Runtime.CString MyEntity = "MyEntity";
     }
 }
