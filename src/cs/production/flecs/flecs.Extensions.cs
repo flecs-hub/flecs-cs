@@ -66,8 +66,11 @@ namespace flecs_hub
                 {
                     name = componentNameC,
                 },
-                size = (ulong)structSize,
-                alignment = (ulong)structAlignment
+                type =
+                {
+                    size = structSize,
+                    alignment = structAlignment
+                }
             };
 
             return ecs_component_init(world, &componentDescriptor);
