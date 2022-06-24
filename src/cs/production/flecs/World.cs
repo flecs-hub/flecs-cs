@@ -118,7 +118,7 @@ public unsafe class World
         data.Callback(context);
     }
 
-    public ecs_entity_t CreateEntity(string name)
+    public ecs_entity_t InitializeEntity(string name)
     {
         var desc = default(ecs_entity_desc_t);
         desc.name = name;

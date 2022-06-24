@@ -30,7 +30,7 @@ internal static class Program
         // // ecs_os_free(type_str);
 
         // Iterate entities for the current group 
-        for (var i = 0; i < iterator.Count; i ++)
+        for (var i = 0; i < iterator.Count; i++)
         {
             ref var position = ref p[i];
             var velocity = v[i];
@@ -58,7 +58,7 @@ internal static class Program
         var pears = world.InitializeTag("pears");
 
         // Create an entity with name Bob, add Position and food preference
-        var bob = world.CreateEntity("Bob");
+        var bob = world.InitializeEntity("Bob");
         world.SetComponent(bob, componentPosition, new Position { X = 0, Y = 0 });
         world.SetComponent(bob, componentVelocity, new Velocity { X = 2, Y = 2 });
         world.AddPair(bob, eats, apples);
