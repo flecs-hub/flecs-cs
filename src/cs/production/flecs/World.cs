@@ -39,7 +39,7 @@ public unsafe class World
         return exitCode;
     }
 
-    public ecs_entity_t RegisterComponent<TComponent>()
+    public ecs_entity_t InitializeComponent<TComponent>()
         where TComponent : unmanaged
     {
         var componentType = typeof(TComponent);
@@ -58,6 +58,31 @@ public unsafe class World
         desc.type.alignment = structAlignment;
         id = ecs_component_init(_worldHandle, &desc);
         Debug.Assert(id.Data.Data != 0, "ECS_INVALID_PARAMETER");
+        return id;
+    }
+
+    public ecs_entity_t InitializeSystem(SystemCallback callback, string? filterExpression = null)
+    {
+        var id = new ecs_entity_t();
+        ecs_system_desc_t desc = default;
+        desc.entity.name = "Test";
+        var phase = EcsOnUpdate;
+        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        desc.entity.add[1] = phase;
+        desc.query.filter.expr = filterExpression ?? string.Empty;
+        desc.callback.Data.Pointer = &SystemCallback;
+        desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(callback);
+
+        id = ecs_system_init(_worldHandle, &desc);
+        return id;
+    }
+    
+    public ecs_entity_t InitializeTag(string name)
+    {
+        ecs_entity_desc_t desc = default;
+        desc.name = name;
+        var id = ecs_entity_init(_worldHandle, &desc);
+        Debug.Assert(id.Data != 0, "ECS_INVALID_PARAMETER");
         return id;
     }
 
@@ -84,22 +109,6 @@ public unsafe class World
         return result;
     }
 
-    public ecs_entity_t RegisterSystem(SystemCallback callback, string? filterExpression = null)
-    {
-        var id = new ecs_entity_t();
-        ecs_system_desc_t desc = default;
-        desc.entity.name = "Test";
-        var phase = EcsOnUpdate;
-        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
-        desc.entity.add[1] = phase;
-        desc.query.filter.expr = filterExpression ?? string.Empty;
-        desc.callback.Data.Pointer = &SystemCallback;
-        desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(callback);
-
-        id = ecs_system_init(_worldHandle, &desc);
-        return id;
-    }
-
     [UnmanagedCallersOnly]
     private static void SystemCallback(ecs_iter_t* it)
     {
@@ -108,16 +117,7 @@ public unsafe class World
         var context = new Iterator(it);
         data.Callback(context);
     }
-    
-    public ecs_entity_t Tag(string name)
-    {
-        ecs_entity_desc_t desc = default;
-        desc.name = name;
-        var id = ecs_entity_init(_worldHandle, &desc);
-        Debug.Assert(id.Data != 0, "ECS_INVALID_PARAMETER");
-        return id;
-    }
-    
+
     public ecs_entity_t CreateEntity(string name)
     {
         var desc = default(ecs_entity_desc_t);
