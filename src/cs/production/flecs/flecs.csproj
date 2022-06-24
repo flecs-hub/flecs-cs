@@ -10,7 +10,6 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <RootNamespace>flecs_hub</RootNamespace>
         <ImplicitUsings>false</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>

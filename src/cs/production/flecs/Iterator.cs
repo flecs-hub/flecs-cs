@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.CompilerServices;
+using static flecs_hub.flecs;
 
-namespace flecs_hub;
-using static flecs;
+namespace flecs;
 
 public readonly unsafe struct Iterator
 {

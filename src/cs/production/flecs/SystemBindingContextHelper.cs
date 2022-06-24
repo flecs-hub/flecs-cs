@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace flecs_hub;
+namespace flecs;
 
 internal static class SystemBindingContextHelper
 {

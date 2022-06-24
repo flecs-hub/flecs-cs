@@ -2,9 +2,10 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using flecs_hub;
+using static flecs_hub.flecs;
 
-namespace flecs_hub;
-using static flecs;
+namespace flecs;
 
 public unsafe class World
 {
@@ -19,7 +20,10 @@ public unsafe class World
 
     public World(string[] args)
     {
-        _worldHandle = ecs_init_w_args(args);
+        var argv = args.Length == 0 ? default : Runtime.CStrings.CStringArray(args);
+        _worldHandle = ecs_init_w_args(args.Length, argv);
+        Runtime.CStrings.FreeCStrings(argv, args.Length);
+;
         _libraryHandle = CLibrary.Load("libflecs.dylib");
 
         var ecsPair = CLibrary.GetExport(_libraryHandle, "ECS_PAIR");
@@ -46,6 +50,7 @@ public unsafe class World
         var componentName = componentType.Name;
         var componentNameC = Runtime.CStrings.CString(componentName);
         var structLayoutAttribute = componentType.StructLayoutAttribute;
+        CheckStructLayout(structLayoutAttribute);
         var structSize = Unsafe.SizeOf<TComponent>();
         var structAlignment = structLayoutAttribute!.Pack;
 
@@ -86,16 +91,22 @@ public unsafe class World
         return id;
     }
 
-    public ref T GetComponent<T>(ecs_entity_t entity, ecs_id_t id)
-        where T : unmanaged
+    public ref TComponent GetComponent<TComponent>(ecs_entity_t entity, ecs_id_t id)
+        where TComponent : unmanaged
     {
+        var componentType = typeof(TComponent);
+        var structLayoutAttribute = componentType.StructLayoutAttribute;
+        CheckStructLayout(structLayoutAttribute);
         var pointer = ecs_get_id(_worldHandle, entity, id);
-        return ref Unsafe.AsRef<T>(pointer);
+        return ref Unsafe.AsRef<TComponent>(pointer);
     }
     
     public ecs_entity_t SetComponent<TComponent>(ecs_entity_t entity, ecs_id_t componentId, ref TComponent component)
         where TComponent : unmanaged
     {
+        var componentType = typeof(TComponent);
+        var structLayoutAttribute = componentType.StructLayoutAttribute;
+        CheckStructLayout(structLayoutAttribute);
         var structSize = Unsafe.SizeOf<TComponent>();
         var pointer = Unsafe.AsPointer(ref component);
         var result = ecs_set_id(_worldHandle, entity, componentId, (ulong)structSize, pointer);
@@ -147,5 +158,14 @@ public unsafe class World
     private ulong ecs_entity_t_comb(ulong lo, ulong hi)
     {
         return (hi << 32) + lo;
+    }
+
+    private static void CheckStructLayout(StructLayoutAttribute? structLayoutAttribute)
+    {
+        if (structLayoutAttribute == null || structLayoutAttribute.Value == LayoutKind.Auto)
+        {
+            throw new FlecsException(
+                "Component must have a StructLayout attribute with LayoutKind sequential or explicit. This is to ensure that the struct fields are not reorganized by the C# compiler.");
+        }
     }
 }

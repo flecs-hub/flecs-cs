@@ -1,17 +1,14 @@
-﻿using System.Runtime.InteropServices;
-using flecs_hub;
+﻿using flecs_hub;
 
 internal static class Program
 {
-    [StructLayout(LayoutKind.Sequential)] // Necessary so the C# compiler is not allowed to reorganize the struct
-    public struct Position
+    struct Position
     {
         public double X;
         public double Y;
     }
 
-    [StructLayout(LayoutKind.Sequential)] // Necessary so the C# compiler is not allowed to reorganize the struct
-    public struct Velocity
+    struct Velocity
     {
         public double X;
         public double Y;
