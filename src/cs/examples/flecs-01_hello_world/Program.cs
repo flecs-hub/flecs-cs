@@ -33,7 +33,7 @@ internal static class Program
         for (var i = 0; i < iterator.Count; i ++)
         {
             ref var position = ref p[i];
-            ref var velocity = ref v[i];
+            var velocity = v[i];
 
             position.X += velocity.X;
             position.Y += velocity.Y;
