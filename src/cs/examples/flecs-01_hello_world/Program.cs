@@ -1,4 +1,4 @@
-﻿using flecs_hub;
+﻿using flecs;
 
 internal static class Program
 {
