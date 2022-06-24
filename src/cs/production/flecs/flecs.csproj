@@ -1,10 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-    <ItemGroup>
-        <None Include="*.cs" />
-        <Compile Remove="*.cs" />
-    </ItemGroup>
     
+    <!-- flecs -->
+    <PropertyGroup>
+        <_IsEnabledSourceCode>false</_IsEnabledSourceCode>
+    </PropertyGroup>
     <Import Project="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../../../flecs.props'))" />
     
     <!-- MSBuild settings -->
@@ -13,6 +12,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <RootNamespace>flecs_hub</RootNamespace>
         <ImplicitUsings>false</ImplicitUsings>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
 </Project>
