@@ -18,7 +18,7 @@ internal static class Program
     {
         var world = new World(args);
 
-        var bob = world.InitializeEntity("Bob");
+        var bob = world.CreateEntity("Bob");
         bob.SetComponent(new Position { X = 10, Y = 20 });
         bob.AddTag<Walking>();
 
@@ -31,7 +31,7 @@ internal static class Program
 
         bob.SetComponent(new Position { X = 20, Y = 30 });
 
-        var alice = world.InitializeEntity("Alice");
+        var alice = world.CreateEntity("Alice");
         alice.SetComponent(new Position { X = 10, Y = 20 });
         alice.AddTag<Walking>();
 

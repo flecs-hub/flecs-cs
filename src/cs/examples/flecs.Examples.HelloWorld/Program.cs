@@ -57,10 +57,10 @@ internal static class Program
         var world = new World(args);
 
         // Register system
-        world.InitializeSystem<Position, Velocity>(Move);
+        world.RegisterSystem<Position, Velocity>(Move);
 
         // Create an entity with name Bob, add Position and food preference
-        var bob = world.InitializeEntity("Bob");
+        var bob = world.CreateEntity("Bob");
         bob.SetComponent(new Position { X = 0, Y = 0 });
         bob.SetComponent(new Velocity { X = 2, Y = 2 });
         bob.AddPair<Eats, Apples>();

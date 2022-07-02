@@ -37,7 +37,7 @@ public unsafe class World
         return exitCode;
     }
 
-    public void InitializeComponent<TComponent>()
+    public void RegisterComponent<TComponent>()
         where TComponent : unmanaged
     {
         var type = typeof(TComponent);
@@ -60,7 +60,7 @@ public unsafe class World
         _componentIdentifiersByType[typeof(TComponent)] = id;
     }
 
-    public void InitializeTag<TTag>()
+    public void RegisterTag<TTag>()
         where TTag : unmanaged, ITag
     {
         ecs_entity_desc_t desc = default;
@@ -72,7 +72,7 @@ public unsafe class World
         _tagIdentifiersByType[type] = id;
     }
 
-    public ecs_entity_t InitializeSystem(
+    public ecs_entity_t RegisterSystem(
         SystemCallback callback, ecs_entity_t phase, string filterExpression, string? name = null)
     {
         ecs_system_desc_t desc = default;
@@ -84,7 +84,7 @@ public unsafe class World
         return id;
     }
 
-    public ecs_entity_t InitializeSystem<TComponent1>(
+    public ecs_entity_t RegisterSystem<TComponent1>(
         SystemCallback callback, ecs_entity_t phase, string? name = null)
     {
         ecs_system_desc_t desc = default;
@@ -96,7 +96,7 @@ public unsafe class World
         return id;
     }
 
-    public ecs_entity_t InitializeSystem<TComponent1, TComponent2>(
+    public ecs_entity_t RegisterSystem<TComponent1, TComponent2>(
         SystemCallback callback, string? name = null)
     {
         var id = default(ecs_entity_t);
@@ -135,7 +135,7 @@ public unsafe class World
         data.Callback(iterator);
     }
 
-    public Entity InitializeEntity(string name)
+    public Entity CreateEntity(string name)
     {
         var desc = default(ecs_entity_desc_t);
         desc.name = name;
@@ -188,7 +188,7 @@ public unsafe class World
             return value;
         }
 
-        InitializeComponent<TComponent>();
+        RegisterComponent<TComponent>();
         return _componentIdentifiersByType[type];
     }
 
@@ -202,7 +202,7 @@ public unsafe class World
             return value;
         }
 
-        InitializeTag<TTag>();
+        RegisterTag<TTag>();
         return _tagIdentifiersByType[type];
     }
 }

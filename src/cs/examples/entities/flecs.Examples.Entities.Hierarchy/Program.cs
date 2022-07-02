@@ -30,26 +30,26 @@ internal static class Program
         // Hierarchies use ECS relations and the builtin flecs::ChildOf relation to
         // create entities as children of other entities.
 
-        var sun = world.InitializeEntity("Sun");
+        var sun = world.CreateEntity("Sun");
         sun.AddTag<Star>();
         sun.SetComponent(new Position { X = 1, Y = 1 });
         
-        var mercury = world.InitializeEntity("Mercury");
+        var mercury = world.CreateEntity("Mercury");
         mercury.AddParent(sun);
         mercury.AddTag<Planet>();
         mercury.SetComponent(new Position { X = 1, Y = 1 });
         
-        var venus = world.InitializeEntity("Venus");
+        var venus = world.CreateEntity("Venus");
         venus.AddParent(sun);
         venus.AddTag<Planet>();
         venus.SetComponent(new Position { X = 2, Y = 2 });
         
-        var earth = world.InitializeEntity("Earth");
+        var earth = world.CreateEntity("Earth");
         earth.AddParent(sun);
         earth.AddTag<Planet>();
         earth.SetComponent(new Position { X = 3, Y = 3 });
         
-        var moon = world.InitializeEntity("Moon");
+        var moon = world.CreateEntity("Moon");
         moon.AddParent(earth);
         moon.AddTag<Moon>();
         moon.SetComponent(new Position { X = 0.1f, Y = 0.1f });
