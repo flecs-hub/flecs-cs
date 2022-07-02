@@ -4,30 +4,41 @@ using flecs;
 internal static class Program
 {
     [StructLayout(LayoutKind.Sequential)]
-    struct Position
+    struct Position : IComponent
     {
         public double X;
         public double Y;
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    struct Velocity
+    struct Velocity : IComponent
     {
         public double X;
         public double Y;
     }
     
+    struct Eats : ITag
+    {
+    }
+
+    struct Apples : ITag
+    {
+    }
+
+    struct Pears : ITag
+    {
+    }
+    
     // Move system implementation. System callbacks may be called multiple times, as entities are grouped by which
     // components they have, and each group has its own set of component arrays.
-    static void Move(Iterator iterator)
+    static void Move(SystemIterator iterator)
     {
         var p = iterator.Term<Position>(1);
         var v = iterator.Term<Velocity>(2);
 
         // Print the set of components for the iterated over entities
-        var table = iterator.Table();
-        var typeString = table.String();
-        Console.WriteLine("Move entities with " + typeString);
+        var tableString = iterator.Table().String();
+        Console.WriteLine("Move entities with table: " + tableString);
 
         // Iterate entities for the current group 
         for (var i = 0; i < iterator.Count; i++)
@@ -46,29 +57,29 @@ internal static class Program
         var world = new World(args);
 
         // Register components
-        var componentPosition = world.InitializeComponent<Position>();
-        var componentVelocity = world.InitializeComponent<Velocity>();
+        world.InitializeComponent<Position>();
+        world.InitializeComponent<Velocity>();
         
         // Register system
         world.InitializeSystem<Position, Velocity>(Move);
 
         // Register tags (components without a size)
-        var eats = world.InitializeTag("eats");
-        var apples = world.InitializeTag("apples");
-        var pears = world.InitializeTag("pears");
+        world.InitializeTag<Eats>();
+        world.InitializeTag<Apples>();
+        world.InitializeTag<Pears>();
 
         // Create an entity with name Bob, add Position and food preference
         var bob = world.InitializeEntity("Bob");
-        world.SetComponent(bob, componentPosition, new Position { X = 0, Y = 0 });
-        world.SetComponent(bob, componentVelocity, new Velocity { X = 2, Y = 2 });
-        world.AddPair(bob, eats, apples);
-        
+        bob.SetComponent(new Position { X = 0, Y = 0 });
+        bob.SetComponent(new Velocity { X = 2, Y = 2 });
+        bob.AddTagPair<Eats, Apples>();
+
         // Run systems twice. Usually this function is called once per frame
         world.Progress(0);
         world.Progress(0);
         
         // See if Bob has moved (he has)
-        var p = world.GetComponent<Position>(bob, componentPosition);
+        var p = bob.GetComponent<Position>();
         Console.WriteLine("Bob's position is {" + p.X + ", " + p.Y + "}");
 
         return world.Fini();

@@ -8,9 +8,9 @@ internal static class SystemBindingContextHelper
     private static SystemBindingContextData[] _bindingContextInstances = new SystemBindingContextData[512];
     private static int _systemsCount;
 
-   public static IntPtr CreateSystemBindingContext(SystemCallback callback)
+   public static IntPtr CreateSystemBindingContext(World world, SystemCallback callback)
     {
-        var data = new SystemBindingContextData(callback);
+        var data = new SystemBindingContextData(world, callback);
         var count = Interlocked.Increment(ref _systemsCount);
         if (count > _bindingContextInstances.Length)
         {
@@ -30,10 +30,12 @@ internal static class SystemBindingContextHelper
     
     public readonly struct SystemBindingContextData
     {
+        public readonly World World;
         public readonly SystemCallback Callback;
 
-        public SystemBindingContextData(SystemCallback callback)
+        public SystemBindingContextData(World world, SystemCallback callback)
         {
+            World = world;
             Callback = callback;
         }
     }

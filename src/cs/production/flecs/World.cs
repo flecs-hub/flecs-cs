@@ -11,8 +11,11 @@ namespace flecs;
 [PublicAPI]
 public unsafe class World
 {
-    private readonly ecs_world_t* _worldHandle;
-    private Dictionary<Type, ecs_entity_t> _componentHandlesByType = new();
+    internal static Dictionary<IntPtr, World> Pointers = new();
+
+    internal readonly ecs_world_t* Handle;
+    private Dictionary<Type, ecs_entity_t> _componentIdentifiersByType = new();
+    private Dictionary<Type, ecs_entity_t> _tagIdentifiersByType = new();
 
     private readonly ecs_id_t ECS_PAIR;
     private readonly ecs_entity_t EcsOnUpdate;
@@ -23,7 +26,8 @@ public unsafe class World
     public World(string[] args)
     {
         var argv = args.Length == 0 ? default : Runtime.CStrings.CStringArray(args);
-        _worldHandle = ecs_init_w_args(args.Length, argv);
+        Handle = ecs_init_w_args(args.Length, argv);
+        Pointers.Add((IntPtr)Handle, this);
         Runtime.CStrings.FreeCStrings(argv, args.Length);
 
         ECS_PAIR = pinvoke_ECS_PAIR();
@@ -33,17 +37,18 @@ public unsafe class World
 
     public int Fini()
     {
-        var exitCode = ecs_fini(_worldHandle);
+        Pointers.Remove((IntPtr)Handle);
+        var exitCode = ecs_fini(Handle);
         return exitCode;
     }
 
-    public ecs_entity_t InitializeComponent<TComponent>()
+    public void InitializeComponent<TComponent>()
         where TComponent : unmanaged
     {
-        var componentType = typeof(TComponent);
-        var componentName = componentType.Name;
+        var type = typeof(TComponent);
+        var componentName = GetFlecsTypeName(type);
         var componentNameC = Runtime.CStrings.CString(componentName);
-        var structLayoutAttribute = componentType.StructLayoutAttribute;
+        var structLayoutAttribute = type.StructLayoutAttribute;
         CheckStructLayout(structLayoutAttribute);
         var structSize = Unsafe.SizeOf<TComponent>();
         var structAlignment = structLayoutAttribute!.Pack;
@@ -55,11 +60,23 @@ public unsafe class World
         desc.entity.symbol = componentNameC;
         desc.type.size = structSize;
         desc.type.alignment = structAlignment;
-        id = ecs_component_init(_worldHandle, &desc);
+        id = ecs_component_init(Handle, &desc);
         Debug.Assert(id.Data.Data != 0, "ECS_INVALID_PARAMETER");
-        return id;
+        _componentIdentifiersByType[typeof(TComponent)] = id;
     }
-    
+
+    public void InitializeTag<TTag>()
+        where TTag : unmanaged, ITag
+    {
+        ecs_entity_desc_t desc = default;
+        var type = typeof(TTag);
+        var typeName = GetFlecsTypeName<TTag>();
+        desc.name = typeName;
+        var id = ecs_entity_init(Handle, &desc);
+        Debug.Assert(id.Data != 0, "ECS_INVALID_PARAMETER");
+        _tagIdentifiersByType[type] = id;
+    }
+
     public ecs_entity_t InitializeSystem(
         SystemCallback callback, ecs_entity_t phase, string filterExpression, string? name = null)
     {
@@ -68,7 +85,7 @@ public unsafe class World
 
         desc.query.filter.expr = filterExpression;
 
-        var id = ecs_system_init(_worldHandle, &desc);
+        var id = ecs_system_init(Handle, &desc);
         return id;
     }
 
@@ -78,9 +95,9 @@ public unsafe class World
         ecs_system_desc_t desc = default;
         FillSystemDescriptorCommon(ref desc, callback, phase, name);
 
-        desc.query.filter.expr = GetComponentName<TComponent1>();
+        desc.query.filter.expr = GetFlecsTypeName<TComponent1>();
 
-        var id = ecs_system_init(_worldHandle, &desc);
+        var id = ecs_system_init(Handle, &desc);
         return id;
     }
 
@@ -94,13 +111,13 @@ public unsafe class World
         desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
-        desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(callback);
+        desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(this, callback);
 
-        var componentName1 = GetComponentName<TComponent1>();
-        var componentName2 = GetComponentName<TComponent2>();
+        var componentName1 = GetFlecsTypeName<TComponent1>();
+        var componentName2 = GetFlecsTypeName<TComponent2>();
         desc.query.filter.expr = componentName1 + ", " + componentName2;
 
-        id = ecs_system_init(_worldHandle, &desc);
+        id = ecs_system_init(Handle, &desc);
         return id;
     }
 
@@ -111,45 +128,7 @@ public unsafe class World
         desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
-        desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(callback);
-    }
-
-    public ecs_entity_t InitializeTag(string name)
-    {
-        ecs_entity_desc_t desc = default;
-        desc.name = name;
-        var id = ecs_entity_init(_worldHandle, &desc);
-        Debug.Assert(id.Data != 0, "ECS_INVALID_PARAMETER");
-        return id;
-    }
-
-    public ref TComponent GetComponent<TComponent>(ecs_entity_t entity, ecs_id_t id)
-        where TComponent : unmanaged
-    {
-        var componentType = typeof(TComponent);
-        var structLayoutAttribute = componentType.StructLayoutAttribute;
-        CheckStructLayout(structLayoutAttribute);
-        var pointer = ecs_get_id(_worldHandle, entity, id);
-        return ref Unsafe.AsRef<TComponent>(pointer);
-    }
-    
-    public ecs_entity_t SetComponent<TComponent>(ecs_entity_t entity, ecs_id_t componentId, ref TComponent component)
-        where TComponent : unmanaged
-    {
-        var componentType = typeof(TComponent);
-        var structLayoutAttribute = componentType.StructLayoutAttribute;
-        CheckStructLayout(structLayoutAttribute);
-        var structSize = Unsafe.SizeOf<TComponent>();
-        var pointer = Unsafe.AsPointer(ref component);
-        var result = ecs_set_id(_worldHandle, entity, componentId, (ulong)structSize, pointer);
-        return result;
-    }
-    
-    public ecs_entity_t SetComponent<TComponent>(ecs_entity_t entity, ecs_id_t componentId, TComponent component)
-        where TComponent : unmanaged
-    {
-        var result = SetComponent(entity, componentId, ref component);
-        return result;
+        desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(this, callback);
     }
 
     [UnmanagedCallersOnly]
@@ -157,39 +136,32 @@ public unsafe class World
     {
         SystemBindingContextHelper.GetSystemBindingContext((IntPtr)it->binding_ctx, out var data);
         
-        var iterator = new Iterator(it);
+        var iterator = new SystemIterator(data.World, it);
         data.Callback(iterator);
     }
 
-    public ecs_entity_t InitializeEntity(string name)
+    public Entity InitializeEntity(string name)
     {
         var desc = default(ecs_entity_desc_t);
         desc.name = name;
-        var result = ecs_entity_init(_worldHandle, &desc);
+        var entity = ecs_entity_init(Handle, &desc);
+        var result = new Entity(this, entity);
         return result;
     }
-    
-    // #define ecs_pair(pred, obj) (ECS_PAIR | ecs_entity_t_comb(obj, pred))
 
-    public void AddPair(ecs_entity_t subject, ecs_entity_t relation, ecs_entity_t @object)
+    public EntityIterator EntityIterator<TComponent>()
+        where TComponent : unmanaged, IComponent
     {
-        var id = ecs_pair(relation, @object);
-        ecs_add_id(_worldHandle, subject, id);
+        var term = default(ecs_term_t);
+        term.id = _componentIdentifiersByType[typeof(TComponent)];
+        var iterator = ecs_term_iter(Handle, &term);
+        var result = new EntityIterator(this, iterator);
+        return result;
     }
 
     public bool Progress(float deltaTime)
     {
-        return ecs_progress(_worldHandle, deltaTime);
-    }
-
-    private ulong ecs_pair(ecs_entity_t pred, ecs_entity_t obj)
-    {
-        return ECS_PAIR | ecs_entity_t_comb(obj.Data.Data, pred.Data.Data);
-    }
-
-    private ulong ecs_entity_t_comb(ulong lo, ulong hi)
-    {
-        return (hi << 32) + lo;
+        return ecs_progress(Handle, deltaTime);
     }
 
     private static void CheckStructLayout(StructLayoutAttribute? structLayoutAttribute)
@@ -201,8 +173,23 @@ public unsafe class World
         }
     }
 
-    private string GetComponentName<TComponent>()
+    private string GetFlecsTypeName(Type type)
     {
-        return typeof(TComponent).Name;
+        return type.FullName!.Replace("+", ".", StringComparison.InvariantCulture);
+    }
+    
+    private string GetFlecsTypeName<T>()
+    {
+        return GetFlecsTypeName(typeof(T));
+    }
+
+    internal ecs_id_t GetComponentIdentifierFrom(Type type)
+    {
+        return _componentIdentifiersByType[type];
+    }
+
+    internal ecs_id_t GetTagIdentifierFrom(Type type)
+    {
+        return _tagIdentifiersByType[type];
     }
 }

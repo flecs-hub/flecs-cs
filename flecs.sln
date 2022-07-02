@@ -2,11 +2,15 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{9E1476CE-E22E-44FD-ABC4-93625DDBBA99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flecs-01_hello_world", "src\cs\examples\flecs-01_hello_world\flecs-01_hello_world.csproj", "{A3C2CCD0-3D6E-4356-916D-B67E220646F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flecs.Examples.HelloWorld", "src\cs\examples\flecs.Examples.HelloWorld\flecs.Examples.HelloWorld.csproj", "{A3C2CCD0-3D6E-4356-916D-B67E220646F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{39423871-7923-4AFB-A756-35E17FCBA274}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flecs", "src\cs\production\flecs\flecs.csproj", "{5EB4443F-134E-43A0-9607-9F3504671E47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{3DA02832-2DA5-49CC-929D-6DB290DA28EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flecs.Examples.Entities.Basics", "src\cs\examples\entities\flecs.Examples.Entities.Basics\flecs.Examples.Entities.Basics.csproj", "{766D8B45-62CC-474E-9E4B-8C4D5FB42F2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,9 +26,15 @@ Global
 		{5EB4443F-134E-43A0-9607-9F3504671E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EB4443F-134E-43A0-9607-9F3504671E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EB4443F-134E-43A0-9607-9F3504671E47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766D8B45-62CC-474E-9E4B-8C4D5FB42F2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766D8B45-62CC-474E-9E4B-8C4D5FB42F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766D8B45-62CC-474E-9E4B-8C4D5FB42F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766D8B45-62CC-474E-9E4B-8C4D5FB42F2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A3C2CCD0-3D6E-4356-916D-B67E220646F7} = {9E1476CE-E22E-44FD-ABC4-93625DDBBA99}
 		{5EB4443F-134E-43A0-9607-9F3504671E47} = {39423871-7923-4AFB-A756-35E17FCBA274}
+		{3DA02832-2DA5-49CC-929D-6DB290DA28EC} = {9E1476CE-E22E-44FD-ABC4-93625DDBBA99}
+		{766D8B45-62CC-474E-9E4B-8C4D5FB42F2A} = {3DA02832-2DA5-49CC-929D-6DB290DA28EC}
 	EndGlobalSection
 EndGlobal

@@ -6,14 +6,16 @@ using static flecs_hub.flecs;
 namespace flecs;
 
 [PublicAPI]
-public readonly unsafe struct Iterator
+public readonly unsafe struct SystemIterator
 {
-    public readonly ecs_iter_t* Handle;
+    private readonly World _world;
+    internal readonly ecs_iter_t* Handle;
 
     public int Count => Handle->count;
 
-    internal Iterator(ecs_iter_t* it)
+    internal SystemIterator(World world, ecs_iter_t* it)
     {
+        _world = world;
         Handle = it;
     }
 
