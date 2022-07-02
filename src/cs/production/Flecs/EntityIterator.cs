@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using static flecs_hub.flecs;
@@ -22,7 +23,7 @@ public readonly unsafe struct EntityIterator
         Handle = it;
     }
 
-    public bool TermNext()
+    public bool HasNext()
     {
         fixed (EntityIterator* @this = &this)
         {

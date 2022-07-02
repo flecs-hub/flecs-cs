@@ -20,10 +20,6 @@ public unsafe class World
     private Dictionary<Type, ecs_entity_t> _componentIdentifiersByType = new();
     private Dictionary<Type, ecs_entity_t> _tagIdentifiersByType = new();
 
-    private readonly ecs_id_t _ecsPair;
-    private readonly ecs_entity_t _ecsOnUpdate;
-    private readonly ecs_entity_t _ecsDependsOn;
-
     public int ExitCode { get; private set; }
 
     public World(string[] args)
@@ -32,10 +28,6 @@ public unsafe class World
         Handle = ecs_init_w_args(args.Length, argv);
         Pointers.Add((IntPtr)Handle, this);
         Runtime.CStrings.FreeCStrings(argv, args.Length);
-
-        _ecsPair = pinvoke_ECS_PAIR();
-        _ecsOnUpdate = pinvoke_EcsOnUpdate();
-        _ecsDependsOn = pinvoke_EcsDependsOn();
     }
 
     public int Fini()
@@ -110,8 +102,8 @@ public unsafe class World
         var id = default(ecs_entity_t);
         ecs_system_desc_t desc = default;
         desc.entity.name = name ?? callback.Method.Name;
-        var phase = _ecsOnUpdate;
-        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(_ecsDependsOn, phase) : default;
+        var phase = pinvoke_EcsOnUpdate();
+        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(pinvoke_EcsDependsOn(), phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(this, callback);
@@ -128,7 +120,7 @@ public unsafe class World
         ref ecs_system_desc_t desc, SystemCallback callback, ecs_entity_t phase, string? name)
     {
         desc.entity.name = name ?? callback.Method.Name;
-        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(_ecsDependsOn, phase) : default;
+        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(pinvoke_EcsDependsOn(), phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(this, callback);

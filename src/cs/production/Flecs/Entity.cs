@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
 
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using static flecs_hub.flecs;
 
@@ -53,6 +54,13 @@ public readonly unsafe struct Entity
         ecs_add_id(_world.Handle, _handle, id);
     }
 
+    public void AddParent(Entity entity)
+    {
+        var ecsChildOf = pinvoke_EcsChildOf();
+        var id = ecs_pair(ecsChildOf, entity._handle);
+        ecs_add_id(_world.Handle, _handle, id);
+    }
+
     public ref TComponent GetComponent<TComponent>()
         where TComponent : unmanaged, IComponent
     {
@@ -82,5 +90,29 @@ public readonly unsafe struct Entity
     {
         var result = ecs_get_name(_world.Handle, _handle);
         return result.ToString();
+    }
+
+    public bool IsChildOf(Entity entity)
+    {
+        var pair = ecs_childof(entity._handle);
+        var result = ecs_has_id(_world.Handle, _handle, pair);
+        return result;
+    }
+
+    public string FullPathString()
+    {
+        var cString = ecs_get_path_w_sep(_world.Handle, default, _handle, ".", default);
+        var result = Marshal.PtrToStringAnsi(cString._pointer)!;
+        Marshal.FreeHGlobal(cString._pointer);
+        return result;
+    }
+
+    public EntityIterator Children()
+    {
+        var term = default(ecs_term_t);
+        term.id = ecs_childof(_handle);
+        var iterator = ecs_term_iter(_world.Handle, &term);
+        var result = new EntityIterator(_world, iterator);
+        return result;
     }
 }

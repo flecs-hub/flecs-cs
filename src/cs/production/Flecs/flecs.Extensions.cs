@@ -10,6 +10,11 @@ namespace flecs_hub
             return pinvoke_ECS_PAIR() | ecs_entity_t_comb(obj.Data.Data, pred.Data.Data);
         }
 
+        internal static ulong ecs_childof(ecs_entity_t e)
+        {
+            return ecs_pair(pinvoke_EcsChildOf(), e);
+        }
+
         private static ulong ecs_entity_t_comb(ulong lo, ulong hi)
         {
             return (hi << 32) + lo;

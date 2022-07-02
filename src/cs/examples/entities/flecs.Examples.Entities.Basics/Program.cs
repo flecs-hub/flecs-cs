@@ -47,7 +47,7 @@ internal static class Program
 
         // Iterate all entities with Position
         var it = world.EntityIterator<Position>();
-        while (it.TermNext()) 
+        while (it.HasNext()) 
         {
             var p = it.Term<Position>(1);
             for (var i = 0; i < it.Count; i ++)

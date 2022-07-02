@@ -15,3 +15,8 @@ ecs_entity_t pinvoke_EcsDependsOn()
 {
     return EcsDependsOn;
 }
+
+ecs_entity_t pinvoke_EcsChildOf()
+{
+    return EcsChildOf;
+}
