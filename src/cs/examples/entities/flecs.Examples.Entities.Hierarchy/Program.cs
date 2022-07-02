@@ -56,7 +56,7 @@ internal static class Program
         
         var moon = world.InitializeEntity("Moon");
         moon.AddParent(earth);
-        moon.AddTag<Planet>();
+        moon.AddTag<Moon>();
         moon.SetComponent(new Position { X = 0.1f, Y = 0.1f });
         
         // Is the Moon a child of Earth?
