@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using flecs;
+using Flecs;
 
 internal static class Program
 {

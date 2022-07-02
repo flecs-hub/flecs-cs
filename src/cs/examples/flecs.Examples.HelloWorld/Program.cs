@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using flecs;
+using Flecs;
 
 internal static class Program
 {
@@ -72,7 +72,7 @@ internal static class Program
         var bob = world.InitializeEntity("Bob");
         bob.SetComponent(new Position { X = 0, Y = 0 });
         bob.SetComponent(new Velocity { X = 2, Y = 2 });
-        bob.AddTagPair<Eats, Apples>();
+        bob.AddPair<Eats, Apples>();
 
         // Run systems twice. Usually this function is called once per frame
         world.Progress(0);

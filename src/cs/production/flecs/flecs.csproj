@@ -3,6 +3,7 @@
     <!-- flecs -->
     <PropertyGroup>
         <_IsEnabledSourceCode>false</_IsEnabledSourceCode>
+        <RootNamespace>flecs</RootNamespace>
     </PropertyGroup>
     <Import Project="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../../../flecs.props'))" />
     
@@ -13,8 +14,20 @@
         <ImplicitUsings>false</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+
+    <!-- bottlenose.MSBuild.Tools project settings -->
+    <PropertyGroup>
+        <EnableAnalyzers>true</EnableAnalyzers>
+        <EnableAnalyzersStyleCop>true</EnableAnalyzersStyleCop>
+        <StyleCopSettingsFilePath>$(MSBuildThisFileDirectory)/Properties/StyleCop.json</StyleCopSettingsFilePath>
+    </PropertyGroup>
+    
+    <!-- NuGet package references -->
     <ItemGroup>
-      <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
+      <PackageReference Include="bottlenoselabs.MSBuild.Tools" Version="1.1.3">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 
 </Project>

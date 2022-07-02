@@ -1,9 +1,11 @@
+// Copyright (c) Flecs Hub (https://github.com/flecs-hub). All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
+
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-
-namespace flecs;
 using static flecs_hub.flecs;
 
+namespace Flecs;
 [PublicAPI]
 public readonly unsafe struct Entity
 {
@@ -30,8 +32,16 @@ public readonly unsafe struct Entity
         var tagId = _world.GetTagIdentifierFrom(type);
         ecs_add_id(_world.Handle, _handle, tagId);
     }
-    
-    public void AddTagPair<TTag1, TTag2>()
+
+    public void RemoveTag<TTag>()
+        where TTag : unmanaged, ITag
+    {
+        var type = typeof(TTag);
+        var tagId = _world.GetTagIdentifierFrom(type);
+        ecs_remove_id(_world.Handle, _handle, tagId);
+    }
+
+    public void AddPair<TTag1, TTag2>()
         where TTag1 : unmanaged, ITag
         where TTag2 : unmanaged, ITag
     {
@@ -41,14 +51,6 @@ public readonly unsafe struct Entity
         var tagId2 = _world.GetTagIdentifierFrom(type2);
         var id = ecs_pair(tagId1, tagId2);
         ecs_add_id(_world.Handle, _handle, id);
-    }
-
-    public void RemoveTag<TTag>()
-        where TTag : unmanaged, ITag
-    {
-        var type = typeof(TTag);
-        var tagId = _world.GetTagIdentifierFrom(type);
-        ecs_remove_id(_world.Handle, _handle, tagId);
     }
 
     public ref TComponent GetComponent<TComponent>()
@@ -69,7 +71,7 @@ public readonly unsafe struct Entity
         var pointer = Unsafe.AsPointer(ref component);
         ecs_set_id(_world.Handle, _handle, componentId, (ulong)structSize, pointer);
     }
-    
+
     public void SetComponent<TComponent>(TComponent component)
         where TComponent : unmanaged, IComponent
     {

@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flecs.Examples.HelloWorld",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{39423871-7923-4AFB-A756-35E17FCBA274}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "flecs", "src\cs\production\flecs\flecs.csproj", "{5EB4443F-134E-43A0-9607-9F3504671E47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs", "src\cs\production\Flecs\Flecs.csproj", "{5EB4443F-134E-43A0-9607-9F3504671E47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{3DA02832-2DA5-49CC-929D-6DB290DA28EC}"
 EndProject

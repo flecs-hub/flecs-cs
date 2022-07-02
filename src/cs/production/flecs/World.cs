@@ -1,3 +1,6 @@
+// Copyright (c) Flecs Hub (https://github.com/flecs-hub). All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,7 +9,7 @@ using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using static flecs_hub.flecs;
 
-namespace flecs;
+namespace Flecs;
 
 [PublicAPI]
 public unsafe class World
@@ -17,9 +20,9 @@ public unsafe class World
     private Dictionary<Type, ecs_entity_t> _componentIdentifiersByType = new();
     private Dictionary<Type, ecs_entity_t> _tagIdentifiersByType = new();
 
-    private readonly ecs_id_t ECS_PAIR;
-    private readonly ecs_entity_t EcsOnUpdate;
-    private readonly ecs_entity_t EcsDependsOn;
+    private readonly ecs_id_t _ecsPair;
+    private readonly ecs_entity_t _ecsOnUpdate;
+    private readonly ecs_entity_t _ecsDependsOn;
 
     public int ExitCode { get; private set; }
 
@@ -30,9 +33,9 @@ public unsafe class World
         Pointers.Add((IntPtr)Handle, this);
         Runtime.CStrings.FreeCStrings(argv, args.Length);
 
-        ECS_PAIR = pinvoke_ECS_PAIR();
-        EcsOnUpdate = pinvoke_EcsOnUpdate();
-        EcsDependsOn = pinvoke_EcsDependsOn();
+        _ecsPair = pinvoke_ECS_PAIR();
+        _ecsOnUpdate = pinvoke_EcsOnUpdate();
+        _ecsDependsOn = pinvoke_EcsDependsOn();
     }
 
     public int Fini()
@@ -53,7 +56,7 @@ public unsafe class World
         var structSize = Unsafe.SizeOf<TComponent>();
         var structAlignment = structLayoutAttribute!.Pack;
 
-        var id = new ecs_entity_t();
+        var id = default(ecs_entity_t);
         ecs_component_desc_t desc;
         desc.entity.entity = id;
         desc.entity.name = componentNameC;
@@ -104,11 +107,11 @@ public unsafe class World
     public ecs_entity_t InitializeSystem<TComponent1, TComponent2>(
         SystemCallback callback, string? name = null)
     {
-        var id = new ecs_entity_t();
+        var id = default(ecs_entity_t);
         ecs_system_desc_t desc = default;
         desc.entity.name = name ?? callback.Method.Name;
-        var phase = EcsOnUpdate;
-        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        var phase = _ecsOnUpdate;
+        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(_ecsDependsOn, phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(this, callback);
@@ -125,7 +128,7 @@ public unsafe class World
         ref ecs_system_desc_t desc, SystemCallback callback, ecs_entity_t phase, string? name)
     {
         desc.entity.name = name ?? callback.Method.Name;
-        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(_ecsDependsOn, phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(this, callback);
@@ -135,7 +138,7 @@ public unsafe class World
     private static void SystemCallback(ecs_iter_t* it)
     {
         SystemBindingContextHelper.GetSystemBindingContext((IntPtr)it->binding_ctx, out var data);
-        
+
         var iterator = new SystemIterator(data.World, it);
         data.Callback(iterator);
     }
@@ -177,7 +180,7 @@ public unsafe class World
     {
         return type.FullName!.Replace("+", ".", StringComparison.InvariantCulture);
     }
-    
+
     private string GetFlecsTypeName<T>()
     {
         return GetFlecsTypeName(typeof(T));
