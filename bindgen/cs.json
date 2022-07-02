@@ -1,7 +1,7 @@
 {
   "directory": "./ast",
   "cs": {
-    "output_file": "../src/cs/production/flecs/flecs.cs",
+    "output_file": "../src/cs/production/Flecs/flecs.cs",
     "namespace": "flecs_hub",
     "library_name": "flecs",
     "ignored_names": [
