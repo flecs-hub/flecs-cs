@@ -1,16 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using flecs_hub;
+using JetBrains.Annotations;
 using static flecs_hub.flecs;
 
 namespace flecs;
 
+[PublicAPI]
 public unsafe class World
 {
-    private readonly IntPtr _libraryHandle;
     private readonly ecs_world_t* _worldHandle;
+    private Dictionary<Type, ecs_entity_t> _componentHandlesByType = new();
 
     private readonly ecs_id_t ECS_PAIR;
     private readonly ecs_entity_t EcsOnUpdate;
@@ -23,22 +25,14 @@ public unsafe class World
         var argv = args.Length == 0 ? default : Runtime.CStrings.CStringArray(args);
         _worldHandle = ecs_init_w_args(args.Length, argv);
         Runtime.CStrings.FreeCStrings(argv, args.Length);
-;
-        _libraryHandle = CLibrary.Load("libflecs.dylib");
 
-        var ecsPair = CLibrary.GetExport(_libraryHandle, "ECS_PAIR");
-        ECS_PAIR.Data = (ulong)Marshal.ReadInt64(ecsPair);
-
-        var ecsOnUpdate = CLibrary.GetExport(_libraryHandle, "EcsOnUpdate");
-        EcsOnUpdate.Data.Data = (ulong)Marshal.ReadInt64(ecsOnUpdate);
-        
-        var ecsDependsOn = CLibrary.GetExport(_libraryHandle, "EcsDependsOn");
-        EcsDependsOn.Data.Data = (ulong)Marshal.ReadInt64(ecsDependsOn);
+        ECS_PAIR = pinvoke_ECS_PAIR();
+        EcsOnUpdate = pinvoke_EcsOnUpdate();
+        EcsDependsOn = pinvoke_EcsDependsOn();
     }
 
     public int Fini()
     {
-        CLibrary.Free(_libraryHandle);
         var exitCode = ecs_fini(_worldHandle);
         return exitCode;
     }
@@ -65,23 +59,61 @@ public unsafe class World
         Debug.Assert(id.Data.Data != 0, "ECS_INVALID_PARAMETER");
         return id;
     }
+    
+    public ecs_entity_t InitializeSystem(
+        SystemCallback callback, ecs_entity_t phase, string filterExpression, string? name = null)
+    {
+        ecs_system_desc_t desc = default;
+        FillSystemDescriptorCommon(ref desc, callback, phase, name);
 
-    public ecs_entity_t InitializeSystem(SystemCallback callback, string? filterExpression = null)
+        desc.query.filter.expr = filterExpression;
+
+        var id = ecs_system_init(_worldHandle, &desc);
+        return id;
+    }
+
+    public ecs_entity_t InitializeSystem<TComponent1>(
+        SystemCallback callback, ecs_entity_t phase, string? name = null)
+    {
+        ecs_system_desc_t desc = default;
+        FillSystemDescriptorCommon(ref desc, callback, phase, name);
+
+        desc.query.filter.expr = GetComponentName<TComponent1>();
+
+        var id = ecs_system_init(_worldHandle, &desc);
+        return id;
+    }
+
+    public ecs_entity_t InitializeSystem<TComponent1, TComponent2>(
+        SystemCallback callback, string? name = null)
     {
         var id = new ecs_entity_t();
         ecs_system_desc_t desc = default;
-        desc.entity.name = "Test";
+        desc.entity.name = name ?? callback.Method.Name;
         var phase = EcsOnUpdate;
         desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
         desc.entity.add[1] = phase;
-        desc.query.filter.expr = filterExpression ?? string.Empty;
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(callback);
+
+        var componentName1 = GetComponentName<TComponent1>();
+        var componentName2 = GetComponentName<TComponent2>();
+        desc.query.filter.expr = componentName1 + ", " + componentName2;
 
         id = ecs_system_init(_worldHandle, &desc);
         return id;
     }
-    
+
+    private void FillSystemDescriptorCommon(
+        ref ecs_system_desc_t desc, SystemCallback callback, ecs_entity_t phase, string? name)
+    {
+        desc.entity.name = name ?? callback.Method.Name;
+        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        desc.entity.add[1] = phase;
+        desc.callback.Data.Pointer = &SystemCallback;
+        desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(callback);
+    }
+
     public ecs_entity_t InitializeTag(string name)
     {
         ecs_entity_desc_t desc = default;
@@ -125,8 +157,8 @@ public unsafe class World
     {
         SystemBindingContextHelper.GetSystemBindingContext((IntPtr)it->binding_ctx, out var data);
         
-        var context = new Iterator(it);
-        data.Callback(context);
+        var iterator = new Iterator(it);
+        data.Callback(iterator);
     }
 
     public ecs_entity_t InitializeEntity(string name)
@@ -167,5 +199,10 @@ public unsafe class World
             throw new FlecsException(
                 "Component must have a StructLayout attribute with LayoutKind sequential or explicit. This is to ensure that the struct fields are not reorganized by the C# compiler.");
         }
+    }
+
+    private string GetComponentName<TComponent>()
+    {
+        return typeof(TComponent).Name;
     }
 }

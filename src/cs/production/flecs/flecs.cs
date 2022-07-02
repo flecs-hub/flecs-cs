@@ -31,6 +31,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_world_t* ecs_mini();
 
@@ -41,6 +42,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void* ecs_emplace_id(ecs_world_t* world, ecs_entity_t entity, ecs_id_t id);
 
@@ -51,6 +53,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_get_object(ecs_world_t* world, ecs_entity_t entity, ecs_entity_t rel, int index);
 
@@ -81,6 +84,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_defer_end(ecs_world_t* world);
 
@@ -101,6 +105,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_term_fini(ecs_term_t* term);
 
@@ -121,6 +126,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_fini(ecs_world_t* world);
 
@@ -151,6 +157,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_filter_str(ecs_world_t* world, ecs_filter_t* filter);
 
@@ -221,6 +228,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_new_from_path_w_sep(ecs_world_t* world, ecs_entity_t parent, CString path, CString sep, CString prefix);
 
@@ -231,6 +239,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_type_t* ecs_table_get_type(ecs_table_t* table);
 
@@ -241,6 +250,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_async_stage_free(ecs_world_t* stage);
 
@@ -277,10 +287,12 @@ namespace flecs_hub
         // Function @ flecs.h:4669:15
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ecs_emit(ecs_world_t* world, ecs_event_desc_t* desc);
+
+        // Function @ flecs.h:1706:21
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_record_t* ecs_record_find(ecs_world_t* world, ecs_entity_t entity);
 
@@ -301,6 +313,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void* ecs_ref_get_id(ecs_world_t* world, ecs_ref_t* @ref, ecs_id_t id);
 
@@ -411,6 +424,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_search(ecs_world_t* world, ecs_table_t* table, ecs_id_t id, ecs_id_t* id_out);
 
@@ -451,6 +465,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_term_finalize(ecs_world_t* world, CString name, ecs_term_t* term);
 
@@ -461,6 +476,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_query_table_count(ecs_query_t* query);
 
@@ -521,6 +537,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_run_post_frame(ecs_world_t* world, ecs_fini_action_t action, void* ctx);
 
@@ -547,10 +564,12 @@ namespace flecs_hub
         // Function @ flecs.h:3834:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ecs_table_swap_rows(ecs_world_t* world, ecs_table_t* table, int row_1, int row_2);
+
+        // Function @ flecs.h:2740:14
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_iter_var_is_constrained(ecs_iter_t* it, int var_id);
 
@@ -561,6 +580,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\addons\meta.h)
         //	aarch64-unknown-linux-gnu (flecs/addons/meta.h)
         //	aarch64-apple-darwin (flecs/addons/meta.h)
+        //	x86_64-apple-darwin (flecs/addons/meta.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_meta_push(ecs_meta_cursor_t* cursor);
 
@@ -571,6 +591,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_defer_resume(ecs_world_t* world);
 
@@ -581,6 +602,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ulong ecs_iter_column_size(ecs_iter_t* it, int index);
 
@@ -661,6 +683,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_component_init(ecs_world_t* world, ecs_component_desc_t* desc);
 
@@ -701,6 +724,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_entity_init(ecs_world_t* world, ecs_entity_desc_t* desc);
 
@@ -721,6 +745,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_search_relation(ecs_world_t* world, ecs_table_t* table, int offset, ecs_id_t id, ecs_entity_t rel, int min_depth, int max_depth, ecs_entity_t* subject_out, ecs_id_t* id_out, int* depth_out, ecs_table_record_t** tr_out);
 
@@ -731,6 +756,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_has_id(ecs_world_t* world, ecs_entity_t entity, ecs_id_t id);
 
@@ -761,6 +787,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_table_t* ecs_get_storage_table(ecs_world_t* world, ecs_entity_t entity);
 
@@ -877,10 +904,6 @@ namespace flecs_hub
         // Function @ flecs.h:1524:16
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_measure_system_time(ecs_world_t* world, CBool enable);
 
@@ -892,7 +915,7 @@ namespace flecs_hub
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void ecs_os_dbg(CString file, int line, CString msg);
+        public static extern ecs_entity_t ecs_get_object(ecs_world_t* world, ecs_entity_t entity, ecs_entity_t rel, int index);
 
         // Function @ map.h:174:9
         //	x86_64-unknown-linux-gnu (flecs/private/map.h)
@@ -921,6 +944,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_table_t* ecs_get_table(ecs_world_t* world, ecs_entity_t entity);
 
@@ -961,6 +985,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_should_quit(ecs_world_t* world);
 
@@ -1001,6 +1026,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_table_str(ecs_world_t* world, ecs_table_t* table);
 
@@ -1011,6 +1037,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t* ecs_set_lookup_path(ecs_world_t* world, ecs_entity_t* lookup_path);
 
@@ -1041,16 +1068,19 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_term_next(ecs_iter_t* it);
 
         // Function @ flecs.h:2593:14
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ecs_defer_resume(ecs_world_t* world);
+
+        // Function @ flecs.h:1524:16
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_lookup_symbol(ecs_world_t* world, CString symbol, CBool lookup_as_path);
 
@@ -1061,6 +1091,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_filter_finalize(ecs_world_t* world, ecs_filter_t* filter);
 
@@ -1072,7 +1103,7 @@ namespace flecs_hub
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int ecs_query_entity_count(ecs_query_t* query);
+        public static extern CBool ecs_pipeline_stats_get(ecs_world_t* world, ecs_entity_t pipeline, ecs_pipeline_stats_t* stats);
 
         // Function @ flecs.h:4595:6
         //	x86_64-unknown-linux-gnu
@@ -1131,6 +1162,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_type_hooks_t* ecs_get_hooks_id(ecs_world_t* world, ecs_entity_t id);
 
@@ -1141,6 +1173,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void* ecs_table_get_column(ecs_table_t* table, int index);
 
@@ -1161,6 +1194,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_set_hooks_id(ecs_world_t* world, ecs_entity_t id, ecs_type_hooks_t* hooks);
 
@@ -1187,10 +1221,6 @@ namespace flecs_hub
         // Function @ flecs.h:1448:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_dim(ecs_world_t* world, int entity_count);
 
@@ -1221,6 +1251,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_query_fini(ecs_query_t* query);
 
@@ -1371,6 +1402,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void* ecs_get_trigger_binding_ctx(ecs_world_t* world, ecs_entity_t trigger);
 
@@ -1461,6 +1493,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_table_t* ecs_table_add_id(ecs_world_t* world, ecs_table_t* table, ecs_id_t id);
 
@@ -1471,6 +1504,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_query_t* ecs_query_init(ecs_world_t* world, ecs_query_desc_t* desc);
 
@@ -1481,6 +1515,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_get_path_w_sep(ecs_world_t* world, ecs_entity_t parent, ecs_entity_t child, CString sep, CString prefix);
 
@@ -1521,6 +1556,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_iter_t ecs_page_iter(ecs_iter_t* it, int offset, int limit);
 
@@ -1541,6 +1577,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_table_type_to_storage_index(ecs_table_t* table, int index);
 
@@ -1601,6 +1638,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\addons\stats.h)
         //	aarch64-unknown-linux-gnu (flecs/addons/stats.h)
         //	aarch64-apple-darwin (flecs/addons/stats.h)
+        //	x86_64-apple-darwin (flecs/addons/stats.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_pipeline_stats_copy_last(ecs_pipeline_stats_t* dst, ecs_pipeline_stats_t* src);
 
@@ -1611,6 +1649,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_is_valid(ecs_world_t* world, ecs_entity_t e);
 
@@ -1621,6 +1660,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_new_id(ecs_world_t* world);
 
@@ -1661,6 +1701,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_world_info_t* ecs_get_world_info(ecs_world_t* world);
 
@@ -1691,6 +1732,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\private\sparse.h)
         //	aarch64-unknown-linux-gnu (flecs/private/sparse.h)
         //	aarch64-apple-darwin (flecs/private/sparse.h)
+        //	x86_64-apple-darwin (flecs/private/sparse.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int flecs_sparse_size(ecs_sparse_t* sparse);
 
@@ -1761,6 +1803,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_flags32_t ecs_id_get_flags(ecs_world_t* world, ecs_id_t id);
 
@@ -1801,6 +1844,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_query_empty_table_count(ecs_query_t* query);
 
@@ -1831,6 +1875,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_term_is_set(ecs_iter_t* it, int index);
 
@@ -1841,6 +1886,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\addons\stats.h)
         //	aarch64-unknown-linux-gnu (flecs/addons/stats.h)
         //	aarch64-apple-darwin (flecs/addons/stats.h)
+        //	x86_64-apple-darwin (flecs/addons/stats.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_query_stats_reduce(ecs_query_stats_t* dst, ecs_query_stats_t* src);
 
@@ -1861,16 +1907,19 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void* ecs_get_observer_binding_ctx(ecs_world_t* world, ecs_entity_t observer);
 
         // Function @ flecs.h:2864:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ecs_filter_copy(ecs_filter_t* dst, ecs_filter_t* src);
+
+        // Function @ flecs.h:4595:6
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_term_id_is_set(ecs_term_id_t* id);
 
@@ -1891,6 +1940,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_table_has_module(ecs_table_t* table);
 
@@ -1954,15 +2004,11 @@ namespace flecs_hub
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void flecs_hashmap_copy(ecs_hashmap_t* src, ecs_hashmap_t* dst);
 
-        // Function @ meta.h:483:6
-        //	x86_64-unknown-linux-gnu (flecs/addons/meta.h)
-        //	x86_64-apple-darwin (flecs/addons/meta.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\meta.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\meta.h)
-        //	aarch64-unknown-linux-gnu (flecs/addons/meta.h)
-        //	aarch64-apple-darwin (flecs/addons/meta.h)
+        // Function @ sparse.h:183:9
+        //	aarch64-apple-darwin (flecs/private/sparse.h)
+        //	x86_64-apple-darwin (flecs/private/sparse.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CChar ecs_meta_get_char(ecs_meta_cursor_t* cursor);
+        public static extern int flecs_sparse_size(ecs_sparse_t* sparse);
 
         // Function @ doc.h:55:6
         //	x86_64-unknown-linux-gnu (flecs/addons/doc.h)
@@ -2011,6 +2057,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_atfini(ecs_world_t* world, ecs_fini_action_t action, void* ctx);
 
@@ -2031,6 +2078,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_iter_poly(ecs_world_t* world, ecs_poly_t* poly, ecs_iter_t* iter, ecs_term_t* filter);
 
@@ -2087,10 +2135,6 @@ namespace flecs_hub
         // Function @ flecs.h:1858:10
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_id_t ecs_make_pair(ecs_entity_t relation, ecs_entity_t @object);
 
@@ -2101,6 +2145,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_iter_t ecs_filter_iter(ecs_world_t* world, ecs_filter_t* filter);
 
@@ -2161,6 +2206,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_query_next(ecs_iter_t* iter);
 
@@ -2181,6 +2227,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_id_in_use(ecs_world_t* world, ecs_id_t id);
 
@@ -2231,6 +2278,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_set_symbol(ecs_world_t* world, ecs_entity_t entity, CString symbol);
 
@@ -2277,10 +2325,12 @@ namespace flecs_hub
         // Function @ flecs.h:3369:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern CBool ecs_id_is_valid(ecs_world_t* world, ecs_id_t id);
+
+        // Function @ flecs.h:1468:6
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_query_changed(ecs_query_t* query, ecs_iter_t* it);
 
@@ -2301,6 +2351,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_term_is_readonly(ecs_iter_t* it, int index);
 
@@ -2351,6 +2402,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_iter_fini(ecs_iter_t* it);
 
@@ -2361,6 +2413,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_term_t ecs_term_copy(ecs_term_t* src);
 
@@ -2431,6 +2484,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\addons\doc.h)
         //	aarch64-unknown-linux-gnu (flecs/addons/doc.h)
         //	aarch64-apple-darwin (flecs/addons/doc.h)
+        //	x86_64-apple-darwin (flecs/addons/doc.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_doc_get_detail(ecs_world_t* world, ecs_entity_t entity);
 
@@ -2487,10 +2541,6 @@ namespace flecs_hub
         // Function @ flecs.h:3593:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_observer_default_run_action(ecs_iter_t* it);
 
@@ -2541,6 +2591,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_type_info_t* ecs_get_type_info(ecs_world_t* world, ecs_id_t id);
 
@@ -2562,25 +2613,29 @@ namespace flecs_hub
         //	aarch64-unknown-linux-gnu (flecs/private/sparse.h)
         //	aarch64-apple-darwin (flecs/private/sparse.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void flecs_sparse_set_generation(ecs_sparse_t* sparse, ulong id);
+        public static extern CBool ecs_progress(ecs_world_t* world, float delta_time);
 
         // Function @ flecs.h:4261:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ecs_get_path_w_sep_buf(ecs_world_t* world, ecs_entity_t parent, ecs_entity_t child, CString sep, CString prefix, ecs_strbuf_t* buf);
+
+        // Function @ flecs.h:2110:10
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_set_stage_count(ecs_world_t* world, int stages);
 
         // Function @ flecs.h:2879:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ecs_term_t ecs_term_move(ecs_term_t* src);
+
+        // Function @ flecs.h:3133:7
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_term_is_initialized(ecs_term_t* term);
 
@@ -2617,10 +2672,12 @@ namespace flecs_hub
         // Function @ flecs.h:4629:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ecs_iter_t ecs_filter_chain_iter(ecs_iter_t* it, ecs_filter_t* filter);
+
+        // Function @ flecs.h:3210:6
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_table_swap_rows(ecs_world_t* world, ecs_table_t* table, int row_1, int row_2);
 
@@ -2731,6 +2788,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\addons\meta.h)
         //	aarch64-unknown-linux-gnu (flecs/addons/meta.h)
         //	aarch64-apple-darwin (flecs/addons/meta.h)
+        //	x86_64-apple-darwin (flecs/addons/meta.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_meta_set_null(ecs_meta_cursor_t* cursor);
 
@@ -2791,6 +2849,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_get_alive(ecs_world_t* world, ecs_entity_t e);
 
@@ -2831,6 +2890,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_table_range_t ecs_iter_get_var_as_range(ecs_iter_t* it, int var_id);
 
@@ -2851,6 +2911,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_iter_t ecs_worker_iter(ecs_iter_t* it, int index, int count);
 
@@ -2891,6 +2952,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_id_t ecs_strip_generation(ecs_entity_t e);
 
@@ -2931,6 +2993,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t* ecs_get_lookup_path(ecs_world_t* world);
 
@@ -2941,6 +3004,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t* ecs_bulk_init(ecs_world_t* world, ecs_bulk_desc_t* desc);
 
@@ -2981,6 +3045,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_set_with(ecs_world_t* world, ecs_id_t id);
 
@@ -2991,6 +3056,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_is_component_enabled_w_id(ecs_world_t* world, ecs_entity_t entity, ecs_id_t id);
 
@@ -3011,6 +3077,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_iter_set_var(ecs_iter_t* it, int var_id, ecs_entity_t entity);
 
@@ -3037,12 +3104,8 @@ namespace flecs_hub
         // Function @ flecs.h:1640:14
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ecs_entity_t ecs_new_low_id(ecs_world_t* world);
+        public static extern ecs_iter_t ecs_worker_iter(ecs_iter_t* it, int index, int count);
 
         // Function @ flecs.h:4243:6
         //	x86_64-unknown-linux-gnu
@@ -3051,6 +3114,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_set_automerge(ecs_world_t* world, CBool automerge);
 
@@ -3077,10 +3141,6 @@ namespace flecs_hub
         // Function @ flecs.h:1426:7
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void* ecs_get_context(ecs_world_t* world);
 
@@ -3122,7 +3182,7 @@ namespace flecs_hub
         //	aarch64-unknown-linux-gnu (flecs/private/sparse.h)
         //	aarch64-apple-darwin (flecs/private/sparse.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong* flecs_sparse_new_ids(ecs_sparse_t* sparse, int count);
+        public static extern CBool ecs_os_has_dl();
 
         // Function @ snapshot.h:44:17
         //	x86_64-unknown-linux-gnu (flecs/addons/snapshot.h)
@@ -3141,6 +3201,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_lookup_child(ecs_world_t* world, ecs_entity_t parent, CString name);
 
@@ -3181,6 +3242,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_filter_next_instanced(ecs_iter_t* it);
 
@@ -3197,10 +3259,12 @@ namespace flecs_hub
         // Function @ flecs.h:4272:9
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ecs_world_t* ecs_get_world(ecs_poly_t* world);
+
+        // Function @ flecs.h:2906:6
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_get_stage_count(ecs_world_t* world);
 
@@ -3221,6 +3285,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_term_t ecs_term_move(ecs_term_t* src);
 
@@ -3297,10 +3362,6 @@ namespace flecs_hub
         // Function @ flecs.h:4214:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_defer_suspend(ecs_world_t* world);
 
@@ -3327,10 +3388,6 @@ namespace flecs_hub
         // Function @ meta.h:506:13
         //	x86_64-unknown-linux-gnu (flecs/addons/meta.h)
         //	x86_64-apple-darwin (flecs/addons/meta.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\meta.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\meta.h)
-        //	aarch64-unknown-linux-gnu (flecs/addons/meta.h)
-        //	aarch64-apple-darwin (flecs/addons/meta.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_meta_get_string(ecs_meta_cursor_t* cursor);
 
@@ -3411,18 +3468,15 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\addons\stats.h)
         //	aarch64-unknown-linux-gnu (flecs/addons/stats.h)
         //	aarch64-apple-darwin (flecs/addons/stats.h)
+        //	x86_64-apple-darwin (flecs/addons/stats.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_pipeline_stats_fini(ecs_pipeline_stats_t* stats);
 
-        // Function @ timer.h:72:14
-        //	x86_64-unknown-linux-gnu (flecs/addons/timer.h)
-        //	x86_64-apple-darwin (flecs/addons/timer.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\timer.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\timer.h)
-        //	aarch64-unknown-linux-gnu (flecs/addons/timer.h)
-        //	aarch64-apple-darwin (flecs/addons/timer.h)
+        // Function @ flecs.h:3284:21
+        //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ecs_entity_t ecs_set_timeout(ecs_world_t* world, ecs_entity_t tick_source, float timeout);
+        public static extern ecs_filter_t* ecs_query_get_filter(ecs_query_t* query);
 
         // Function @ flecs.h:2381:13
         //	x86_64-unknown-linux-gnu
@@ -3441,6 +3495,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_delete_empty_tables(ecs_world_t* world, ecs_id_t id, ushort clear_generation, ushort delete_generation, int min_id_count, double time_budget_seconds);
 
@@ -3451,6 +3506,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_filter_find_this_var(ecs_filter_t* filter);
 
@@ -3461,6 +3517,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_new_w_id(ecs_world_t* world, ecs_id_t id);
 
@@ -3491,6 +3548,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_set_scope(ecs_world_t* world, ecs_entity_t scope);
 
@@ -3501,6 +3559,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void* ecs_get_id(ecs_world_t* world, ecs_entity_t entity, ecs_id_t id);
 
@@ -3521,6 +3580,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_frame_end(ecs_world_t* world);
 
@@ -3561,6 +3621,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_world_t* ecs_init();
 
@@ -3571,6 +3632,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_merge(ecs_world_t* world);
 
@@ -3624,23 +3686,21 @@ namespace flecs_hub
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_system_stats_copy_last(ecs_system_stats_t* dst, ecs_system_stats_t* src);
 
-        // Function @ system.h:254:6
-        //	x86_64-unknown-linux-gnu (flecs/addons/system.h)
-        //	x86_64-apple-darwin (flecs/addons/system.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\system.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\system.h)
-        //	aarch64-unknown-linux-gnu (flecs/addons/system.h)
-        //	aarch64-apple-darwin (flecs/addons/system.h)
+        // Function @ flecs.h:3414:9
+        //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void FlecsSystemImport(ecs_world_t* world);
+        public static extern int ecs_query_table_count(ecs_query_t* query);
 
         // Function @ flecs.h:2335:14
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern CBool ecs_term_is_set(ecs_iter_t* it, int index);
+
+        // Function @ flecs.h:4067:8
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_set_name(ecs_world_t* world, ecs_entity_t entity, CString name);
 
@@ -3661,6 +3721,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_iter_next(ecs_iter_t* it);
 
@@ -3691,6 +3752,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_set_name_prefix(ecs_world_t* world, CString prefix);
 
@@ -3727,20 +3789,36 @@ namespace flecs_hub
         // Function @ flecs.h:1755:14
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void* ecs_get_observer_ctx(ecs_world_t* world, ecs_entity_t observer);
+
+        // Function @ os_api.h:469:6
+        //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern CBool ecs_os_has_heap();
+
+        // Function @ os_api.h:408:6
+        //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void ecs_os_enable_high_timer_resolution(CBool enable);
+
+        // Function @ flecs.h:1301:14
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_clone(ecs_world_t* world, ecs_entity_t dst, ecs_entity_t src, CBool copy_value);
 
         // Function @ flecs.h:2307:13
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern CBool ecs_commit(ecs_world_t* world, ecs_entity_t entity, ecs_record_t* @record, ecs_table_t* table, ecs_type_t* added, ecs_type_t* removed);
+
+        // Function @ flecs.h:3124:7
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_get_name(ecs_world_t* world, ecs_entity_t entity);
 
@@ -3791,6 +3869,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_id_match(ecs_id_t id, ecs_id_t pattern);
 
@@ -3831,6 +3910,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_get_typeid(ecs_world_t* world, ecs_id_t id);
 
@@ -3851,6 +3931,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_table_storage_to_type_index(ecs_table_t* table, int index);
 
@@ -3871,6 +3952,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_get_symbol(ecs_world_t* world, ecs_entity_t entity);
 
@@ -3891,6 +3973,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_iter_is_true(ecs_iter_t* it);
 
@@ -3931,6 +4014,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern int ecs_table_count(ecs_table_t* table);
 
@@ -3941,6 +4025,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_table_t* ecs_table_remove_id(ecs_world_t* world, ecs_table_t* table, ecs_id_t id);
 
@@ -4004,15 +4089,11 @@ namespace flecs_hub
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_vasprintf(CString fmt, void* args);
 
-        // Function @ sparse.h:150:6
-        //	x86_64-unknown-linux-gnu (flecs/private/sparse.h)
-        //	x86_64-apple-darwin (flecs/private/sparse.h)
-        //	aarch64-pc-windows-msvc (flecs\private\sparse.h)
-        //	x86_64-pc-windows-msvc (flecs\private\sparse.h)
-        //	aarch64-unknown-linux-gnu (flecs/private/sparse.h)
-        //	aarch64-apple-darwin (flecs/private/sparse.h)
+        // Function @ flecs_cpp.h:51:7
+        //	aarch64-apple-darwin (flecs/addons/flecs_cpp.h)
+        //	x86_64-apple-darwin (flecs/addons/flecs_cpp.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern CBool flecs_sparse_is_alive(ecs_sparse_t* sparse, ulong id);
+        public static extern CString ecs_cpp_get_constant_name(CString constant_name, CString func_name, ulong len);
 
         // Function @ meta.h:648:14
         //	x86_64-unknown-linux-gnu (flecs/addons/meta.h)
@@ -4021,16 +4102,19 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\addons\meta.h)
         //	aarch64-unknown-linux-gnu (flecs/addons/meta.h)
         //	aarch64-apple-darwin (flecs/addons/meta.h)
+        //	x86_64-apple-darwin (flecs/addons/meta.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_quantity_init(ecs_world_t* world, ecs_entity_desc_t* desc);
 
         // Function @ flecs.h:4180:6
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
+        public static extern CBool ecs_readonly_begin(ecs_world_t* world);
+
+        // Function @ flecs.h:3486:7
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_defer_begin(ecs_world_t* world);
 
@@ -4041,6 +4125,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_quit(ecs_world_t* world);
 
@@ -4101,6 +4186,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_query_next_instanced(ecs_iter_t* iter);
 
@@ -4131,6 +4217,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_term_is_writeonly(ecs_iter_t* it, int index);
 
@@ -4142,7 +4229,7 @@ namespace flecs_hub
         //	aarch64-unknown-linux-gnu (flecs/addons/expr.h)
         //	aarch64-apple-darwin (flecs/addons/expr.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ecs_size_t ecs_stresc(CString @out, ecs_size_t size, CChar delimiter, CString @in);
+        public static extern CString ecs_module_path_from_c(CString c_name);
 
         // Function @ os_api.h:485:6
         //	x86_64-unknown-linux-gnu (flecs/os_api.h)
@@ -4251,6 +4338,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\private\strbuf.h)
         //	aarch64-unknown-linux-gnu (flecs/private/strbuf.h)
         //	aarch64-apple-darwin (flecs/private/strbuf.h)
+        //	x86_64-apple-darwin (flecs/private/strbuf.h)
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_strbuf_appendch(ecs_strbuf_t* buffer, CChar ch);
 
@@ -4271,6 +4359,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_delete(ecs_world_t* world, ecs_entity_t entity);
 
@@ -4291,6 +4380,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_enable(ecs_world_t* world, ecs_entity_t entity, CBool enabled);
 
@@ -4331,6 +4421,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_type_t* ecs_get_type(ecs_world_t* world, ecs_entity_t entity);
 
@@ -4351,6 +4442,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_world_t* ecs_get_world(ecs_poly_t* world);
 
@@ -4371,6 +4463,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ecs_query_skip(ecs_iter_t* it);
 
@@ -4441,6 +4534,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_table_t* ecs_iter_get_var_as_table(ecs_iter_t* it, int var_id);
 
@@ -4461,6 +4555,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CString ecs_iter_str(ecs_iter_t* it);
 
@@ -4601,6 +4696,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_commit(ecs_world_t* world, ecs_entity_t entity, ecs_record_t* @record, ecs_table_t* table, ecs_type_t* added, ecs_type_t* removed);
 
@@ -4671,6 +4767,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern CBool ecs_id_is_wildcard(ecs_id_t id);
 
@@ -4721,6 +4818,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]
         public static extern ecs_entity_t ecs_lookup_path_w_sep(ecs_world_t* world, ecs_entity_t parent, CString path, CString sep, CString prefix, CBool recursive);
 
@@ -4759,11 +4857,6 @@ namespace flecs_hub
         #region Types
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_os_thread_t_VoidPtr
@@ -4774,10 +4867,6 @@ namespace flecs_hub
         // FunctionPointer @ NoLocation
         //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_IntPtr_Int
         {
@@ -4785,12 +4874,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_os_thread_callback_t_VoidPtr_Ecs_os_thread_t
         {
@@ -4798,12 +4883,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_CString_Ecs_os_dl_t
         {
@@ -4811,12 +4892,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_os_dl_t_Void
         {
@@ -4824,25 +4901,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
-        [StructLayout(LayoutKind.Sequential)]
-        public struct FnPtr_Void
-        {
-            public delegate* unmanaged<void> Pointer;
-        }
-
-        // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
         //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_VoidPtr_Ecs_size_t_VoidPtr
         {
@@ -4850,12 +4910,17 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
+        [StructLayout(LayoutKind.Sequential)]
+        public struct FnPtr_VoidPtr_Ecs_size_t_VoidPtr
+        {
+            public delegate* unmanaged<void*, ecs_size_t, void*> Pointer;
+        }
+
+        // FunctionPointer @ NoLocation
+        //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_os_cond_t
         {
@@ -4863,12 +4928,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_os_mutex_t_Void
         {
@@ -4876,12 +4937,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_world_tPtr_Ecs_app_desc_tPtr_Int
         {
@@ -4889,12 +4946,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_VoidPtr_VoidPtr
         {
@@ -4902,12 +4955,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_os_cond_t_Void
         {
@@ -4915,12 +4964,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_world_tPtr_Int
         {
@@ -4928,12 +4973,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_world_tPtr_Ecs_table_tPtr_Ecs_entity_tPtr_VoidPtr_Int_Int_Int_Ecs_order_by_action_t_Void
         {
@@ -4941,12 +4982,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_iter_tPtr_Void
         {
@@ -4954,12 +4991,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_world_tPtr_Void
         {
@@ -4967,12 +5000,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_CString_CString
         {
@@ -4980,12 +5009,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_os_mutex_t
         {
@@ -4993,12 +5018,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_time_tPtr_Void
         {
@@ -5006,12 +5027,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_os_cond_t_Ecs_os_mutex_t_Void
         {
@@ -5019,12 +5036,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_world_tPtr_Ecs_poly_tPtr_Ecs_iter_tPtr_Ecs_term_tPtr_Void
         {
@@ -5032,12 +5045,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_size_t_VoidPtr
         {
@@ -5045,12 +5054,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_os_dl_t_CString_Ecs_os_proc_t
         {
@@ -5058,12 +5063,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_iter_tPtr_CBool
         {
@@ -5071,12 +5072,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ulong
         {
@@ -5084,12 +5081,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_world_tPtr_Ecs_table_tPtr_Ecs_id_t_VoidPtr_Ulong
         {
@@ -5097,12 +5090,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Int_CString_Int_CString_Void
         {
@@ -5110,12 +5099,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_CBool_Void
         {
@@ -5123,12 +5108,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_VoidPtr_VoidPtr_Int_Ecs_type_info_tPtr_Void
         {
@@ -5136,12 +5117,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_world_tPtr_CString_VoidPtr_Ecs_entity_t
         {
@@ -5149,12 +5126,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_entity_t_VoidPtr_Ecs_entity_t_VoidPtr_Int
         {
@@ -5162,12 +5135,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_VoidPtr_VoidPtr_Int
         {
@@ -5175,12 +5144,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_world_tPtr_VoidPtr_Void
         {
@@ -5188,12 +5153,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_VoidPtr_Void
         {
@@ -5201,12 +5162,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_VoidPtr_Int_Ecs_type_info_tPtr_Void
         {
@@ -5214,12 +5171,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_VoidPtr_Ulong
         {
@@ -5227,12 +5180,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Int_Int_Void
         {
@@ -5240,12 +5189,8 @@ namespace flecs_hub
         }
 
         // FunctionPointer @ NoLocation
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct FnPtr_Ecs_http_request_tPtr_Ecs_http_reply_tPtr_VoidPtr_CBool
         {
@@ -5265,6 +5210,15 @@ namespace flecs_hub
             [FieldOffset(0)] // size = 8, padding = 0
             public ecs_entity_t @event;
 
+        // Struct @ expr.h:106:16
+        //	aarch64-apple-darwin (flecs/addons/expr.h)
+        //	x86_64-apple-darwin (flecs/addons/expr.h)
+        [StructLayout(LayoutKind.Explicit, Size = 32, Pack = 8)]
+        public struct ecs_parse_expr_desc_t
+        {
+            [FieldOffset(0)] // size = 8, padding = 0
+            public CString name;
+
             [FieldOffset(8)] // size = 8, padding = 0
             public ecs_type_t* ids;
 
@@ -5279,6 +5233,7 @@ namespace flecs_hub
 
             [FieldOffset(36)] // size = 4, padding = 0
             public int count;
+        }
 
             [FieldOffset(40)] // size = 8, padding = 0
             public void* param;
@@ -6801,12 +6756,8 @@ namespace flecs_hub
         }
 
         // Union @ api_types.h:221:5
-        //	x86_64-unknown-linux-gnu (flecs/private/api_types.h)
-        //	x86_64-apple-darwin (flecs/private/api_types.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_types.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_types.h)
-        //	aarch64-unknown-linux-gnu (flecs/private/api_types.h)
         //	aarch64-apple-darwin (flecs/private/api_types.h)
+        //	x86_64-apple-darwin (flecs/private/api_types.h)
         [StructLayout(LayoutKind.Explicit, Size = 1152, Pack = 8)]
         public struct ecs_iter_private_t_ANONYMOUS_FIELD0
         {
@@ -7520,24 +7471,17 @@ namespace flecs_hub
             }
         }
 
-        // Struct @ meta.h:630:16
-        //	x86_64-unknown-linux-gnu (flecs/addons/meta.h)
-        //	x86_64-apple-darwin (flecs/addons/meta.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\meta.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\meta.h)
-        //	aarch64-unknown-linux-gnu (flecs/addons/meta.h)
-        //	aarch64-apple-darwin (flecs/addons/meta.h)
-        [StructLayout(LayoutKind.Explicit, Size = 336, Pack = 8)]
-        public struct ecs_unit_prefix_desc_t
+        // Struct @ hashmap.h:18:9
+        //	aarch64-apple-darwin (flecs/private/hashmap.h)
+        //	x86_64-apple-darwin (flecs/private/hashmap.h)
+        [StructLayout(LayoutKind.Explicit, Size = 16, Pack = 8)]
+        public struct ecs_hm_bucket_t
         {
-            [FieldOffset(0)] // size = 320, padding = 0
-            public ecs_entity_desc_t entity;
+            [FieldOffset(0)] // size = 8, padding = 0
+            public ecs_vector_t* keys;
 
-            [FieldOffset(320)] // size = 8, padding = 0
-            public CString symbol;
-
-            [FieldOffset(328)] // size = 8, padding = 0
-            public ecs_unit_translation_t translation;
+            [FieldOffset(8)] // size = 8, padding = 0
+            public ecs_vector_t* values;
         }
 
         // Struct @ http.h:43:9
@@ -7824,13 +7768,78 @@ namespace flecs_hub
             public ecs_entity_t member;
         }
 
+        // Struct @ flecs.h:3490:16
+        //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
+        [StructLayout(LayoutKind.Explicit, Size = 72, Pack = 8)]
+        public struct ecs_event_desc_t
+        {
+            [FieldOffset(0)] // size = 8, padding = 0
+            public ecs_entity_t @event;
+
+            [FieldOffset(8)] // size = 8, padding = 0
+            public ecs_type_t* ids;
+
+            [FieldOffset(16)] // size = 8, padding = 0
+            public ecs_table_t* table;
+
+            [FieldOffset(24)] // size = 8, padding = 0
+            public ecs_table_t* other_table;
+
+            [FieldOffset(32)] // size = 4, padding = 0
+            public int offset;
+
+            [FieldOffset(36)] // size = 4, padding = 0
+            public int count;
+
+            [FieldOffset(40)] // size = 8, padding = 0
+            public void* param;
+
+            [FieldOffset(48)] // size = 8, padding = 0
+            public ecs_poly_t* observable;
+
+            [FieldOffset(56)] // size = 1, padding = 7
+            public CBool table_event;
+
+            [FieldOffset(64)] // size = 8, padding = 0
+            public ecs_entity_t relation;
+        }
+
+        // Struct @ monitor.h:42:9
+        //	aarch64-apple-darwin (flecs/addons/monitor.h)
+        //	x86_64-apple-darwin (flecs/addons/monitor.h)
+        [StructLayout(LayoutKind.Explicit, Size = 43220, Pack = 4)]
+        public struct EcsWorldStats
+        {
+            [FieldOffset(0)] // size = 8, padding = 0
+            public EcsStatsHeader hdr;
+
+            [FieldOffset(8)] // size = 43212, padding = 0
+            public ecs_world_stats_t stats;
+        }
+
+        // Struct @ strbuf.h:30:16
+        //	aarch64-apple-darwin (flecs/private/strbuf.h)
+        //	x86_64-apple-darwin (flecs/private/strbuf.h)
+        [StructLayout(LayoutKind.Explicit, Size = 24, Pack = 8)]
+        public struct ecs_strbuf_element
+        {
+            [FieldOffset(0)] // size = 1, padding = 3
+            public CBool buffer_embedded;
+
+            [FieldOffset(4)] // size = 4, padding = 0
+            public int pos;
+
+            [FieldOffset(8)] // size = 8, padding = 0
+            public CString buf;
+
+            [FieldOffset(16)] // size = 8, padding = 0
+            public ecs_strbuf_element* next;
+        }
+
         // Struct @ api_types.h:111:16
-        //	x86_64-unknown-linux-gnu (flecs/private/api_types.h)
-        //	x86_64-apple-darwin (flecs/private/api_types.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_types.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_types.h)
-        //	aarch64-unknown-linux-gnu (flecs/private/api_types.h)
         //	aarch64-apple-darwin (flecs/private/api_types.h)
+        //	x86_64-apple-darwin (flecs/private/api_types.h)
         [StructLayout(LayoutKind.Explicit, Size = 304, Pack = 8)]
         public struct ecs_term_iter_t
         {
@@ -8102,48 +8111,51 @@ namespace flecs_hub
             public int reduce_count;
         }
 
-        // Struct @ flecs.h:748:16
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
+        // Struct @ flecs.h:712:16
         //	aarch64-apple-darwin
-        [StructLayout(LayoutKind.Explicit, Size = 3192, Pack = 8)]
-        public struct ecs_query_desc_t
+        //	x86_64-apple-darwin
+        [StructLayout(LayoutKind.Explicit, Size = 3112, Pack = 8)]
+        public struct ecs_filter_desc_t
         {
             [FieldOffset(0)] // size = 4, padding = 4
             public int _canary;
 
-            [FieldOffset(8)] // size = 3112, padding = 0
-            public ecs_filter_desc_t filter;
+            [FieldOffset(8)] // size = 8, padding = 3064
+            public fixed byte _terms[8]; // ecs_term_t[16]
 
-            [FieldOffset(3120)] // size = 8, padding = 0
-            public ecs_entity_t order_by_component;
+            public Span<ecs_term_t> terms
+            {
+                get
+                {
+                    fixed (ecs_filter_desc_t* @this = &this)
+                    {
+                        var pointer = &@this->_terms[0];
+                        var span = new Span<ecs_term_t>(pointer, 16);
+                        return span;
+                    }
+                }
+            }
 
-            [FieldOffset(3128)] // size = 8, padding = 0
-            public ecs_order_by_action_t order_by;
+            [FieldOffset(3080)] // size = 8, padding = 0
+            public ecs_term_t* terms_buffer;
 
-            [FieldOffset(3136)] // size = 8, padding = 0
-            public ecs_sort_table_action_t sort_table;
+            [FieldOffset(3088)] // size = 4, padding = 0
+            public int terms_buffer_count;
 
-            [FieldOffset(3144)] // size = 8, padding = 0
-            public ecs_id_t group_by_id;
+            [FieldOffset(3092)] // size = 1, padding = 0
+            public CBool filter;
 
-            [FieldOffset(3152)] // size = 8, padding = 0
-            public ecs_group_by_action_t group_by;
+            [FieldOffset(3093)] // size = 1, padding = 0
+            public CBool instanced;
 
-            [FieldOffset(3160)] // size = 8, padding = 0
-            public void* group_by_ctx;
+            [FieldOffset(3094)] // size = 1, padding = 1
+            public CBool match_empty_tables;
 
-            [FieldOffset(3168)] // size = 8, padding = 0
-            public ecs_ctx_free_t group_by_ctx_free;
+            [FieldOffset(3096)] // size = 8, padding = 0
+            public CString expr;
 
-            [FieldOffset(3176)] // size = 8, padding = 0
-            public ecs_query_t* parent;
-
-            [FieldOffset(3184)] // size = 8, padding = 0
-            public ecs_entity_t system;
+            [FieldOffset(3104)] // size = 8, padding = 0
+            public CString name;
         }
 
         // Struct @ map.h:50:16
@@ -8325,8 +8337,8 @@ namespace flecs_hub
         [StructLayout(LayoutKind.Explicit, Size = 3112, Pack = 8)]
         public struct ecs_filter_desc_t
         {
-            [FieldOffset(0)] // size = 4, padding = 4
-            public int _canary;
+            [FieldOffset(0)] // size = 4, padding = 0
+            public ecs_meta_type_op_kind_t kind;
 
             [FieldOffset(8)] // size = 8, padding = 3064
             public fixed byte _terms[8]; // ecs_term_t[16]
@@ -8398,13 +8410,106 @@ namespace flecs_hub
             public int skip_count;
         }
 
-        // Struct @ api_types.h:178:16
-        //	x86_64-unknown-linux-gnu (flecs/private/api_types.h)
-        //	x86_64-apple-darwin (flecs/private/api_types.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_types.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_types.h)
-        //	aarch64-unknown-linux-gnu (flecs/private/api_types.h)
+        // Struct @ meta.h:257:16
+        //	aarch64-apple-darwin (flecs/addons/meta.h)
+        //	x86_64-apple-darwin (flecs/addons/meta.h)
+        [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 4)]
+        public struct ecs_unit_translation_t
+        {
+            [FieldOffset(0)] // size = 4, padding = 0
+            public int factor;
+
+            [FieldOffset(4)] // size = 4, padding = 0
+            public int power;
+        }
+
+        // Struct @ flecs.h:394:16
+        //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
+        [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
+        public struct ecs_iterable_t
+        {
+            [FieldOffset(0)] // size = 8, padding = 0
+            public ecs_iter_init_action_t init;
+        }
+
+        // Struct @ api_types.h:143:16
         //	aarch64-apple-darwin (flecs/private/api_types.h)
+        //	x86_64-apple-darwin (flecs/private/api_types.h)
+        [StructLayout(LayoutKind.Explicit, Size = 1152, Pack = 8)]
+        public struct ecs_filter_iter_t
+        {
+            [FieldOffset(0)] // size = 832, padding = 0
+            public ecs_filter_t filter;
+
+            [FieldOffset(832)] // size = 4, padding = 4
+            public ecs_iter_kind_t kind;
+
+            [FieldOffset(840)] // size = 304, padding = 0
+            public ecs_term_iter_t term_iter;
+
+            [FieldOffset(1144)] // size = 4, padding = 0
+            public int matches_left;
+
+            [FieldOffset(1148)] // size = 4, padding = 0
+            public int pivot_term;
+        }
+
+        // Struct @ api_types.h:220:16
+        //	aarch64-apple-darwin (flecs/private/api_types.h)
+        //	x86_64-apple-darwin (flecs/private/api_types.h)
+        [StructLayout(LayoutKind.Explicit, Size = 1400, Pack = 8)]
+        public struct ecs_iter_private_t
+        {
+            [FieldOffset(0)] // size = 1152, padding = 0
+            public ecs_iter_private_t_ANONYMOUS_FIELD0 iter;
+
+            [FieldOffset(1152)] // size = 248, padding = 0
+            public ecs_iter_cache_t cache;
+        }
+
+        // Struct @ meta.h:544:16
+        //	aarch64-apple-darwin (flecs/addons/meta.h)
+        //	x86_64-apple-darwin (flecs/addons/meta.h)
+        [StructLayout(LayoutKind.Explicit, Size = 1088, Pack = 8)]
+        public struct ecs_bitmask_desc_t
+        {
+            [FieldOffset(0)] // size = 320, padding = 0
+            public ecs_entity_desc_t entity;
+
+            [FieldOffset(320)] // size = 8, padding = 760
+            public fixed byte _constants[8]; // ecs_bitmask_constant_t[32]
+
+            public Span<ecs_bitmask_constant_t> constants
+            {
+                get
+                {
+                    fixed (ecs_bitmask_desc_t* @this = &this)
+                    {
+                        var pointer = &@this->_constants[0];
+                        var span = new Span<ecs_bitmask_constant_t>(pointer, 32);
+                        return span;
+                    }
+                }
+            }
+        }
+
+        // Struct @ os_api.h:31:16
+        //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
+        [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 4)]
+        public struct ecs_time_t
+        {
+            [FieldOffset(0)] // size = 4, padding = 0
+            public uint sec;
+
+            [FieldOffset(4)] // size = 4, padding = 0
+            public uint nanosec;
+        }
+
+        // Struct @ api_types.h:178:16
+        //	aarch64-apple-darwin (flecs/private/api_types.h)
+        //	x86_64-apple-darwin (flecs/private/api_types.h)
         [StructLayout(LayoutKind.Explicit, Size = 56, Pack = 8)]
         public struct ecs_rule_iter_t
         {
@@ -8505,18 +8610,23 @@ namespace flecs_hub
         [StructLayout(LayoutKind.Sequential)]
         public struct ecs_id_record_t
         {
-        }
+            [FieldOffset(0)] // size = 4, padding = 0
+            public int first_;
 
-        // OpaqueType @ api_types.h:46:39
-        //	x86_64-unknown-linux-gnu (flecs/private/api_types.h)
-        //	x86_64-apple-darwin (flecs/private/api_types.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_types.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_types.h)
-        //	aarch64-unknown-linux-gnu (flecs/private/api_types.h)
-        //	aarch64-apple-darwin (flecs/private/api_types.h)
-        [StructLayout(LayoutKind.Sequential)]
-        public struct ecs_query_table_node_t
-        {
+            [FieldOffset(4)] // size = 960, padding = 0
+            public ecs_metric_t matched_table_count;
+
+            [FieldOffset(964)] // size = 960, padding = 0
+            public ecs_metric_t matched_empty_table_count;
+
+            [FieldOffset(1924)] // size = 960, padding = 0
+            public ecs_metric_t matched_entity_count;
+
+            [FieldOffset(2884)] // size = 4, padding = 0
+            public int last_;
+
+            [FieldOffset(2888)] // size = 4, padding = 0
+            public int t;
         }
 
         // OpaqueType @ vector.h:53:29
@@ -8529,27 +8639,52 @@ namespace flecs_hub
         [StructLayout(LayoutKind.Sequential)]
         public struct ecs_vector_t
         {
+            [FieldOffset(0)] // size = 8, padding = 0
+            public ecs_world_t* world;
+
+            [FieldOffset(8)] // size = 8, padding = 2040
+            public fixed byte _scope[8]; // ecs_meta_scope_t[32]
+
+            public Span<ecs_meta_scope_t> scope
+            {
+                get
+                {
+                    fixed (ecs_meta_cursor_t* @this = &this)
+                    {
+                        var pointer = &@this->_scope[0];
+                        var span = new Span<ecs_meta_scope_t>(pointer, 32);
+                        return span;
+                    }
+                }
+            }
+
+            [FieldOffset(2056)] // size = 4, padding = 0
+            public int depth;
+
+            [FieldOffset(2060)] // size = 1, padding = 0
+            public CBool valid;
+
+            [FieldOffset(2061)] // size = 1, padding = 2
+            public CBool is_primitive_scope;
+
+            [FieldOffset(2064)] // size = 8, padding = 0
+            public FnPtr_Ecs_world_tPtr_CString_VoidPtr_Ecs_entity_t lookup_action;
+
+            [FieldOffset(2072)] // size = 8, padding = 0
+            public void* lookup_ctx;
         }
 
-        // OpaqueType @ flecs.h:179:28
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
-        //	aarch64-apple-darwin
+        // OpaqueType @ api_types.h:43:32
+        //	aarch64-apple-darwin (flecs/private/api_types.h)
+        //	x86_64-apple-darwin (flecs/private/api_types.h)
         [StructLayout(LayoutKind.Sequential)]
-        public struct ecs_table_t
+        public struct ecs_id_record_t
         {
         }
 
         // OpaqueType @ snapshot.h:23:31
-        //	x86_64-unknown-linux-gnu (flecs/addons/snapshot.h)
-        //	x86_64-apple-darwin (flecs/addons/snapshot.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\snapshot.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\snapshot.h)
-        //	aarch64-unknown-linux-gnu (flecs/addons/snapshot.h)
         //	aarch64-apple-darwin (flecs/addons/snapshot.h)
+        //	x86_64-apple-darwin (flecs/addons/snapshot.h)
         [StructLayout(LayoutKind.Sequential)]
         public struct ecs_snapshot_t
         {
@@ -8562,6 +8697,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct ecs_poly_t
         {
@@ -8574,6 +8710,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct ecs_rule_t
         {
@@ -8587,7 +8724,7 @@ namespace flecs_hub
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
-        public struct ecs_query_t
+        public struct ecs_query_table_node_t
         {
         }
 
@@ -8598,6 +8735,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Sequential)]
         public struct ecs_world_t
         {
@@ -8613,6 +8751,11 @@ namespace flecs_hub
         [StructLayout(LayoutKind.Sequential)]
         public struct ecs_mixins_t
         {
+            [FieldOffset(0)] // size = 1, padding = 0
+            public byte Data;
+
+            public static implicit operator byte(ecs_flags8_t data) => data.Data;
+            public static implicit operator ecs_flags8_t(byte data) => new() { Data = data };
         }
 
         // TypeAlias @ flecs.h:337:16
@@ -8724,6 +8867,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_mutex_new_t
         {
@@ -8741,6 +8885,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_strdup_t
         {
@@ -8758,6 +8903,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_cond_broadcast_t
         {
@@ -8788,10 +8934,19 @@ namespace flecs_hub
         // TypeAlias @ os_api.h:155:12
         //	x86_64-unknown-linux-gnu (flecs/os_api.h)
         //	x86_64-apple-darwin (flecs/os_api.h)
-        //	aarch64-pc-windows-msvc (flecs\os_api.h)
-        //	x86_64-pc-windows-msvc (flecs\os_api.h)
-        //	aarch64-unknown-linux-gnu (flecs/os_api.h)
+        [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
+        public struct ecs_os_thread_callback_t
+        {
+            [FieldOffset(0)] // size = 8, padding = 0
+            public FnPtr_VoidPtr_VoidPtr Data;
+
+            public static implicit operator FnPtr_VoidPtr_VoidPtr(ecs_os_thread_callback_t data) => data.Data;
+            public static implicit operator ecs_os_thread_callback_t(FnPtr_VoidPtr_VoidPtr data) => new() { Data = data };
+        }
+
+        // TypeAlias @ os_api.h:108:8
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_now_t
         {
@@ -8819,30 +8974,35 @@ namespace flecs_hub
             public static implicit operator ecs_copy_t(FnPtr_VoidPtr_VoidPtr_Int_Ecs_type_info_tPtr_Void data) => new() { Data = data };
         }
 
-        // TypeAlias @ os_api.h:75:9
-        //	x86_64-unknown-linux-gnu (flecs/os_api.h)
-        //	x86_64-apple-darwin (flecs/os_api.h)
-        //	aarch64-pc-windows-msvc (flecs\os_api.h)
-        //	x86_64-pc-windows-msvc (flecs\os_api.h)
-        //	aarch64-unknown-linux-gnu (flecs/os_api.h)
+        // TypeAlias @ os_api.h:181:8
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
-        public struct ecs_os_api_calloc_t
+        public struct ecs_os_api_dlclose_t
         {
             [FieldOffset(0)] // size = 8, padding = 0
-            public FnPtr_Ecs_size_t_VoidPtr Data;
+            public FnPtr_Ecs_os_dl_t_Void Data;
 
-            public static implicit operator FnPtr_Ecs_size_t_VoidPtr(ecs_os_api_calloc_t data) => data.Data;
-            public static implicit operator ecs_os_api_calloc_t(FnPtr_Ecs_size_t_VoidPtr data) => new() { Data = data };
+            public static implicit operator FnPtr_Ecs_os_dl_t_Void(ecs_os_api_dlclose_t data) => data.Data;
+            public static implicit operator ecs_os_api_dlclose_t(FnPtr_Ecs_os_dl_t_Void data) => new() { Data = data };
         }
 
         // TypeAlias @ os_api.h:176:17
         //	x86_64-unknown-linux-gnu (flecs/os_api.h)
         //	x86_64-apple-darwin (flecs/os_api.h)
-        //	aarch64-pc-windows-msvc (flecs\os_api.h)
-        //	x86_64-pc-windows-msvc (flecs\os_api.h)
-        //	aarch64-unknown-linux-gnu (flecs/os_api.h)
+        [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
+        public struct ecs_os_api_get_time_t
+        {
+            [FieldOffset(0)] // size = 8, padding = 0
+            public FnPtr_Ecs_time_tPtr_Void Data;
+
+            public static implicit operator FnPtr_Ecs_time_tPtr_Void(ecs_os_api_get_time_t data) => data.Data;
+            public static implicit operator ecs_os_api_get_time_t(FnPtr_Ecs_time_tPtr_Void data) => new() { Data = data };
+        }
+
+        // TypeAlias @ os_api.h:58:8
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_dlproc_t
         {
@@ -8928,6 +9088,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_mutex_t
         {
@@ -8962,6 +9123,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_free_t
         {
@@ -9064,6 +9226,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_cond_new_t
         {
@@ -9077,10 +9240,19 @@ namespace flecs_hub
         // TypeAlias @ os_api.h:46:19
         //	x86_64-unknown-linux-gnu (flecs/os_api.h)
         //	x86_64-apple-darwin (flecs/os_api.h)
-        //	aarch64-pc-windows-msvc (flecs\os_api.h)
-        //	x86_64-pc-windows-msvc (flecs\os_api.h)
-        //	aarch64-unknown-linux-gnu (flecs/os_api.h)
+        [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
+        public struct ecs_os_api_cond_free_t
+        {
+            [FieldOffset(0)] // size = 8, padding = 0
+            public FnPtr_Ecs_os_cond_t_Void Data;
+
+            public static implicit operator FnPtr_Ecs_os_cond_t_Void(ecs_os_api_cond_free_t data) => data.Data;
+            public static implicit operator ecs_os_api_cond_free_t(FnPtr_Ecs_os_cond_t_Void data) => new() { Data = data };
+        }
+
+        // TypeAlias @ os_api.h:45:19
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_dl_t
         {
@@ -9098,6 +9270,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_cond_free_t
         {
@@ -9132,6 +9305,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_cond_signal_t
         {
@@ -9149,6 +9323,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_entity_t
         {
@@ -9167,13 +9342,13 @@ namespace flecs_hub
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
-        public struct ecs_run_action_t
+        public struct ecs_os_api_dlopen_t
         {
             [FieldOffset(0)] // size = 8, padding = 0
-            public FnPtr_Ecs_iter_tPtr_Void Data;
+            public FnPtr_CString_Ecs_os_dl_t Data;
 
-            public static implicit operator FnPtr_Ecs_iter_tPtr_Void(ecs_run_action_t data) => data.Data;
-            public static implicit operator ecs_run_action_t(FnPtr_Ecs_iter_tPtr_Void data) => new() { Data = data };
+            public static implicit operator FnPtr_CString_Ecs_os_dl_t(ecs_os_api_dlopen_t data) => data.Data;
+            public static implicit operator ecs_os_api_dlopen_t(FnPtr_CString_Ecs_os_dl_t data) => new() { Data = data };
         }
 
         // TypeAlias @ os_api.h:44:19
@@ -9200,14 +9375,15 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
-        public struct ecs_order_by_action_t
+        public struct ecs_iter_action_t
         {
             [FieldOffset(0)] // size = 8, padding = 0
-            public FnPtr_Ecs_entity_t_VoidPtr_Ecs_entity_t_VoidPtr_Int Data;
+            public FnPtr_Ecs_iter_tPtr_Void Data;
 
-            public static implicit operator FnPtr_Ecs_entity_t_VoidPtr_Ecs_entity_t_VoidPtr_Int(ecs_order_by_action_t data) => data.Data;
-            public static implicit operator ecs_order_by_action_t(FnPtr_Ecs_entity_t_VoidPtr_Ecs_entity_t_VoidPtr_Int data) => new() { Data = data };
+            public static implicit operator FnPtr_Ecs_iter_tPtr_Void(ecs_iter_action_t data) => data.Data;
+            public static implicit operator ecs_iter_action_t(FnPtr_Ecs_iter_tPtr_Void data) => new() { Data = data };
         }
 
         // TypeAlias @ flecs.h:346:15
@@ -9217,6 +9393,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_compare_action_t
         {
@@ -9313,12 +9490,8 @@ namespace flecs_hub
         }
 
         // TypeAlias @ flecs.h:164:18
-        //	x86_64-unknown-linux-gnu
-        //	x86_64-apple-darwin
-        //	aarch64-pc-windows-msvc
-        //	x86_64-pc-windows-msvc
-        //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_id_t
         {
@@ -9349,10 +9522,6 @@ namespace flecs_hub
         // TypeAlias @ os_api.h:84:9
         //	x86_64-unknown-linux-gnu (flecs/os_api.h)
         //	x86_64-apple-darwin (flecs/os_api.h)
-        //	aarch64-pc-windows-msvc (flecs\os_api.h)
-        //	x86_64-pc-windows-msvc (flecs\os_api.h)
-        //	aarch64-unknown-linux-gnu (flecs/os_api.h)
-        //	aarch64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_thread_callback_t
         {
@@ -9387,6 +9556,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_iter_fini_action_t
         {
@@ -9404,6 +9574,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_thread_t
         {
@@ -9414,21 +9585,17 @@ namespace flecs_hub
             public static implicit operator ecs_os_thread_t(UIntPtr data) => new() { Data = data };
         }
 
-        // TypeAlias @ api_defines.h:100:18
-        //	x86_64-unknown-linux-gnu (flecs/private/api_defines.h)
-        //	x86_64-apple-darwin (flecs/private/api_defines.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_defines.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_defines.h)
-        //	aarch64-unknown-linux-gnu (flecs/private/api_defines.h)
-        //	aarch64-apple-darwin (flecs/private/api_defines.h)
+        // TypeAlias @ flecs.h:337:16
+        //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
-        public struct ecs_flags64_t
+        public struct ecs_fini_action_t
         {
             [FieldOffset(0)] // size = 8, padding = 0
-            public ulong Data;
+            public FnPtr_Ecs_world_tPtr_VoidPtr_Void Data;
 
-            public static implicit operator ulong(ecs_flags64_t data) => data.Data;
-            public static implicit operator ecs_flags64_t(ulong data) => new() { Data = data };
+            public static implicit operator FnPtr_Ecs_world_tPtr_VoidPtr_Void(ecs_fini_action_t data) => data.Data;
+            public static implicit operator ecs_fini_action_t(FnPtr_Ecs_world_tPtr_VoidPtr_Void data) => new() { Data = data };
         }
 
         // TypeAlias @ os_api.h:142:8
@@ -9472,6 +9639,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_sort_table_action_t
         {
@@ -9536,10 +9704,6 @@ namespace flecs_hub
         // TypeAlias @ os_api.h:185:9
         //	x86_64-unknown-linux-gnu (flecs/os_api.h)
         //	x86_64-apple-darwin (flecs/os_api.h)
-        //	aarch64-pc-windows-msvc (flecs\os_api.h)
-        //	x86_64-pc-windows-msvc (flecs\os_api.h)
-        //	aarch64-unknown-linux-gnu (flecs/os_api.h)
-        //	aarch64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_module_to_path_t
         {
@@ -9574,6 +9738,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc
         //	aarch64-unknown-linux-gnu
         //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_group_by_action_t
         {
@@ -9608,6 +9773,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_cond_wait_t
         {
@@ -9625,6 +9791,7 @@ namespace flecs_hub
         //	x86_64-pc-windows-msvc (flecs\os_api.h)
         //	aarch64-unknown-linux-gnu (flecs/os_api.h)
         //	aarch64-apple-darwin (flecs/os_api.h)
+        //	x86_64-apple-darwin (flecs/os_api.h)
         [StructLayout(LayoutKind.Explicit, Size = 8, Pack = 8)]
         public struct ecs_os_api_enable_high_timer_resolution_t
         {
@@ -9653,12 +9820,8 @@ namespace flecs_hub
         }
 
         // Enum @ meta.h:131:14
-        //	x86_64-unknown-linux-gnu (flecs/addons/meta.h)
-        //	x86_64-apple-darwin (flecs/addons/meta.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\meta.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\meta.h)
-        //	aarch64-unknown-linux-gnu (flecs/addons/meta.h)
         //	aarch64-apple-darwin (flecs/addons/meta.h)
+        //	x86_64-apple-darwin (flecs/addons/meta.h)
         public enum ecs_type_kind_t : int
         {
             EcsPrimitiveType = 0,
@@ -9671,12 +9834,8 @@ namespace flecs_hub
         }
 
         // Enum @ meta.h:278:14
-        //	x86_64-unknown-linux-gnu (flecs/addons/meta.h)
-        //	x86_64-apple-darwin (flecs/addons/meta.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\meta.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\meta.h)
-        //	aarch64-unknown-linux-gnu (flecs/addons/meta.h)
         //	aarch64-apple-darwin (flecs/addons/meta.h)
+        //	x86_64-apple-darwin (flecs/addons/meta.h)
         public enum ecs_meta_type_op_kind_t : int
         {
             EcsOpArray = 0,
@@ -9777,42 +9936,22 @@ namespace flecs_hub
         //	aarch64-apple-darwin
         public enum ecs_oper_kind_t : int
         {
-            EcsAnd = 0,
-            EcsOr = 1,
-            EcsNot = 2,
-            EcsOptional = 3,
-            EcsAndFrom = 4,
-            EcsOrFrom = 5,
-            EcsNotFrom = 6
+            EcsHttpGet = 0,
+            EcsHttpPost = 1,
+            EcsHttpPut = 2,
+            EcsHttpDelete = 3,
+            EcsHttpOptions = 4,
+            EcsHttpMethodUnsupported = 5
         }
 
-        // Enum @ meta.h:150:14
-        //	x86_64-unknown-linux-gnu (flecs/addons/meta.h)
-        //	x86_64-apple-darwin (flecs/addons/meta.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\meta.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\meta.h)
-        //	aarch64-unknown-linux-gnu (flecs/addons/meta.h)
-        //	aarch64-apple-darwin (flecs/addons/meta.h)
-        public enum ecs_primitive_kind_t : int
+        // Enum @ flecs.h:425:14
+        //	aarch64-apple-darwin
+        //	x86_64-apple-darwin
+        public enum ecs_var_kind_t : int
         {
-            EcsBool = 1,
-            EcsChar = 2,
-            EcsByte = 3,
-            EcsU8 = 4,
-            EcsU16 = 5,
-            EcsU32 = 6,
-            EcsU64 = 7,
-            EcsI8 = 8,
-            EcsI16 = 9,
-            EcsI32 = 10,
-            EcsI64 = 11,
-            EcsF32 = 12,
-            EcsF64 = 13,
-            EcsUPtr = 14,
-            EcsIPtr = 15,
-            EcsString = 16,
-            EcsEntity = 17,
-            EcsPrimitiveKindLast = 17
+            EcsVarDefault = 0,
+            EcsVarIsEntity = 1,
+            EcsVarIsVariable = 2
         }
 
         // MacroObject @ api_flags.h:114:9
@@ -9834,8 +9973,9 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:54:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsTableHasLifecycle = 768;
+
+        // MacroObject @ api_flags.h:116:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsIdDontInherit = 128;
 
@@ -9858,16 +9998,18 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:53:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsWorldQuitWorkers = 1;
+
+        // MacroObject @ api_flags.h:123:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsIdExclusive = 64;
 
         // MacroObject @ api_flags.h:137:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsIterIsValid = 1;
+
+        // MacroObject @ api_flags.h:20:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsTableHasRemoveActions = 328200;
 
@@ -9930,8 +10072,9 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:61:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsEntityObservedAcyclic = 268435456;
+
+        // MacroObject @ api_flags.h:19:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsIdHasOnRemove = 65536;
 
@@ -10039,20 +10182,24 @@ namespace flecs_hub
         //	aarch64-apple-darwin (flecs/addons/log.h)
         public const int ECS_INVALID_OPERATION = 1;
 
-        // MacroObject @ api_flags.h:117:9
-        //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
-        //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        // MacroObject @ api_flags.h:112:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
-        public const uint EcsTableIsDisabled = 128;
+        //	x86_64-apple-darwin (flecs/private/api_flags.h)
+        public const uint EcsTableIsPrefab = 4;
+
+        // MacroObject @ log.h:479:9
+        //	aarch64-apple-darwin (flecs/addons/log.h)
+        //	x86_64-apple-darwin (flecs/addons/log.h)
+        public static string ECS_YELLOW = "[0;33m";
+
+        // MacroObject @ api_flags.h:114:9
+        //	aarch64-apple-darwin (flecs/private/api_flags.h)
+        //	x86_64-apple-darwin (flecs/private/api_flags.h)
+        public const uint EcsTableHasChildOf = 16;
 
         // MacroObject @ api_flags.h:21:9
-        //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
-        //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
+        //	x86_64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsWorldFini = 8;
 
         // MacroObject @ log.h:490:9
@@ -10146,10 +10293,7 @@ namespace flecs_hub
         // MacroObject @ log.h:459:9
         //	x86_64-unknown-linux-gnu (flecs/addons/log.h)
         //	x86_64-apple-darwin (flecs/addons/log.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\log.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\log.h)
-        //	aarch64-apple-darwin (flecs/addons/log.h)
-        public const int ECS_INCONSISTENT_COMPONENT_ID = 26;
+        public const int ECS_INCONSISTENT_NAME = 20;
 
         // MacroObject @ api_flags.h:147:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
@@ -10354,8 +10498,9 @@ namespace flecs_hub
         // MacroObject @ log.h:448:9
         //	x86_64-unknown-linux-gnu (flecs/addons/log.h)
         //	x86_64-apple-darwin (flecs/addons/log.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\log.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\log.h)
+        public const int ECS_OUT_OF_RANGE = 5;
+
+        // MacroObject @ log.h:438:9
         //	aarch64-apple-darwin (flecs/addons/log.h)
         public const int ECS_OPERATION_FAILED = 10;
 
@@ -10370,10 +10515,7 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:67:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	aarch64-apple-darwin (flecs/private/api_flags.h)
-        public const uint EcsIdMarkedForDelete = 1073741824;
+        public const uint EcsIdOnDeleteRemove = 1;
 
         // MacroObject @ api_flags.h:116:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
@@ -10490,8 +10632,14 @@ namespace flecs_hub
         // MacroObject @ log.h:467:9
         //	x86_64-unknown-linux-gnu (flecs/addons/log.h)
         //	x86_64-apple-darwin (flecs/addons/log.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\log.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\log.h)
+        public const int ECS_MODULE_UNDEFINED = 28;
+
+        // MacroObject @ api_defines.h:161:9
+        //	aarch64-apple-darwin (flecs/private/api_defines.h)
+        //	x86_64-apple-darwin (flecs/private/api_defines.h)
+        public const ulong ECS_COMPONENT_MASK = 72057594037927935;
+
+        // MacroObject @ log.h:467:9
         //	aarch64-apple-darwin (flecs/addons/log.h)
         public const int ECS_COLUMN_IS_NOT_SHARED = 42;
 
@@ -10522,8 +10670,9 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:30:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsTableHasPairs = 32;
+
+        // MacroObject @ api_flags.h:137:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsEntityObserved = 2147483648;
 
@@ -10618,16 +10767,18 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:131:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsFilterMatchAnything = 64;
+
+        // MacroObject @ api_flags.h:60:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsTableMarkedForDelete = 1073741824;
 
         // MacroObject @ api_flags.h:127:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsIdHasOnSet = 131072;
+
+        // MacroObject @ api_flags.h:127:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsTableHasOnRemove = 65536;
 
@@ -10690,8 +10841,9 @@ namespace flecs_hub
         // MacroObject @ log.h:458:9
         //	x86_64-unknown-linux-gnu (flecs/addons/log.h)
         //	x86_64-apple-darwin (flecs/addons/log.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\log.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\log.h)
+        public const int ECS_INVALID_OPERATION = 1;
+
+        // MacroObject @ log.h:476:9
         //	aarch64-apple-darwin (flecs/addons/log.h)
         public const int ECS_COMPONENT_NOT_REGISTERED = 25;
 
@@ -10834,8 +10986,9 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:19:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsAperiodicComponentMonitors = 4;
+
+        // MacroObject @ api_flags.h:157:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsWorldReadonly = 2;
 
@@ -10858,8 +11011,9 @@ namespace flecs_hub
         // MacroObject @ log.h:460:9
         //	x86_64-unknown-linux-gnu (flecs/addons/log.h)
         //	x86_64-apple-darwin (flecs/addons/log.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\log.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\log.h)
+        public const int ECS_COLUMN_INDEX_OUT_OF_RANGE = 41;
+
+        // MacroObject @ log.h:447:9
         //	aarch64-apple-darwin (flecs/addons/log.h)
         public const int ECS_INCONSISTENT_COMPONENT_ACTION = 27;
 
@@ -10890,8 +11044,9 @@ namespace flecs_hub
         // MacroObject @ log.h:471:9
         //	x86_64-unknown-linux-gnu (flecs/addons/log.h)
         //	x86_64-apple-darwin (flecs/addons/log.h)
-        //	aarch64-pc-windows-msvc (flecs\addons\log.h)
-        //	x86_64-pc-windows-msvc (flecs\addons\log.h)
+        public static string ECS_GREY = "[0;37m";
+
+        // MacroObject @ log.h:481:9
         //	aarch64-apple-darwin (flecs/addons/log.h)
         public const int ECS_INVALID_WHILE_READONLY = 70;
 
@@ -10946,17 +11101,25 @@ namespace flecs_hub
         // MacroObject @ api_defines.h:306:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_defines.h)
         //	x86_64-apple-darwin (flecs/private/api_defines.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_defines.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_defines.h)
+        public const ulong ECS_ROLE_MASK = 18374686479671623680;
+
+        // MacroObject @ log.h:453:9
+        //	aarch64-apple-darwin (flecs/addons/log.h)
+        //	x86_64-apple-darwin (flecs/addons/log.h)
+        public const int ECS_INVALID_COMPONENT_ALIGNMENT = 24;
+
+        // MacroObject @ api_defines.h:307:9
         //	aarch64-apple-darwin (flecs/private/api_defines.h)
         public const ulong ECS_OR = 17870283321406128128;
 
-        // MacroObject @ api_flags.h:148:9
-        //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
-        //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        // MacroObject @ api_flags.h:122:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
+        //	x86_64-apple-darwin (flecs/private/api_flags.h)
+        public const uint EcsTableHasUnion = 4096;
+
+        // MacroObject @ api_flags.h:148:9
+        //	aarch64-apple-darwin (flecs/private/api_flags.h)
+        //	x86_64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsQueryHasMonitor = 32;
 
         // MacroObject @ api_flags.h:60:9
@@ -10994,8 +11157,9 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:63:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsTableIsDisabled = 128;
+
+        // MacroObject @ api_flags.h:113:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsIdHasUnSet = 262144;
 
@@ -11013,7 +11177,8 @@ namespace flecs_hub
         //	aarch64-pc-windows-msvc
         //	x86_64-pc-windows-msvc
         //	aarch64-apple-darwin
-        public const int EcsParent = 32;
+        //	x86_64-apple-darwin
+        public const int EcsAll = 16;
 
         // MacroObject @ api_flags.h:155:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
@@ -11082,8 +11247,9 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:126:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsTableHasDtors = 512;
+
+        // MacroObject @ api_flags.h:61:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsTableHasOnAdd = 32768;
 
@@ -11154,8 +11320,9 @@ namespace flecs_hub
         // MacroObject @ api_flags.h:119:9
         //	x86_64-unknown-linux-gnu (flecs/private/api_flags.h)
         //	x86_64-apple-darwin (flecs/private/api_flags.h)
-        //	aarch64-pc-windows-msvc (flecs\private\api_flags.h)
-        //	x86_64-pc-windows-msvc (flecs\private\api_flags.h)
+        public const uint EcsTableHasAddActions = 168200;
+
+        // MacroObject @ api_flags.h:111:9
         //	aarch64-apple-darwin (flecs/private/api_flags.h)
         public const uint EcsTableHasDtors = 512;
 

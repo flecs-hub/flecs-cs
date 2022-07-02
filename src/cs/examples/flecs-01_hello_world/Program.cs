@@ -1,13 +1,16 @@
-﻿using flecs;
+﻿using System.Runtime.InteropServices;
+using flecs;
 
 internal static class Program
 {
+    [StructLayout(LayoutKind.Sequential)]
     struct Position
     {
         public double X;
         public double Y;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
     struct Velocity
     {
         public double X;
@@ -16,15 +19,15 @@ internal static class Program
     
     // Move system implementation. System callbacks may be called multiple times, as entities are grouped by which
     // components they have, and each group has its own set of component arrays.
-    public static void Move(Iterator iterator)
+    static void Move(Iterator iterator)
     {
         var p = iterator.Term<Position>(1);
         var v = iterator.Term<Velocity>(2);
 
-        // // Print the set of components for the iterated over entities
-        // var typeString = ecs_table_str(it->world, it->table).ToString();
-        // Console.WriteLine("Move entities with " + typeString);
-        // // ecs_os_free(type_str);
+        // Print the set of components for the iterated over entities
+        var table = iterator.Table();
+        var typeString = table.String();
+        Console.WriteLine("Move entities with " + typeString);
 
         // Iterate entities for the current group 
         for (var i = 0; i < iterator.Count; i++)
@@ -37,7 +40,7 @@ internal static class Program
         }
     }
 
-    private static int Main(string[] args)
+    static int Main(string[] args)
     {
         // Create the world
         var world = new World(args);
@@ -47,7 +50,7 @@ internal static class Program
         var componentVelocity = world.InitializeComponent<Velocity>();
         
         // Register system
-        world.InitializeSystem(Move, "Position, Velocity");
+        world.InitializeSystem<Position, Velocity>(Move);
 
         // Register tags (components without a size)
         var eats = world.InitializeTag("eats");
