@@ -56,17 +56,8 @@ internal static class Program
         // Create the world
         var world = new World(args);
 
-        // Register components
-        world.InitializeComponent<Position>();
-        world.InitializeComponent<Velocity>();
-        
         // Register system
         world.InitializeSystem<Position, Velocity>(Move);
-
-        // Register tags (components without a size)
-        world.InitializeTag<Eats>();
-        world.InitializeTag<Apples>();
-        world.InitializeTag<Pears>();
 
         // Create an entity with name Bob, add Position and food preference
         var bob = world.InitializeEntity("Bob");

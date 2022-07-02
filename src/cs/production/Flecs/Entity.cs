@@ -29,16 +29,14 @@ public readonly unsafe struct Entity
     public void AddTag<TTag>()
         where TTag : unmanaged, ITag
     {
-        var type = typeof(TTag);
-        var tagId = _world.GetTagIdentifierFrom(type);
+        var tagId = _world.GetTagIdentifierFrom<TTag>();
         ecs_add_id(_world.Handle, _handle, tagId);
     }
 
     public void RemoveTag<TTag>()
         where TTag : unmanaged, ITag
     {
-        var type = typeof(TTag);
-        var tagId = _world.GetTagIdentifierFrom(type);
+        var tagId = _world.GetTagIdentifierFrom<TTag>();
         ecs_remove_id(_world.Handle, _handle, tagId);
     }
 
@@ -46,10 +44,8 @@ public readonly unsafe struct Entity
         where TTag1 : unmanaged, ITag
         where TTag2 : unmanaged, ITag
     {
-        var type1 = typeof(TTag1);
-        var tagId1 = _world.GetTagIdentifierFrom(type1);
-        var type2 = typeof(TTag2);
-        var tagId2 = _world.GetTagIdentifierFrom(type2);
+        var tagId1 = _world.GetTagIdentifierFrom<TTag1>();
+        var tagId2 = _world.GetTagIdentifierFrom<TTag2>();
         var id = ecs_pair(tagId1, tagId2);
         ecs_add_id(_world.Handle, _handle, id);
     }
@@ -64,8 +60,7 @@ public readonly unsafe struct Entity
     public ref TComponent GetComponent<TComponent>()
         where TComponent : unmanaged, IComponent
     {
-        var type = typeof(TComponent);
-        var componentId = _world.GetComponentIdentifierFrom(type);
+        var componentId = _world.GetComponentIdentifierFrom<TComponent>();
         var pointer = ecs_get_id(_world.Handle, _handle, componentId);
         return ref Unsafe.AsRef<TComponent>(pointer);
     }
@@ -73,8 +68,7 @@ public readonly unsafe struct Entity
     public void SetComponent<TComponent>(ref TComponent component)
         where TComponent : unmanaged, IComponent
     {
-        var type = typeof(TComponent);
-        var componentId = _world.GetComponentIdentifierFrom(type);
+        var componentId = _world.GetComponentIdentifierFrom<TComponent>();
         var structSize = Unsafe.SizeOf<TComponent>();
         var pointer = Unsafe.AsPointer(ref component);
         ecs_set_id(_world.Handle, _handle, componentId, (ulong)structSize, pointer);

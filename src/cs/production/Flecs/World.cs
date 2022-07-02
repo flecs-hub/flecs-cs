@@ -178,13 +178,31 @@ public unsafe class World
         return GetFlecsTypeName(typeof(T));
     }
 
-    internal ecs_id_t GetComponentIdentifierFrom(Type type)
+    internal ecs_id_t GetComponentIdentifierFrom<TComponent>()
+        where TComponent : unmanaged, IComponent
     {
+        var type = typeof(TComponent);
+        var containsKey = _componentIdentifiersByType.TryGetValue(type, out var value);
+        if (containsKey)
+        {
+            return value;
+        }
+
+        InitializeComponent<TComponent>();
         return _componentIdentifiersByType[type];
     }
 
-    internal ecs_id_t GetTagIdentifierFrom(Type type)
+    internal ecs_id_t GetTagIdentifierFrom<TTag>()
+        where TTag : unmanaged, ITag
     {
+        var type = typeof(TTag);
+        var containsKey = _tagIdentifiersByType.TryGetValue(type, out var value);
+        if (containsKey)
+        {
+            return value;
+        }
+
+        InitializeTag<TTag>();
         return _tagIdentifiersByType[type];
     }
 }

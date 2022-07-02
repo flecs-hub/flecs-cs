@@ -18,9 +18,6 @@ internal static class Program
     {
         var world = new World(args);
 
-        world.InitializeComponent<Position>();
-        world.InitializeTag<Walking>();
-
         var bob = world.InitializeEntity("Bob");
         bob.SetComponent(new Position { X = 10, Y = 20 });
         bob.AddTag<Walking>();

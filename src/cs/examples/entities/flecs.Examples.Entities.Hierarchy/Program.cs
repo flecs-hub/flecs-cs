@@ -26,11 +26,6 @@ internal static class Program
     {
         var world = new World(args);
 
-        world.InitializeComponent<Position>();
-        world.InitializeTag<Star>();
-        world.InitializeTag<Planet>();
-        world.InitializeTag<Moon>();
-        
         // Create a simple hierarchy.
         // Hierarchies use ECS relations and the builtin flecs::ChildOf relation to
         // create entities as children of other entities.
