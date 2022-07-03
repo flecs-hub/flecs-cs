@@ -16,17 +16,52 @@
     #define PINVOKE_TARGET_ENV_MSVC     0
     #define PINVOKE_TARGET_ENV_GNU      0
 #else
-    #define PINVOKE_TARGET_CPU_X64      defined(__x86_64__) || defined(_M_AMD64) || defined(_M_X64)
-    #define PINVOKE_TARGET_CPU_X86      defined(i386) || defined(__i386__) || defined(__i386) || defined(_M_IX86)
-    #define PINVOKE_TARGET_CPU_ARM64    defined(__aarch64__) || defined(_M_ARM64)
+    #include <stdio.h>
 
-    #define PINVOKE_TARGET_OS_WINDOWS   defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
-    #define PINVOKE_TARGET_OS_LINUX     defined(__linux__)
+    #if defined(__x86_64__) || defined(_M_AMD64) || defined(_M_X64)
+        #define PINVOKE_TARGET_CPU_X64 1
+    #else
+        #define PINVOKE_TARGET_CPU_X64 0
+    #endif
+
+    #if defined(i386) || defined(__i386__) || defined(__i386) || defined(_M_IX86)
+        #define PINVOKE_TARGET_CPU_X86 1
+    #else
+        #define PINVOKE_TARGET_CPU_X86 0
+    #endif
+
+    #if defined(__aarch64__) || defined(_M_ARM64)
+        #define PINVOKE_TARGET_CPU_ARM64 1
+    #else
+        #define PINVOKE_TARGET_CPU_ARM64 0
+    #endif
+
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
+        #define PINVOKE_TARGET_OS_WINDOWS 1
+    #else
+        #define PINVOKE_TARGET_OS_WINDOWS 0
+    #endif
+
+    #if defined(__linux__)
+        #define PINVOKE_TARGET_OS_LINUX 1
+    #else
+        #define PINVOKE_TARGET_OS_LINUX 0
+    #endif
+
     #define PINVOKE_TARGET_OS_MACOS     0
     #define PINVOKE_TARGET_OS_IOS       0
 
-    #define PINVOKE_TARGET_ENV_MSVC     defined(_MSC_VER)
-    #define PINVOKE_TARGET_ENV_GNU      defined(__GNUC__)
+    #if defined(_MSC_VER)
+        #define PINVOKE_TARGET_ENV_MSVC 1
+    #else
+        #define PINVOKE_TARGET_ENV_MSVC 0
+    #endif
+
+    #if defined(__GNUC__)
+        #define PINVOKE_TARGET_ENV_GNU 1
+    #else
+        #define PINVOKE_TARGET_ENV_GNU 0
+    #endif
 #endif
 
 #if PINVOKE_TARGET_OS_WINDOWS && PINVOKE_TARGET_ENV_GNU
@@ -83,13 +118,13 @@
     #define PINVOKE_TARGET_NAME 0
 #endif
 
-#if PINVOKE_TARGET_OS_WINDOWS
-    #define PINVOKE_API_DECL __declspec(dllexport)
+#if defined(_MSC_VER) || defined(__MINGW32__)
+    #define PINVOKE_API __declspec(dllexport)
 #else
-    #define PINVOKE_API_DECL extern
+    #define PINVOKE_API extern
 #endif
 
-PINVOKE_API_DECL const char* pinvoke_get_platform_name()
+PINVOKE_API const char* pinvoke_get_platform_name()
 {
     return PINVOKE_TARGET_NAME;
 }

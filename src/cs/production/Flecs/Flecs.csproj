@@ -3,6 +3,7 @@
     <!-- flecs -->
     <PropertyGroup>
         <_IsEnabledSourceCode>false</_IsEnabledSourceCode>
+        <AssemblyName>Flecs-cs</AssemblyName>
     </PropertyGroup>
     <Import Project="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../../../flecs.props'))" />
     
