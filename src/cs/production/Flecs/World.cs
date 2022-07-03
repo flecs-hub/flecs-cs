@@ -37,7 +37,7 @@ public unsafe class World
         return exitCode;
     }
 
-    public void RegisterComponent<TComponent>()
+    public void RegisterComponent<TComponent>(ComponentHooks? hooks = null)
         where TComponent : unmanaged
     {
         var type = typeof(TComponent);
@@ -56,8 +56,9 @@ public unsafe class World
         desc.type.size = structSize;
         desc.type.alignment = structAlignment;
         id = ecs_component_init(Handle, &desc);
-        Debug.Assert(id.Data.Data != 0, "ECS_INVALID_PARAMETER");
         _componentIdentifiersByType[typeof(TComponent)] = id;
+
+        SetHooks(hooks, id);
     }
 
     public void RegisterTag<TTag>()
@@ -73,7 +74,7 @@ public unsafe class World
     }
 
     public ecs_entity_t RegisterSystem(
-        SystemCallback callback, ecs_entity_t phase, string filterExpression, string? name = null)
+        CallbackIterator callback, ecs_entity_t phase, string filterExpression, string? name = null)
     {
         ecs_system_desc_t desc = default;
         FillSystemDescriptorCommon(ref desc, callback, phase, name);
@@ -85,7 +86,7 @@ public unsafe class World
     }
 
     public ecs_entity_t RegisterSystem<TComponent1>(
-        SystemCallback callback, ecs_entity_t phase, string? name = null)
+        CallbackIterator callback, ecs_entity_t phase, string? name = null)
     {
         ecs_system_desc_t desc = default;
         FillSystemDescriptorCommon(ref desc, callback, phase, name);
@@ -97,7 +98,7 @@ public unsafe class World
     }
 
     public ecs_entity_t RegisterSystem<TComponent1, TComponent2>(
-        SystemCallback callback, string? name = null)
+        CallbackIterator callback, string? name = null)
     {
         var id = default(ecs_entity_t);
         ecs_system_desc_t desc = default;
@@ -106,7 +107,7 @@ public unsafe class World
         desc.entity.add[0] = phase.Data != 0 ? ecs_pair(pinvoke_EcsDependsOn(), phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
-        desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(this, callback);
+        desc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
 
         var componentName1 = GetFlecsTypeName<TComponent1>();
         var componentName2 = GetFlecsTypeName<TComponent2>();
@@ -117,21 +118,21 @@ public unsafe class World
     }
 
     private void FillSystemDescriptorCommon(
-        ref ecs_system_desc_t desc, SystemCallback callback, ecs_entity_t phase, string? name)
+        ref ecs_system_desc_t desc, CallbackIterator callback, ecs_entity_t phase, string? name)
     {
         desc.entity.name = name ?? callback.Method.Name;
         desc.entity.add[0] = phase.Data != 0 ? ecs_pair(pinvoke_EcsDependsOn(), phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
-        desc.binding_ctx = (void*)SystemBindingContextHelper.CreateSystemBindingContext(this, callback);
+        desc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
     }
 
     [UnmanagedCallersOnly]
     private static void SystemCallback(ecs_iter_t* it)
     {
-        SystemBindingContextHelper.GetSystemBindingContext((IntPtr)it->binding_ctx, out var data);
+        CallbacksHelper.GetSystemCallbackContext((IntPtr)it->binding_ctx, out var data);
 
-        var iterator = new SystemIterator(data.World, it);
+        var iterator = new Iterator(data.World, it);
         data.Callback(iterator);
     }
 
@@ -157,6 +158,19 @@ public unsafe class World
     public bool Progress(float deltaTime)
     {
         return ecs_progress(Handle, deltaTime);
+    }
+
+    private void SetHooks(ComponentHooks? hooksNullable, ecs_entity_t id)
+    {
+        if (hooksNullable == null)
+        {
+            return;
+        }
+
+        var hooksDesc = default(ecs_type_hooks_t);
+        var hooks = hooksNullable.Value;
+        ComponentHooks.Fill(this, ref hooks, &hooksDesc);
+        ecs_set_hooks_id(Handle, id, &hooksDesc);
     }
 
     private static void CheckStructLayout(StructLayoutAttribute? structLayoutAttribute)

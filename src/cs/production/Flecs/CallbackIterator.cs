@@ -3,4 +3,4 @@
 
 namespace Flecs;
 
-public delegate void SystemCallback(SystemIterator iterator);
+public delegate void CallbackIterator(Iterator iterator);

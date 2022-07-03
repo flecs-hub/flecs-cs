@@ -57,6 +57,13 @@ public readonly unsafe struct Entity
         ecs_add_id(_world.Handle, _handle, id);
     }
 
+    public void AddComponent<TComponent>()
+        where TComponent : unmanaged, IComponent
+    {
+        var componentId = _world.GetComponentIdentifierFrom<TComponent>();
+        ecs_add_id(_world.Handle, _handle, componentId);
+    }
+
     public ref TComponent GetComponent<TComponent>()
         where TComponent : unmanaged, IComponent
     {
@@ -78,6 +85,11 @@ public readonly unsafe struct Entity
         where TComponent : unmanaged, IComponent
     {
         SetComponent(ref component);
+    }
+
+    public void Delete()
+    {
+        ecs_delete(_world.Handle, _handle);
     }
 
     public string Name()

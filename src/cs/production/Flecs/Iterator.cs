@@ -9,14 +9,14 @@ using static flecs_hub.flecs;
 namespace Flecs;
 
 [PublicAPI]
-public readonly unsafe struct SystemIterator
+public readonly unsafe struct Iterator
 {
     private readonly World _world;
     internal readonly ecs_iter_t* Handle;
 
     public int Count => Handle->count;
 
-    internal SystemIterator(World world, ecs_iter_t* it)
+    internal Iterator(World world, ecs_iter_t* it)
     {
         _world = world;
         Handle = it;
@@ -32,5 +32,17 @@ public readonly unsafe struct SystemIterator
     public Table Table()
     {
         return new Table(Handle->world, Handle->table);
+    }
+
+    public Entity Entity(int index)
+    {
+        var result = new Entity(_world, Handle->entities[index]);
+        return result;
+    }
+
+    public IteratorEvent Event()
+    {
+        var result = new IteratorEvent(_world, Handle->@event);
+        return result;
     }
 }

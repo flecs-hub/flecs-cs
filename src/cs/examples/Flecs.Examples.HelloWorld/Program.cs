@@ -31,7 +31,7 @@ internal static class Program
     
     // Move system implementation. System callbacks may be called multiple times, as entities are grouped by which
     // components they have, and each group has its own set of component arrays.
-    static void Move(SystemIterator iterator)
+    static void Move(Iterator iterator)
     {
         var p = iterator.Term<Position>(1);
         var v = iterator.Term<Velocity>(2);
