@@ -17,6 +17,9 @@ internal static class Program
     static int Main(string[] args)
     {
         var world = new World(args);
+        
+        world.RegisterComponent<Position>();
+        world.RegisterTag<Walking>();
 
         var bob = world.CreateEntity("Bob");
         bob.SetComponent(new Position { X = 10, Y = 20 });

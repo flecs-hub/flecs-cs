@@ -55,6 +55,12 @@ internal static class Program
     {
         // Create the world
         var world = new World(args);
+        
+        world.RegisterComponent<Position>();
+        world.RegisterComponent<Velocity>();
+        world.RegisterTag<Eats>();
+        world.RegisterTag<Apples>();
+        world.RegisterTag<Pears>();
 
         // Register system
         world.RegisterSystem<Position, Velocity>(Move);
