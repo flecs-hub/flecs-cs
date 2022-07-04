@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-using Flecs;
+
+namespace Flecs.Examples.Entities.IterateComponents;
 
 [StructLayout(LayoutKind.Sequential)]
 public struct Position : IComponent
@@ -29,7 +30,7 @@ public struct Apples : ITag
 
 internal static class Program
 {
-    static int Main(string[] args)
+    private static int Main(string[] args)
     {
         var world = new World(args);
 

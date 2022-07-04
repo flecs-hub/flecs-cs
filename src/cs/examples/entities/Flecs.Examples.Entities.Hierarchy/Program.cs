@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-using Flecs;
+
+namespace Flecs.Examples.Entities.Hierarchy;
 
 [StructLayout(LayoutKind.Sequential)]
 public struct Position : IComponent

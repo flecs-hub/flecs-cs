@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
-using Flecs;
 using flecs_hub;
+
+namespace Flecs.Examples.Entities.Hooks;
 
 // Component hooks are callbacks that can be registered for a type that are
 // invoked during different parts of the component lifecycle.

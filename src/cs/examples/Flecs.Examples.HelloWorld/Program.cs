@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-using Flecs;
+
+namespace Flecs.Examples.HelloWorld;
 
 [StructLayout(LayoutKind.Sequential)]
 public struct Position : IComponent
