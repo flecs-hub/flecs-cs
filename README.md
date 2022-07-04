@@ -13,9 +13,17 @@ Automatically updated C# bindings for https://github.com/SanderMertens/flecs wit
 
 ## Developers: Documentation
 
-For more information on how C# bindings work, see [`C2CS`](https://github.com/lithiumtoast/c2cs), the tool that generates the bindings for `flecs` and other C libraries.
+### C# Examples
 
-To learn how to use `flecs`, check out the https://github.com/SanderMertens/flecs#documentation.
+For examples in C#, see [./src/cs/examples](https://github.com/flecs-hub/flecs-cs/tree/main/src/cs/examples), or open up the solution `.sln` file in VisualStudio / Rider.
+
+### C Examples
+
+To learn how to use `flecs` directly, check out the https://github.com/SanderMertens/flecs#documentation.
+
+### Bindings
+
+For more information on how C# bindings work, see [`C2CS`](https://github.com/lithiumtoast/c2cs), the tool that generates the bindings for `flecs` and other C libraries.
 
 ## License
 
