@@ -17,8 +17,8 @@ public unsafe class World
     internal static Dictionary<IntPtr, World> Pointers = new();
 
     internal readonly ecs_world_t* Handle;
-    private Dictionary<Type, ecs_entity_t> _componentIdentifiersByType = new();
-    private Dictionary<Type, ecs_entity_t> _tagIdentifiersByType = new();
+    private Dictionary<Type, ulong> _componentIdentifiersByType = new();
+    private Dictionary<Type, ulong> _tagIdentifiersByType = new();
 
     public int ExitCode { get; private set; }
 
@@ -56,7 +56,7 @@ public unsafe class World
         desc.type.size = structSize;
         desc.type.alignment = structAlignment;
         id = ecs_component_init(Handle, &desc);
-        _componentIdentifiersByType[typeof(TComponent)] = id;
+        _componentIdentifiersByType[typeof(TComponent)] = id.Data.Data;
 
         SetHooks(hooks, id);
     }
@@ -70,37 +70,32 @@ public unsafe class World
         desc.name = typeName;
         var id = ecs_entity_init(Handle, &desc);
         Debug.Assert(id.Data != 0, "ECS_INVALID_PARAMETER");
-        _tagIdentifiersByType[type] = id;
+        _tagIdentifiersByType[type] = id.Data.Data;
     }
 
-    public ecs_entity_t RegisterSystem(
+    public void RegisterSystem(
         CallbackIterator callback, ecs_entity_t phase, string filterExpression, string? name = null)
     {
         ecs_system_desc_t desc = default;
         FillSystemDescriptorCommon(ref desc, callback, phase, name);
 
         desc.query.filter.expr = filterExpression;
-
-        var id = ecs_system_init(Handle, &desc);
-        return id;
+        ecs_system_init(Handle, &desc);
     }
 
-    public ecs_entity_t RegisterSystem<TComponent1>(
+    public void RegisterSystem<TComponent1>(
         CallbackIterator callback, ecs_entity_t phase, string? name = null)
     {
         ecs_system_desc_t desc = default;
         FillSystemDescriptorCommon(ref desc, callback, phase, name);
 
         desc.query.filter.expr = GetFlecsTypeName<TComponent1>();
-
-        var id = ecs_system_init(Handle, &desc);
-        return id;
+        ecs_system_init(Handle, &desc);
     }
 
-    public ecs_entity_t RegisterSystem<TComponent1, TComponent2>(
+    public void RegisterSystem<TComponent1, TComponent2>(
         CallbackIterator callback, string? name = null)
     {
-        var id = default(ecs_entity_t);
         ecs_system_desc_t desc = default;
         desc.entity.name = name ?? callback.Method.Name;
         var phase = pinvoke_EcsOnUpdate();
@@ -113,8 +108,7 @@ public unsafe class World
         var componentName2 = GetFlecsTypeName<TComponent2>();
         desc.query.filter.expr = componentName1 + ", " + componentName2;
 
-        id = ecs_system_init(Handle, &desc);
-        return id;
+        ecs_system_init(Handle, &desc);
     }
 
     private void FillSystemDescriptorCommon(
@@ -192,31 +186,35 @@ public unsafe class World
         return GetFlecsTypeName(typeof(T));
     }
 
-    internal ecs_id_t GetComponentIdentifierFrom<TComponent>()
+    public Identifier GetComponentIdentifier<TComponent>()
         where TComponent : unmanaged, IComponent
     {
         var type = typeof(TComponent);
         var containsKey = _componentIdentifiersByType.TryGetValue(type, out var value);
-        if (containsKey)
+        if (!containsKey)
         {
-            return value;
+            RegisterComponent<TComponent>();
+            value = _componentIdentifiersByType[type];
         }
 
-        RegisterComponent<TComponent>();
-        return _componentIdentifiersByType[type];
+        var id = default(ecs_id_t);
+        id.Data = value;
+        return new Identifier(this, id);
     }
 
-    internal ecs_id_t GetTagIdentifierFrom<TTag>()
+    public Identifier GetTagIdentifier<TTag>()
         where TTag : unmanaged, ITag
     {
         var type = typeof(TTag);
         var containsKey = _tagIdentifiersByType.TryGetValue(type, out var value);
-        if (containsKey)
+        if (!containsKey)
         {
-            return value;
+            RegisterTag<TTag>();
+            value = _tagIdentifiersByType[type];
         }
 
-        RegisterTag<TTag>();
-        return _tagIdentifiersByType[type];
+        var id = default(ecs_id_t);
+        id.Data = value;
+        return new Identifier(this, id);
     }
 }

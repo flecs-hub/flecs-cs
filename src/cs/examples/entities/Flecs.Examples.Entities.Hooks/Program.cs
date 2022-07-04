@@ -2,21 +2,21 @@
 using Flecs;
 using flecs_hub;
 
+// Component hooks are callbacks that can be registered for a type that are
+// invoked during different parts of the component lifecycle.
+    
+[StructLayout(LayoutKind.Sequential)]
+public struct String : IComponent
+{
+    public flecs.Runtime.CString Value;
+}
+
+public struct Tag : ITag
+{
+}
+
 internal static class Program
 {
-    // Component hooks are callbacks that can be registered for a type that are
-    // invoked during different parts of the component lifecycle.
-    
-    [StructLayout(LayoutKind.Sequential)]
-    struct String : IComponent
-    {
-        public flecs.Runtime.CString Value;
-    }
-
-    struct Tag : ITag
-    {
-    }
-
     static int Main(string[] args)
     {
         var world = new World(args);

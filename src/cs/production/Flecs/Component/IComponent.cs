@@ -4,7 +4,7 @@
 namespace Flecs;
 
 /// <summary>
-///     Marker interface for a `flecs` component.
+///     Marker interface for a Flecs component.
 /// </summary>
 public interface IComponent
 {

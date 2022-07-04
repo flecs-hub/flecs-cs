@@ -3,9 +3,14 @@
 
 namespace Flecs;
 
-/// <summary>
-///     Marker interface for a Flecs tag.
-/// </summary>
-public interface ITag
+public readonly struct Pair
 {
+    public readonly Entity First;
+    public readonly Entity Second;
+
+    internal Pair(Entity first, Entity second)
+    {
+        First = first;
+        Second = second;
+    }
 }

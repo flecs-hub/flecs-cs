@@ -1,27 +1,27 @@
 ﻿using System.Runtime.InteropServices;
 using Flecs;
 
+[StructLayout(LayoutKind.Sequential)]
+public struct Position : IComponent
+{
+    public double X;
+    public double Y;
+}
+
+public struct Star : ITag
+{
+}
+    
+public struct Planet : ITag
+{
+}
+    
+public struct Moon : ITag
+{
+}
+
 internal static class Program
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct Position : IComponent
-    {
-        public double X;
-        public double Y;
-    }
-
-    struct Star : ITag
-    {
-    }
-    
-    struct Planet : ITag
-    {
-    }
-    
-    struct Moon : ITag
-    {
-    }
-
     private static int Main(string[] args)
     {
         var world = new World(args);

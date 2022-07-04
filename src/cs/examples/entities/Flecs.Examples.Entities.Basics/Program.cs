@@ -1,19 +1,19 @@
 ﻿using System.Runtime.InteropServices;
 using Flecs;
 
+[StructLayout(LayoutKind.Sequential)]
+public struct Position : IComponent
+{
+    public double X;
+    public double Y;
+}
+
+public struct Walking : ITag
+{
+}
+
 internal static class Program
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct Position : IComponent
-    {
-        public double X;
-        public double Y;
-    }
-
-    struct Walking : ITag
-    {
-    }
-
     static int Main(string[] args)
     {
         var world = new World(args);

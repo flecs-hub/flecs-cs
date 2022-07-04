@@ -19,6 +19,11 @@ public readonly unsafe struct Entity
         _handle = handle;
     }
 
+    public static Entity FromIdentifier(Identifier identifier)
+    {
+        return new Entity(identifier.World, identifier.Handle);
+    }
+
     public EntityType Type()
     {
         var type = ecs_get_type(_world.Handle, _handle);
@@ -29,24 +34,24 @@ public readonly unsafe struct Entity
     public void AddTag<TTag>()
         where TTag : unmanaged, ITag
     {
-        var tagId = _world.GetTagIdentifierFrom<TTag>();
-        ecs_add_id(_world.Handle, _handle, tagId);
+        var tagId = _world.GetTagIdentifier<TTag>();
+        ecs_add_id(_world.Handle, _handle, tagId.Handle);
     }
 
     public void RemoveTag<TTag>()
         where TTag : unmanaged, ITag
     {
-        var tagId = _world.GetTagIdentifierFrom<TTag>();
-        ecs_remove_id(_world.Handle, _handle, tagId);
+        var tagId = _world.GetTagIdentifier<TTag>();
+        ecs_remove_id(_world.Handle, _handle, tagId.Handle);
     }
 
     public void AddPair<TTag1, TTag2>()
         where TTag1 : unmanaged, ITag
         where TTag2 : unmanaged, ITag
     {
-        var tagId1 = _world.GetTagIdentifierFrom<TTag1>();
-        var tagId2 = _world.GetTagIdentifierFrom<TTag2>();
-        var id = ecs_pair(tagId1, tagId2);
+        var tagId1 = _world.GetTagIdentifier<TTag1>();
+        var tagId2 = _world.GetTagIdentifier<TTag2>();
+        var id = ecs_pair(tagId1.Handle, tagId2.Handle);
         ecs_add_id(_world.Handle, _handle, id);
     }
 
@@ -60,25 +65,25 @@ public readonly unsafe struct Entity
     public void AddComponent<TComponent>()
         where TComponent : unmanaged, IComponent
     {
-        var componentId = _world.GetComponentIdentifierFrom<TComponent>();
-        ecs_add_id(_world.Handle, _handle, componentId);
+        var componentId = _world.GetComponentIdentifier<TComponent>();
+        ecs_add_id(_world.Handle, _handle, componentId.Handle);
     }
 
     public ref TComponent GetComponent<TComponent>()
         where TComponent : unmanaged, IComponent
     {
-        var componentId = _world.GetComponentIdentifierFrom<TComponent>();
-        var pointer = ecs_get_id(_world.Handle, _handle, componentId);
+        var componentId = _world.GetComponentIdentifier<TComponent>();
+        var pointer = ecs_get_id(_world.Handle, _handle, componentId.Handle);
         return ref Unsafe.AsRef<TComponent>(pointer);
     }
 
     public void SetComponent<TComponent>(ref TComponent component)
         where TComponent : unmanaged, IComponent
     {
-        var componentId = _world.GetComponentIdentifierFrom<TComponent>();
+        var componentId = _world.GetComponentIdentifier<TComponent>();
         var structSize = Unsafe.SizeOf<TComponent>();
         var pointer = Unsafe.AsPointer(ref component);
-        ecs_set_id(_world.Handle, _handle, componentId, (ulong)structSize, pointer);
+        ecs_set_id(_world.Handle, _handle, componentId.Handle, (ulong)structSize, pointer);
     }
 
     public void SetComponent<TComponent>(TComponent component)

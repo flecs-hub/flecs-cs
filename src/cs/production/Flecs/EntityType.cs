@@ -16,6 +16,11 @@ public readonly unsafe struct EntityType
         _world = world;
     }
 
+    public IdentifiersEnumerable Identifiers()
+    {
+        return new IdentifiersEnumerable(_world, _handle);
+    }
+
     public string String()
     {
         var cString = ecs_type_str(_world.Handle, _handle);

@@ -1,37 +1,37 @@
 ﻿using System.Runtime.InteropServices;
 using Flecs;
 
+[StructLayout(LayoutKind.Sequential)]
+public struct Position : IComponent
+{
+    public double X;
+    public double Y;
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public struct Velocity : IComponent
+{
+    public double X;
+    public double Y;
+}
+
+public struct Eats : ITag
+{
+}
+
+public struct Apples : ITag
+{
+}
+
+public struct Pears : ITag
+{
+}
+
 internal static class Program
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct Position : IComponent
-    {
-        public double X;
-        public double Y;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    struct Velocity : IComponent
-    {
-        public double X;
-        public double Y;
-    }
-    
-    struct Eats : ITag
-    {
-    }
-
-    struct Apples : ITag
-    {
-    }
-
-    struct Pears : ITag
-    {
-    }
-    
     // Move system implementation. System callbacks may be called multiple times, as entities are grouped by which
     // components they have, and each group has its own set of component arrays.
-    static void Move(Iterator iterator)
+    private static void Move(Iterator iterator)
     {
         var p = iterator.Term<Position>(1);
         var v = iterator.Term<Velocity>(2);
@@ -51,7 +51,7 @@ internal static class Program
         }
     }
 
-    static int Main(string[] args)
+    private static int Main(string[] args)
     {
         // Create the world
         var world = new World(args);
