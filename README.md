@@ -1,6 +1,6 @@
 # flecs-cs
 
-Automatically updated C# bindings for https://github.com/SanderMertens/flecs with native dynamic link libraries.
+Semi-automatically updated C# bindings for https://github.com/SanderMertens/flecs with native dynamic link libraries. The lower-level unsafe C# "bindings" are automatically generated but the higher level "wrapper" is manually written.
 
 ## How to use
 
