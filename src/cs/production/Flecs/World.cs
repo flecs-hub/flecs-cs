@@ -151,16 +151,16 @@ public unsafe class World
         return result;
     }
 
-    public Query CreateQuery(ref QueryDescriptor descriptor)
-    {
-        ecs_query_t* query;
-        fixed (ecs_query_desc_t* desc = &descriptor)
-        {
-           query = ecs_query_init(Handle, desc);
-        }
-
-        return new Query(this, query);
-    }
+    // public Query CreateQuery(ref QueryDescriptor descriptor)
+    // {
+    //     ecs_query_t* query;
+    //     fixed (ecs_query_desc_t* desc = &descriptor)
+    //     {
+    //        query = ecs_query_init(Handle, desc);
+    //     }
+    //
+    //     return new Query(this, query);
+    // }
 
     public EntityIterator EntityIterator<TComponent>()
         where TComponent : unmanaged, IComponent
