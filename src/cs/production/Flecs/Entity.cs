@@ -57,8 +57,13 @@ public readonly unsafe struct Entity
 
     public void AddParent(Entity entity)
     {
-        var ecsChildOf = pinvoke_EcsChildOf();
-        var id = ecs_pair(ecsChildOf, entity._handle);
+        var id = ecs_pair(EcsChildOf, entity._handle);
+        ecs_add_id(_world.Handle, _handle, id);
+    }
+
+    public void IsA(Entity entity)
+    {
+        var id = ecs_pair(EcsIsA, entity._handle);
         ecs_add_id(_world.Handle, _handle, id);
     }
 
@@ -90,6 +95,25 @@ public readonly unsafe struct Entity
         where TComponent : unmanaged, IComponent
     {
         SetComponent(ref component);
+    }
+
+    public void SetComponentOverride<TComponent>(ref TComponent component)
+        where TComponent : unmanaged, IComponent
+    {
+        var componentId = _world.GetComponentIdentifier<TComponent>();
+        var structSize = Unsafe.SizeOf<TComponent>();
+        var pointer = Unsafe.AsPointer(ref component);
+
+        var overrideValue = ECS_OVERRIDE.Data;
+        var identifierValue = overrideValue | componentId.Handle.Data;
+        ecs_add_id(_world.Handle, _handle, *(ecs_id_t*)&identifierValue);
+        ecs_set_id(_world.Handle, _handle, componentId.Handle, (ulong)structSize, pointer);
+    }
+
+    public void SetComponentOverride<TComponent>(TComponent component)
+        where TComponent : unmanaged, IComponent
+    {
+        SetComponentOverride(ref component);
     }
 
     public void Delete()

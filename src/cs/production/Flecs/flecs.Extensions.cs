@@ -7,14 +7,29 @@ namespace flecs_hub
 {
     public static unsafe partial class flecs
     {
+        // Roles
+        public static ecs_id_t ECS_PAIR => pinvoke_ECS_PAIR();
+        public static ecs_id_t ECS_OVERRIDE => pinvoke_ECS_OVERRIDE();
+        
+        // Relationships
+        public static ecs_entity_t EcsIsA => pinvoke_EcsIsA();
+        public static ecs_entity_t EcsDependsOn => pinvoke_EcsDependsOn();
+        public static ecs_entity_t EcsChildOf => pinvoke_EcsChildOf();
+        
+        // Entity tags
+        public static ecs_entity_t EcsPrefab => pinvoke_EcsPrefab();
+        
+        // System tags
+        public static ecs_entity_t EcsOnUpdate => pinvoke_EcsOnUpdate();
+
         internal static ulong ecs_pair(ecs_entity_t pred, ecs_entity_t obj)
         {
-            return pinvoke_ECS_PAIR() | ecs_entity_t_comb(obj.Data.Data, pred.Data.Data);
+            return ECS_PAIR.Data | ecs_entity_t_comb(obj.Data.Data, pred.Data.Data);
         }
 
         internal static ulong ecs_childof(ecs_entity_t e)
         {
-            return ecs_pair(pinvoke_EcsChildOf(), e);
+            return ecs_pair(EcsChildOf, e);
         }
 
         internal static ulong ecs_entity_t_comb(ulong lo, ulong hi)

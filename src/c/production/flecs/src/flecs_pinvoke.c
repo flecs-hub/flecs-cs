@@ -1,22 +1,41 @@
 #include "pinvoke.h"
 #include "flecs.h"
 
-PINVOKE_API ecs_id_t pinvoke_ECS_PAIR()
+// Roles
+ecs_id_t pinvoke_ECS_PAIR()
 {
     return ECS_PAIR;
 }
 
-PINVOKE_API ecs_entity_t pinvoke_EcsOnUpdate()
+ecs_id_t pinvoke_ECS_OVERRIDE()
 {
-    return EcsOnUpdate;
+    return ECS_OVERRIDE;
 }
 
-PINVOKE_API ecs_entity_t pinvoke_EcsDependsOn()
+// Relationships
+ecs_entity_t pinvoke_EcsIsA()
+{
+    return EcsIsA;
+}
+
+ecs_entity_t pinvoke_EcsDependsOn()
 {
     return EcsDependsOn;
 }
 
-PINVOKE_API ecs_entity_t pinvoke_EcsChildOf()
+ecs_entity_t pinvoke_EcsChildOf()
 {
     return EcsChildOf;
+}
+
+// Entity tags
+ecs_entity_t pinvoke_EcsPrefab()
+{
+    return EcsPrefab;
+}
+
+// System tags
+ecs_entity_t pinvoke_EcsOnUpdate()
+{
+    return EcsOnUpdate;
 }

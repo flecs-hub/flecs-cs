@@ -22,7 +22,7 @@ public readonly unsafe struct Identifier
         get
         {
             var value = Handle.Data & ECS_ROLE_MASK;
-            return value == pinvoke_ECS_PAIR().Data;
+            return value == ECS_PAIR.Data;
         }
     }
 

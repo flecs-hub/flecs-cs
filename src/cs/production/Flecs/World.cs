@@ -98,8 +98,8 @@ public unsafe class World
     {
         ecs_system_desc_t desc = default;
         desc.entity.name = name ?? callback.Method.Name;
-        var phase = pinvoke_EcsOnUpdate();
-        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(pinvoke_EcsDependsOn(), phase) : default;
+        var phase = EcsOnUpdate;
+        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
@@ -115,7 +115,7 @@ public unsafe class World
         ref ecs_system_desc_t desc, CallbackIterator callback, ecs_entity_t phase, string? name)
     {
         desc.entity.name = name ?? callback.Method.Name;
-        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(pinvoke_EcsDependsOn(), phase) : default;
+        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
         desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
@@ -134,9 +134,32 @@ public unsafe class World
     {
         var desc = default(ecs_entity_desc_t);
         desc.name = name;
+
         var entity = ecs_entity_init(Handle, &desc);
         var result = new Entity(this, entity);
         return result;
+    }
+
+    public Entity CreatePrefab(string name)
+    {
+        var desc = default(ecs_entity_desc_t);
+        desc.name = name;
+        desc.add[0] = pinvoke_EcsPrefab();
+
+        var entity = ecs_entity_init(Handle, &desc);
+        var result = new Entity(this, entity);
+        return result;
+    }
+
+    public Query CreateQuery(ref QueryDescriptor descriptor)
+    {
+        ecs_query_t* query;
+        fixed (ecs_query_desc_t* desc = &descriptor)
+        {
+           query = ecs_query_init(Handle, desc);
+        }
+
+        return new Query(this, query);
     }
 
     public EntityIterator EntityIterator<TComponent>()
