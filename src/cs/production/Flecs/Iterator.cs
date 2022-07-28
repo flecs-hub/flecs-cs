@@ -22,7 +22,7 @@ public readonly unsafe struct Iterator
         Handle = it;
     }
 
-    public Span<T> Term<T>(int index)
+    public Span<T> Field<T>(int index)
     {
         var structSize = Marshal.SizeOf<T>();
         var pointer = ecs_field_w_size(Handle, (ulong) structSize, index);
