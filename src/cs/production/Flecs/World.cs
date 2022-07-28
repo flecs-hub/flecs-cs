@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using flecs_hub;
 using JetBrains.Annotations;
 using static flecs_hub.flecs;
 
@@ -55,7 +57,6 @@ public unsafe class World
         desc.type.alignment = structAlignment;
         id = ecs_component_init(Handle, &desc);
         _componentIdentifiersByType[typeof(TComponent)] = id.Data.Data;
-
         SetHooks(hooks, id);
     }
 
@@ -97,10 +98,7 @@ public unsafe class World
         ecs_system_desc_t desc = default;
         desc.query.filter.name = name ?? callback.Method.Name;
         var phase = EcsOnUpdate;
-        ////desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
-        ////desc.entity.add[1] = phase;
-        desc.callback.Data.Pointer = &SystemCallback;
-        desc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
+        FillSystemDescriptorCommon(ref desc, callback, phase, name);
 
         var componentName1 = GetFlecsTypeName<TComponent1>();
         var componentName2 = GetFlecsTypeName<TComponent2>();
