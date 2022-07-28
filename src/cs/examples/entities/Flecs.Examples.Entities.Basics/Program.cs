@@ -50,7 +50,7 @@ internal static class Program
         var it = world.EntityIterator<Position>();
         while (it.HasNext()) 
         {
-            var p = it.Term<Position>(1);
+            var p = it.Field<Position>(1);
             for (var i = 0; i < it.Count; i ++)
             {
                 var entity = it.Entity(i);

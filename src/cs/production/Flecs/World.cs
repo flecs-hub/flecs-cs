@@ -50,9 +50,9 @@ public unsafe class World
 
         var id = default(ecs_entity_t);
         ecs_component_desc_t desc;
-        desc.entity.entity = id;
-        desc.entity.name = componentNameC;
-        desc.entity.symbol = componentNameC;
+        desc.entity = id;
+        ////desc.entity.name = componentNameC;
+        ////desc.entity.symbol = componentNameC;
         desc.type.size = structSize;
         desc.type.alignment = structAlignment;
         id = ecs_component_init(Handle, &desc);
@@ -97,26 +97,25 @@ public unsafe class World
         CallbackIterator callback, string? name = null)
     {
         ecs_system_desc_t desc = default;
-        desc.entity.name = name ?? callback.Method.Name;
+        desc.query.filter.name = name ?? callback.Method.Name;
         var phase = EcsOnUpdate;
-        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
-        desc.entity.add[1] = phase;
+        ////desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        ////desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
 
         var componentName1 = GetFlecsTypeName<TComponent1>();
         var componentName2 = GetFlecsTypeName<TComponent2>();
         desc.query.filter.expr = componentName1 + ", " + componentName2;
-
         ecs_system_init(Handle, &desc);
     }
 
     private void FillSystemDescriptorCommon(
         ref ecs_system_desc_t desc, CallbackIterator callback, ecs_entity_t phase, string? name)
     {
-        desc.entity.name = name ?? callback.Method.Name;
-        desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
-        desc.entity.add[1] = phase;
+        desc.query.filter.name = name ?? callback.Method.Name;
+        ////desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        ////desc.entity.add[1] = phase;
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
     }

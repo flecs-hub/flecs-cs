@@ -21,6 +21,9 @@
         <EnableAnalyzersStyleCop>true</EnableAnalyzersStyleCop>
         <StyleCopSettingsFilePath>$(MSBuildThisFileDirectory)/Properties/StyleCop.json</StyleCopSettingsFilePath>
     </PropertyGroup>
+    <ItemGroup>
+      <Content Remove="flecs.cs" />
+    </ItemGroup>
     
     <!-- NuGet package references -->
     <ItemGroup>
