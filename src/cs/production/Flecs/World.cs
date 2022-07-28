@@ -48,11 +48,9 @@ public unsafe class World
         var structSize = Unsafe.SizeOf<TComponent>();
         var structAlignment = structLayoutAttribute!.Pack;
 
-        var id = default(ecs_entity_t);
+        var id = CreateEntityRaw(componentName);
         ecs_component_desc_t desc;
         desc.entity = id;
-        ////desc.entity.name = componentNameC;
-        ////desc.entity.symbol = componentNameC;
         desc.type.size = structSize;
         desc.type.alignment = structAlignment;
         id = ecs_component_init(Handle, &desc);
@@ -113,9 +111,11 @@ public unsafe class World
     private void FillSystemDescriptorCommon(
         ref ecs_system_desc_t desc, CallbackIterator callback, ecs_entity_t phase, string? name)
     {
-        desc.query.filter.name = name ?? callback.Method.Name;
-        ////desc.entity.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
-        ////desc.entity.add[1] = phase;
+        ecs_entity_desc_t edesc = default;
+        edesc.name = name ?? callback.Method.Name;
+        edesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        edesc.add[1] = phase;
+        desc.entity = ecs_entity_init(Handle, &edesc);
         desc.callback.Data.Pointer = &SystemCallback;
         desc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
     }
@@ -129,12 +129,18 @@ public unsafe class World
         data.Callback(iterator);
     }
 
-    public Entity CreateEntity(string name)
+    private ecs_entity_t CreateEntityRaw(string name)
     {
         var desc = default(ecs_entity_desc_t);
         desc.name = name;
 
         var entity = ecs_entity_init(Handle, &desc);
+        return entity;
+    }
+
+    public Entity CreateEntity(string name)
+    {
+        var entity = CreateEntityRaw(name);
         var result = new Entity(this, entity);
         return result;
     }
