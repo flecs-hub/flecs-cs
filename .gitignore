@@ -1,6 +1,9 @@
 # JetBrains
 /.idea/
 
+# VisualStudio
+.suo
+
 # C# build artifacts
 bin/
 obj/
