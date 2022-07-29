@@ -34,8 +34,8 @@ internal static class Program
     // components they have, and each group has its own set of component arrays.
     private static void Move(Iterator iterator)
     {
-        var p = iterator.Term<Position>(1);
-        var v = iterator.Term<Velocity>(2);
+        var p = iterator.Field<Position>(1);
+        var v = iterator.Field<Velocity>(2);
 
         // Print the set of components for the iterated over entities
         var tableString = iterator.Table().String();
