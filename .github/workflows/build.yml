@@ -14,6 +14,7 @@ jobs:
 
   native-job:
     name: "Build native libraries: ${{ matrix.platform.rid }}"
+    if: github.actor == 'dependabot[bot]' || github.actor == 'lithiumtoast'
     runs-on: ${{ matrix.platform.os }}
     strategy:
       fail-fast: false
@@ -58,25 +59,28 @@ jobs:
 
       - name: "Download native libraries (win-x64)"
         uses: actions/download-artifact@v1
+        continue-on-error: github.actor != 'dependabot[bot]' && github.actor != 'lithiumtoast'
         with:
           name: "native-libraries-win-x64"
           path: "./lib"
 
       - name: "Download native libraries (osx)"
         uses: actions/download-artifact@v1
+        continue-on-error: github.actor != 'dependabot[bot]' && github.actor != 'lithiumtoast'
         with:
           name: "native-libraries-osx"
           path: "./lib"
 
       - name: "Download native libraries (linux-x64)"
         uses: actions/download-artifact@v1
+        continue-on-error: github.actor != 'dependabot[bot]' && github.actor != 'lithiumtoast'
         with:
           name: "native-libraries-linux-x64"
           path: "./lib"
 
       - name: "Download generated C# code"
         uses: actions/download-artifact@v1
-        continue-on-error: true
+        continue-on-error: github.actor != 'dependabot[bot]' && github.actor != 'lithiumtoast'
         with:
           name: "bindgen-cs"
           path: "./src/cs/production/Flecs/"

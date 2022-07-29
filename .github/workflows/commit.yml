@@ -10,7 +10,7 @@ jobs:
   commit-job:
     name: "Commit generated C# code"
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    if: github.actor == 'dependabot[bot]' || github.actor == 'lithiumtoast'
 
     steps:
       - name: "Clone Git repository"

@@ -8,6 +8,7 @@ jobs:
   bindgen-ast-job:
     name: "Bindgen AST"
     runs-on: ${{ matrix.platform.os }}
+    if: github.actor == 'dependabot[bot]' || github.actor == 'lithiumtoast'
     strategy:
       fail-fast: false
       matrix:
