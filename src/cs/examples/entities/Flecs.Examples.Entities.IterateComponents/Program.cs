@@ -103,7 +103,7 @@ internal static class Program
                 var pair = identifier.AsPair();
                 var relationName = pair.First.Name();
                 var objectName = pair.Second.Name();
-                Console.Write("Relation: " + relationName + ", Object: " + objectName);
+                Console.Write("First: " + relationName + ", Second: " + objectName);
             }
             else
             {
