@@ -196,12 +196,12 @@ public unsafe class World
         }
     }
 
-    private string GetFlecsTypeName(Type type)
+    public string GetFlecsTypeName(Type type)
     {
         return type.FullName!.Replace("+", ".", StringComparison.InvariantCulture);
     }
 
-    private string GetFlecsTypeName<T>()
+    public string GetFlecsTypeName<T>()
     {
         return GetFlecsTypeName(typeof(T));
     }
