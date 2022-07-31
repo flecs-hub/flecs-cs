@@ -59,8 +59,6 @@ public unsafe class World
         var id = ecs_component_init(Handle, &desc);
         _componentIdentifiersByType[typeof(TComponent)] = id.Data.Data;
         SetHooks(hooks, id);
-
-      
     }
 
     public void RegisterTag<TTag>()
