@@ -3,6 +3,7 @@
 
 # VisualStudio
 .suo
+.vs
 
 # C# build artifacts
 bin/
