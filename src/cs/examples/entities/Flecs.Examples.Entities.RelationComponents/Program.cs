@@ -48,13 +48,13 @@ internal static class Program
         // the pair assumes the type of the component.
         var e1 = world.CreateEntity("e1");
         e1.SetPair<Requires, Gigawatts>(new Requires() { Amount = 1.21f });
-        ref var requires1 = ref e1.GetPair<Requires, Gigawatts>();
+        ref var requires1 = ref e1.GetPairFirst<Requires, Gigawatts>();
         Console.WriteLine($"requires: {requires1.Amount}");
 
         // The component can be either the first or second part of a pair:
         var e2 = world.CreateEntity("e2");
         e2.SetPair<Gigawatts, Requires>(new Requires() { Amount = 1.21f });
-        ref var requires2 = ref e2.GetPair<Gigawatts, Requires>();
+        ref var requires2 = ref e2.GetPairSecond<Gigawatts, Requires>();
         Console.WriteLine($"requires: {requires2.Amount}");
 
         // Note that <Requires, Gigawatts> and <Gigawatts, Requires> are two 
@@ -65,12 +65,12 @@ internal static class Program
         //cs binding: SetPairFirst <- component value of first
         var e3 = world.CreateEntity("e3");
         e3.SetPairFirst<Expires, Position>(new Expires() { Timeout = 0.5f });
-        ref var expires = ref e3.GetPairFirst<Expires, Position>();
+        ref var expires = ref e3.GetPairFirstComp<Expires, Position>();
         Console.WriteLine($"requires: {expires.Timeout}");
         //cs binding: SetPairSecond <- component value of second
-        var e4 = world.CreateEntity("e3");
+        var e4 = world.CreateEntity("e4");
         e4.SetPairSecond<Expires, Position>(new Position() { X = 0.5f, Y = 1f });
-        ref var pos = ref e3.GetPairSecond<Expires, Position>();
+        ref var pos = ref e4.GetPairSecondComp<Expires, Position>();
         Console.WriteLine($"pos: {pos.X}/{pos.Y}");
 
         Console.WriteLine("\nComponents e1");
@@ -79,6 +79,8 @@ internal static class Program
         IterateComponents(e2);
         Console.WriteLine("Components e3");
         IterateComponents(e3);
+        Console.WriteLine("Components e4");
+        IterateComponents(e4);
 
         return world.Fini();
     }

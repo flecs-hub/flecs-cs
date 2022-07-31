@@ -100,18 +100,7 @@ public readonly unsafe struct Entity
         ecs_set_id(_world.Handle, _handle, id, (ulong)structSize, pointer);
     }
 
-    public ref TComp GetPair<TTag, TComp>()
-     where TTag : unmanaged, ITag
-     where TComp : unmanaged, IComponent
-    {
-        var tagId = _world.GetTagIdentifier<TTag>();
-        var compId = _world.GetComponentIdentifier<TComp>();
-        var id = ecs_pair(tagId.Handle, compId.Handle);
-        var pointer = ecs_get_id(_world.Handle, _handle, id);
-        return ref Unsafe.AsRef<TComp>(pointer);
-    }
-
-    public ref TComp GetPair<TComp, TTag>()
+    public ref TComp GetPairFirst<TComp, TTag>()
   where TTag : unmanaged, ITag
   where TComp : unmanaged, IComponent
     {
@@ -122,7 +111,18 @@ public readonly unsafe struct Entity
         return ref Unsafe.AsRef<TComp>(pointer);
     }
 
-    public ref TComp1 GetPairFirst<TComp1, TComp2>() // naming / generics fix
+    public ref TComp GetPairSecond<TTag, TComp>()
+ where TTag : unmanaged, ITag
+ where TComp : unmanaged, IComponent
+    {
+        var tagId = _world.GetTagIdentifier<TTag>();
+        var compId = _world.GetComponentIdentifier<TComp>();
+        var id = ecs_pair(tagId.Handle, compId.Handle);
+        var pointer = ecs_get_id(_world.Handle, _handle, id);
+        return ref Unsafe.AsRef<TComp>(pointer);
+    }
+
+    public ref TComp1 GetPairFirstComp<TComp1, TComp2>() // naming / generics fix
      where TComp1 : unmanaged, IComponent
      where TComp2 : unmanaged, IComponent
     {
@@ -133,7 +133,7 @@ public readonly unsafe struct Entity
         return ref Unsafe.AsRef<TComp1>(pointer);
     }
 
-    public ref TComp2 GetPairSecond<TComp1, TComp2>() // naming / generics fix
+    public ref TComp2 GetPairSecondComp<TComp1, TComp2>() // naming / generics fix
     where TComp1 : unmanaged, IComponent
     where TComp2 : unmanaged, IComponent
     {
@@ -143,7 +143,6 @@ public readonly unsafe struct Entity
         var pointer = ecs_get_id(_world.Handle, _handle, id);
         return ref Unsafe.AsRef<TComp2>(pointer);
     }
-
 
     public void AddParent(Entity entity)
     {
