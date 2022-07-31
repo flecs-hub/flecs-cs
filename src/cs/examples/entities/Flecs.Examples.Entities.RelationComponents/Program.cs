@@ -64,14 +64,34 @@ internal static class Program
         // the first element:#
         //cs binding: GetPairFirstComp <- component value of first
         var e3 = world.CreateEntity("e3");
-        e3.SetPairFirst<Expires, Position>(new Expires() { Timeout = 2.5f });
+        e3.SetPairFirstComp<Expires, Position>(new Expires() { Timeout = 2.5f });
         ref var expires = ref e3.GetPairFirstComp<Expires, Position>();
         Console.WriteLine($"<{nameof(Expires)}, {nameof(Position)}> (2 comps, first is value) {nameof(Expires)}: {expires.Timeout}");
+
         //cs binding: GetPairSecondComp <- component value of second
         var e4 = world.CreateEntity("e4");
-        e4.SetPairSecond<Expires, Position>(new Position() { X = 0.5f, Y = 1f });
+        e4.SetPairSecondComp<Expires, Position>(new Position() { X = 0.5f, Y = 1f });
         ref var pos = ref e4.GetPairSecondComp<Expires, Position>();
         Console.WriteLine($"<{nameof(Expires)}, {nameof(Position)}> (2 comps, second is value) {nameof(Position)}: {pos.X}/{pos.Y}");
+        Console.WriteLine($"has <{nameof(Expires)}, {nameof(Position)}>: {e4.HasPairComp<Expires, Position>()}");
+        Console.WriteLine($"has <{nameof(Position)}, {nameof(Expires)}>: {e4.HasPairComp<Position, Expires>()}");
+        Console.WriteLine();
+
+        var eRuntimeTag = world.CreateEntity("RuntimeTag");
+        var e5 = world.CreateEntity("e5");
+        e4.SetPairFirstComp(new Position() { X = 0.5f, Y = 1f }, eRuntimeTag);
+        e4.SetPairSecondComp(eRuntimeTag, new Expires() { Timeout = 0.5f });
+        Console.WriteLine($"has ({nameof(Position)}, {nameof(eRuntimeTag)}): {e4.HasPairFirstComp<Position>(eRuntimeTag)}");
+        Console.WriteLine($"has ({nameof(Position)}, {nameof(eRuntimeTag)}): {e4.HasPairSecondComp<Position>(eRuntimeTag)}");
+
+        Console.WriteLine($"has ({nameof(Expires)}, {nameof(eRuntimeTag)}): {e4.HasPairFirstComp<Expires>(eRuntimeTag)}");
+        Console.WriteLine($"has ({nameof(Expires)}, {nameof(eRuntimeTag)}): {e4.HasPairSecondComp<Expires>(eRuntimeTag)}");
+
+        ref var e4RuntimePos = ref e4.GetPairFirstComp<Position>(eRuntimeTag);
+        ref var e4RuntimeExpires = ref e4.GetPairSecondComp<Expires>(eRuntimeTag);
+        Console.WriteLine($"({nameof(Position)}, {nameof(eRuntimeTag)}) (2 comps, second is runtime tag) {nameof(Position)}: {e4RuntimePos.X}/{e4RuntimePos.Y}");
+        Console.WriteLine($"({nameof(eRuntimeTag)}, {nameof(Expires)}) (2 comps, first is runtime tag) {nameof(Expires)}: {e4RuntimeExpires.Timeout}");
+
         Console.WriteLine("\n\nComponents e1");
         IterateComponents(e1);
         Console.WriteLine("Components e2");
