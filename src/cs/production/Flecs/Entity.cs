@@ -61,7 +61,7 @@ public readonly unsafe struct Entity
     {
         var tagId = _world.GetTagIdentifier<TTag>();
         var compId = _world.GetComponentIdentifier<TComp>();
-        SetPairComponent(component, tagId, compId);
+        SetPairData(component, tagId, compId);
     }
 
     public void SetPair<TComp, TTag>(TComp component) // left comp
@@ -70,7 +70,7 @@ public readonly unsafe struct Entity
     {
         var tagId = _world.GetTagIdentifier<TTag>();
         var compId = _world.GetComponentIdentifier<TComp>();
-        SetPairComponent(component, compId, tagId);
+        SetPairData(component, compId, tagId);
     }
 
     public void SetPairFirst<TComp1, TComp2>(TComp1 component) // assume left comp, right is used as tag
@@ -79,7 +79,7 @@ public readonly unsafe struct Entity
     {
         var comp1id = _world.GetComponentIdentifier<TComp1>();
         var comp2id = _world.GetComponentIdentifier<TComp2>();
-        SetPairComponent(component, comp1id, comp2id);
+        SetPairData(component, comp1id, comp2id);
     }
 
     public void SetPairSecond<TComp1, TComp2>(TComp2 component) // assume right comp, left is used as tag
@@ -88,10 +88,10 @@ public readonly unsafe struct Entity
     {
         var comp1id = _world.GetComponentIdentifier<TComp1>();
         var comp2id = _world.GetComponentIdentifier<TComp2>();
-        SetPairComponent(component, comp2id, comp1id);
+        SetPairData(component, comp2id, comp1id);
     }
 
-    private void SetPairComponent<TComp>(TComp component, Identifier left, Identifier right)
+    private void SetPairData<TComp>(TComp component, Identifier left, Identifier right)
          where TComp : unmanaged, IComponent
     {
         var id = ecs_pair(left.Handle, right.Handle);
@@ -106,9 +106,7 @@ public readonly unsafe struct Entity
     {
         var tagId = _world.GetTagIdentifier<TTag>();
         var compId = _world.GetComponentIdentifier<TComp>();
-        var id = ecs_pair(compId.Handle, tagId.Handle);
-        var pointer = ecs_get_id(_world.Handle, _handle, id);
-        return ref Unsafe.AsRef<TComp>(pointer);
+        return ref GetPairData<TComp>(compId, tagId);
     }
 
     public ref TComp GetPairSecond<TTag, TComp>()
@@ -117,9 +115,7 @@ public readonly unsafe struct Entity
     {
         var tagId = _world.GetTagIdentifier<TTag>();
         var compId = _world.GetComponentIdentifier<TComp>();
-        var id = ecs_pair(tagId.Handle, compId.Handle);
-        var pointer = ecs_get_id(_world.Handle, _handle, id);
-        return ref Unsafe.AsRef<TComp>(pointer);
+        return ref GetPairData<TComp>(tagId, compId);
     }
 
     public ref TComp1 GetPairFirstComp<TComp1, TComp2>() // naming / generics fix
@@ -128,9 +124,7 @@ public readonly unsafe struct Entity
     {
         var comp1id = _world.GetComponentIdentifier<TComp1>();
         var comp2id = _world.GetComponentIdentifier<TComp2>();
-        var id = ecs_pair(comp1id.Handle, comp2id.Handle);
-        var pointer = ecs_get_id(_world.Handle, _handle, id);
-        return ref Unsafe.AsRef<TComp1>(pointer);
+        return ref GetPairData<TComp1>(comp1id, comp2id);
     }
 
     public ref TComp2 GetPairSecondComp<TComp1, TComp2>() // naming / generics fix
@@ -139,9 +133,15 @@ public readonly unsafe struct Entity
     {
         var comp1id = _world.GetComponentIdentifier<TComp1>();
         var comp2id = _world.GetComponentIdentifier<TComp2>();
-        var id = ecs_pair(comp2id.Handle, comp1id.Handle);
+        return ref GetPairData<TComp2>(comp2id, comp1id);
+    }
+
+    private ref TComp GetPairData<TComp>(Identifier first, Identifier second)
+         where TComp : unmanaged, IComponent
+    {
+        var id = ecs_pair(first.Handle, second.Handle);
         var pointer = ecs_get_id(_world.Handle, _handle, id);
-        return ref Unsafe.AsRef<TComp2>(pointer);
+        return ref Unsafe.AsRef<TComp>(pointer);
     }
 
     public void AddParent(Entity entity)
