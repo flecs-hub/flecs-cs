@@ -29,6 +29,19 @@ public readonly unsafe struct Iterator
         return new Span<T>(pointer, Handle->count);
     }
 
+    public bool FieldIsSet(int index)
+    {
+        return ecs_field_is_set(Handle, index);
+    }
+
+    public bool FieldIs<T>(int index)
+        where T : unmanaged, IComponent
+    {
+        var id = ecs_field_id(Handle, index);
+        var compId = _world.GetComponentIdentifier<T>();
+        return id == compId.Handle;
+    }
+
     public Table Table()
     {
         return new Table(Handle->world, Handle->table);
