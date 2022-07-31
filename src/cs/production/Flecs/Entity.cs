@@ -55,6 +55,75 @@ public readonly unsafe struct Entity
         ecs_add_id(_world.Handle, _handle, id);
     }
 
+    public void SetPair<TTag, TComp>(TComp component) // right comp
+   where TTag : unmanaged, ITag
+   where TComp : unmanaged, IComponent
+    {
+        var tagId = _world.GetTagIdentifier<TTag>();
+        var compId = _world.GetComponentIdentifier<TComp>();
+        var id = ecs_pair(tagId.Handle, compId.Handle);
+        var structSize = Unsafe.SizeOf<TComp>();
+        var pointer = Unsafe.AsPointer(ref component);
+        ecs_set_id(_world.Handle, _handle, id, (ulong)structSize, pointer);
+    }
+
+    public void SetPair<TComp, TTag>(TComp component) // left comp
+      where TComp : unmanaged, IComponent
+      where TTag : unmanaged, ITag
+    {
+        var tagId = _world.GetTagIdentifier<TTag>();
+        var compId = _world.GetComponentIdentifier<TComp>();
+        var id = ecs_pair(compId.Handle, tagId.Handle);
+        var structSize = Unsafe.SizeOf<TComp>();
+        var pointer = Unsafe.AsPointer(ref component);
+        ecs_set_id(_world.Handle, _handle, id, (ulong)structSize, pointer);
+    }
+
+    public void SetPairr<TComp1, TComp2>(TComp1 component) // assume left comp, right is used as tag // naming / generics fix
+     where TComp1 : unmanaged, IComponent
+     where TComp2 : unmanaged, IComponent
+    {
+        var comp1id = _world.GetComponentIdentifier<TComp1>();
+        var comp2id = _world.GetComponentIdentifier<TComp2>();
+        var id = ecs_pair(comp1id.Handle, comp2id.Handle);
+        var structSize = Unsafe.SizeOf<TComp1>();
+        var pointer = Unsafe.AsPointer(ref component);
+        ecs_set_id(_world.Handle, _handle, id, (ulong)structSize, pointer);
+    }
+
+    public ref TComp GetPairRight<TTag, TComp>()
+     where TTag : unmanaged, ITag
+     where TComp : unmanaged, IComponent
+    {
+        var tagId = _world.GetTagIdentifier<TTag>();
+        var compId = _world.GetComponentIdentifier<TComp>();
+        var id = ecs_pair(tagId.Handle, compId.Handle);
+        var pointer = ecs_get_id(_world.Handle, _handle, id);
+        return ref Unsafe.AsRef<TComp>(pointer);
+    }
+
+    public ref TComp1 GetPairRightt<TComp1, TComp2>() // naming / generics fix
+     where TComp1 : unmanaged, IComponent
+     where TComp2 : unmanaged, IComponent
+    {
+        var comp1id = _world.GetComponentIdentifier<TComp1>();
+        var comp2id = _world.GetComponentIdentifier<TComp2>();
+        var id = ecs_pair(comp1id.Handle, comp2id.Handle);
+        var pointer = ecs_get_id(_world.Handle, _handle, id);
+        return ref Unsafe.AsRef<TComp1>(pointer);
+    }
+
+    public ref TComp GetPairLeft<TComp, TTag>()
+   where TTag : unmanaged, ITag
+   where TComp : unmanaged, IComponent
+    {
+        var tagId = _world.GetTagIdentifier<TTag>();
+        var compId = _world.GetComponentIdentifier<TComp>();
+        var id = ecs_pair(compId.Handle, tagId.Handle);
+        var pointer = ecs_get_id(_world.Handle, _handle, id);
+        return ref Unsafe.AsRef<TComp>(pointer);
+    }
+
     public void AddParent(Entity entity)
     {
         var id = ecs_pair(EcsChildOf, entity._handle);

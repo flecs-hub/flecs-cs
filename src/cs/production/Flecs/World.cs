@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
 using JetBrains.Annotations;
 using static flecs_hub.flecs;
 
@@ -48,14 +49,18 @@ public unsafe class World
         var structSize = Unsafe.SizeOf<TComponent>();
         var structAlignment = structLayoutAttribute!.Pack;
 
-        var id = CreateEntityRaw(componentName);
-        ecs_component_desc_t desc;
-        desc.entity = id;
+        ecs_entity_desc_t edesc = default;
+        edesc.name = componentNameC;
+        edesc.symbol = componentNameC;
+        ecs_component_desc_t desc = default;
+        desc.entity = ecs_entity_init(Handle, &edesc);
         desc.type.size = structSize;
         desc.type.alignment = structAlignment;
-        id = ecs_component_init(Handle, &desc);
+        var id = ecs_component_init(Handle, &desc);
         _componentIdentifiersByType[typeof(TComponent)] = id.Data.Data;
         SetHooks(hooks, id);
+
+      
     }
 
     public void RegisterTag<TTag>()
@@ -125,18 +130,11 @@ public unsafe class World
         data.Callback(iterator);
     }
 
-    private ecs_entity_t CreateEntityRaw(string name)
+    public Entity CreateEntity(string name)
     {
         var desc = default(ecs_entity_desc_t);
         desc.name = name;
-
         var entity = ecs_entity_init(Handle, &desc);
-        return entity;
-    }
-
-    public Entity CreateEntity(string name)
-    {
-        var entity = CreateEntityRaw(name);
         var result = new Entity(this, entity);
         return result;
     }

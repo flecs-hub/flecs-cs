@@ -1,24 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{9E1476CE-E22E-44FD-ABC4-93625DDBBA99}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{39423871-7923-4AFB-A756-35E17FCBA274}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs", "src\cs\production\Flecs\Flecs.csproj", "{5EB4443F-134E-43A0-9607-9F3504671E47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs", "src\cs\production\Flecs\Flecs.csproj", "{5EB4443F-134E-43A0-9607-9F3504671E47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{3DA02832-2DA5-49CC-929D-6DB290DA28EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs.Examples.HelloWorld", "src\cs\examples\Flecs.Examples.HelloWorld\Flecs.Examples.HelloWorld.csproj", "{E5E0E0A5-DF34-403B-A2BD-93EFF21C4825}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.HelloWorld", "src\cs\examples\Flecs.Examples.HelloWorld\Flecs.Examples.HelloWorld.csproj", "{E5E0E0A5-DF34-403B-A2BD-93EFF21C4825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs.Examples.Entities.Hierarchy", "src\cs\examples\entities\Flecs.Examples.Entities.Hierarchy\Flecs.Examples.Entities.Hierarchy.csproj", "{603A7B38-8FEF-45A6-8EA7-1AE82D9504C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Hierarchy", "src\cs\examples\entities\Flecs.Examples.Entities.Hierarchy\Flecs.Examples.Entities.Hierarchy.csproj", "{603A7B38-8FEF-45A6-8EA7-1AE82D9504C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs.Examples.Entities.Basics", "src\cs\examples\entities\Flecs.Examples.Entities.Basics\Flecs.Examples.Entities.Basics.csproj", "{5B604D6C-EDC7-4D7F-8CF4-D368CAE30A37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Basics", "src\cs\examples\entities\Flecs.Examples.Entities.Basics\Flecs.Examples.Entities.Basics.csproj", "{5B604D6C-EDC7-4D7F-8CF4-D368CAE30A37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs.Examples.Entities.Hooks", "src\cs\examples\entities\Flecs.Examples.Entities.Hooks\Flecs.Examples.Entities.Hooks.csproj", "{CA4D5654-1D45-442E-9C18-F93B1F670263}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Hooks", "src\cs\examples\entities\Flecs.Examples.Entities.Hooks\Flecs.Examples.Entities.Hooks.csproj", "{CA4D5654-1D45-442E-9C18-F93B1F670263}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs.Examples.Entities.IterateComponents", "src\cs\examples\entities\Flecs.Examples.Entities.IterateComponents\Flecs.Examples.Entities.IterateComponents.csproj", "{449DE999-B69C-43D7-9848-0F4BDE7CCC24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.IterateComponents", "src\cs\examples\entities\Flecs.Examples.Entities.IterateComponents\Flecs.Examples.Entities.IterateComponents.csproj", "{449DE999-B69C-43D7-9848-0F4BDE7CCC24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs.Examples.Entities.Prefab", "src\cs\examples\entities\Flecs.Examples.Entities.Prefab\Flecs.Examples.Entities.Prefab.csproj", "{D298B204-9318-44F9-9330-A1EFAADCD205}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Prefab", "src\cs\examples\entities\Flecs.Examples.Entities.Prefab\Flecs.Examples.Entities.Prefab.csproj", "{D298B204-9318-44F9-9330-A1EFAADCD205}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.RelationComponents", "src\cs\examples\entities\Flecs.Examples.Entities.RelationComponents\Flecs.Examples.Entities.RelationComponents.csproj", "{63057DDB-7E98-465D-91AE-396037A0B282}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +59,13 @@ Global
 		{D298B204-9318-44F9-9330-A1EFAADCD205}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D298B204-9318-44F9-9330-A1EFAADCD205}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D298B204-9318-44F9-9330-A1EFAADCD205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63057DDB-7E98-465D-91AE-396037A0B282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63057DDB-7E98-465D-91AE-396037A0B282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63057DDB-7E98-465D-91AE-396037A0B282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63057DDB-7E98-465D-91AE-396037A0B282}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5EB4443F-134E-43A0-9607-9F3504671E47} = {39423871-7923-4AFB-A756-35E17FCBA274}
@@ -64,5 +76,9 @@ Global
 		{CA4D5654-1D45-442E-9C18-F93B1F670263} = {3DA02832-2DA5-49CC-929D-6DB290DA28EC}
 		{449DE999-B69C-43D7-9848-0F4BDE7CCC24} = {3DA02832-2DA5-49CC-929D-6DB290DA28EC}
 		{D298B204-9318-44F9-9330-A1EFAADCD205} = {3DA02832-2DA5-49CC-929D-6DB290DA28EC}
+		{63057DDB-7E98-465D-91AE-396037A0B282} = {3DA02832-2DA5-49CC-929D-6DB290DA28EC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4B6B4B9-1CB6-414C-BF33-521394D6CD71}
 	EndGlobalSection
 EndGlobal
