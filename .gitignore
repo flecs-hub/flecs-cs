@@ -23,3 +23,5 @@ obj/
 # scripts
 /build
 /ext/scripts
+.vs/flecs/DesignTimeBuild/.dtbcache.v2
+.vs/flecs/v17/.futdcache.v1
