@@ -82,7 +82,7 @@ internal static class Program
         e5.SetPairFirstComp(new Position() { X = 0.5f, Y = 1f }, eRuntimeTag);
         e5.SetPairSecondComp(eRuntimeTag, new Expires() { Timeout = 0.5f });
         Console.WriteLine($"has ({nameof(Position)}, {nameof(eRuntimeTag)}): {e5.HasPairFirstComp<Position>(eRuntimeTag)}");
-        Console.WriteLine($"has ({nameof(eRuntimeTag)},  {nameof(Position)}): {e5.HasPairSecondComp<Position>(eRuntimeTag)}");
+        Console.WriteLine($"has ({nameof(eRuntimeTag)}, {nameof(Position)}): {e5.HasPairSecondComp<Position>(eRuntimeTag)}");
 
         Console.WriteLine($"has ({nameof(Expires)}, {nameof(eRuntimeTag)}): {e5.HasPairFirstComp<Expires>(eRuntimeTag)}");
         Console.WriteLine($"has ({nameof(eRuntimeTag)}, {nameof(Expires)}): {e5.HasPairSecondComp<Expires>(eRuntimeTag)}");
