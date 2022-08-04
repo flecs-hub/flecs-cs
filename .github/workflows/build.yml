@@ -14,7 +14,6 @@ jobs:
 
   native-job:
     name: "Build native libraries: ${{ matrix.platform.rid }}"
-    if: ${{ github.actor == 'dependabot[bot]' || github.actor == 'lithiumtoast' }}
     runs-on: ${{ matrix.platform.os }}
     strategy:
       fail-fast: false
