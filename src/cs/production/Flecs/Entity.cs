@@ -1,13 +1,13 @@
 // Copyright (c) Flecs Hub (https://github.com/flecs-hub). All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
 
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using static flecs_hub.flecs;
 
 namespace Flecs;
+
 [PublicAPI]
 public readonly unsafe struct Entity
 {
@@ -63,7 +63,7 @@ public readonly unsafe struct Entity
     }
 
     public void AddPairFirst<TTag>(Entity first)
-      where TTag : unmanaged, ITag
+        where TTag : unmanaged, ITag
     {
         var tagId = _world.GetTagIdentifier<TTag>();
         var id = ecs_pair(first._handle, tagId.Handle);
@@ -71,126 +71,126 @@ public readonly unsafe struct Entity
     }
 
     public void AddPairSecond<TTag>(Entity second)
-       where TTag : unmanaged, ITag
+        where TTag : unmanaged, ITag
     {
         var tagId = _world.GetTagIdentifier<TTag>();
         var id = ecs_pair(tagId.Handle, second._handle);
         ecs_add_id(_world.Handle, _handle, id);
     }
 
-    public void SetPair<TTag, TComp>(TComp component) // right comp
-   where TTag : unmanaged, ITag
-   where TComp : unmanaged, IComponent
+    public void SetPair<TTag, TComponent>(TComponent component) // right comp
+        where TTag : unmanaged, ITag
+        where TComponent : unmanaged, IComponent
     {
         var tagId = _world.GetTagIdentifier<TTag>();
-        var compId = _world.GetComponentIdentifier<TComp>();
+        var compId = _world.GetComponentIdentifier<TComponent>();
         SetPairData(component, tagId, compId);
     }
 
-    public void SetPair<TComp, TTag>(TComp component) // left comp
-      where TComp : unmanaged, IComponent
-      where TTag : unmanaged, ITag
+    public void SetPair<TComponent, TTag>(TComponent component) // left comp
+        where TComponent : unmanaged, IComponent
+        where TTag : unmanaged, ITag
     {
-        var compId = _world.GetComponentIdentifier<TComp>();
+        var componentId = _world.GetComponentIdentifier<TComponent>();
         var tagId = _world.GetTagIdentifier<TTag>();
-        SetPairData(component, compId, tagId);
+        SetPairData(component, componentId, tagId);
     }
 
-    public void SetPairFirstComp<TComp1, TComp2>(TComp1 component) // assume left comp, right is used as tag
-     where TComp1 : unmanaged, IComponent
-     where TComp2 : unmanaged, IComponent
+    public void SetPairFirstComp<TComponent1, TComponent2>(TComponent1 component) // assume left comp, right is used as tag
+        where TComponent1 : unmanaged, IComponent
+        where TComponent2 : unmanaged, IComponent
     {
-        var comp1id = _world.GetComponentIdentifier<TComp1>();
-        var comp2id = _world.GetComponentIdentifier<TComp2>();
-        SetPairData(component, comp1id, comp2id);
+        var componentId1 = _world.GetComponentIdentifier<TComponent1>();
+        var componentId2 = _world.GetComponentIdentifier<TComponent2>();
+        SetPairData(component, componentId1, componentId2);
     }
 
-    public void SetPairSecondComp<TComp1, TComp2>(TComp2 component) // assume right comp, left is used as tag
-    where TComp1 : unmanaged, IComponent
-    where TComp2 : unmanaged, IComponent
+    public void SetPairSecondComp<TComponent1, TComponent2>(TComponent2 component) // assume right comp, left is used as tag
+        where TComponent1 : unmanaged, IComponent
+        where TComponent2 : unmanaged, IComponent
     {
-        var comp1id = _world.GetComponentIdentifier<TComp1>();
-        var comp2id = _world.GetComponentIdentifier<TComp2>();
-        SetPairData(component, comp1id, comp2id);
+        var componentId1 = _world.GetComponentIdentifier<TComponent1>();
+        var componentId2 = _world.GetComponentIdentifier<TComponent2>();
+        SetPairData(component, componentId1, componentId2);
     }
 
-    public void SetPairFirstComp<TComp>(TComp first, Entity second) // assume left comp, right is used as tag
-    where TComp : unmanaged, IComponent
+    public void SetPairFirstComp<TComponent>(TComponent first, Entity second) // assume left comp, right is used as tag
+        where TComponent : unmanaged, IComponent
     {
-        var firstId = _world.GetComponentIdentifier<TComp>();
+        var firstId = _world.GetComponentIdentifier<TComponent>();
         var secondId = new Identifier(_world, second._handle);
         SetPairData(first, firstId, secondId);
     }
 
-    public void SetPairSecondComp<TComp>(Entity first, TComp second) // assume left comp, right is used as tag
-   where TComp : unmanaged, IComponent
+    public void SetPairSecondComp<TComponent>(Entity first, TComponent second) // assume left comp, right is used as tag
+        where TComponent : unmanaged, IComponent
     {
         var firstId = new Identifier(_world, first._handle);
-        var secondId = _world.GetComponentIdentifier<TComp>();
+        var secondId = _world.GetComponentIdentifier<TComponent>();
         SetPairData(second, firstId, secondId);
     }
 
-    private void SetPairData<TComp>(TComp component, Identifier left, Identifier right)
-         where TComp : unmanaged, IComponent
+    private void SetPairData<TComponent>(TComponent component, Identifier left, Identifier right)
+        where TComponent : unmanaged, IComponent
     {
         var id = ecs_pair(left.Handle, right.Handle);
-        var structSize = Unsafe.SizeOf<TComp>();
+        var structSize = Unsafe.SizeOf<TComponent>();
         var pointer = Unsafe.AsPointer(ref component);
         ecs_set_id(_world.Handle, _handle, id, (ulong)structSize, pointer);
     }
 
-    public ref TComp GetPairFirst<TComp, TTag>()
+    public ref TComponent GetPairFirst<TComponent, TTag>()
         where TTag : unmanaged, ITag
-        where TComp : unmanaged, IComponent
+        where TComponent : unmanaged, IComponent
     {
-        var compId = _world.GetComponentIdentifier<TComp>();
+        var compId = _world.GetComponentIdentifier<TComponent>();
         var tagId = _world.GetTagIdentifier<TTag>();
-        return ref GetPairData<TComp>(compId, tagId);
+        return ref GetPairData<TComponent>(compId, tagId);
     }
 
-    public ref TComp GetPairSecond<TTag, TComp>()
-         where TTag : unmanaged, ITag
-         where TComp : unmanaged, IComponent
+    public ref TComponent GetPairSecond<TTag, TComponent>()
+        where TTag : unmanaged, ITag
+        where TComponent : unmanaged, IComponent
     {
         var tagId = _world.GetTagIdentifier<TTag>();
-        var compId = _world.GetComponentIdentifier<TComp>();
-        return ref GetPairData<TComp>(tagId, compId);
+        var compId = _world.GetComponentIdentifier<TComponent>();
+        return ref GetPairData<TComponent>(tagId, compId);
     }
 
-    public ref TComp1 GetPairFirstComp<TComp1, TComp2>()
-     where TComp1 : unmanaged, IComponent
-     where TComp2 : unmanaged, IComponent
+    public ref TComponent1 GetPairFirstComp<TComponent1, TComponent2>()
+        where TComponent1 : unmanaged, IComponent
+        where TComponent2 : unmanaged, IComponent
     {
-        var comp1id = _world.GetComponentIdentifier<TComp1>();
-        var comp2id = _world.GetComponentIdentifier<TComp2>();
-        return ref GetPairData<TComp1>(comp1id, comp2id);
+        var componentId1 = _world.GetComponentIdentifier<TComponent1>();
+        var componentId2 = _world.GetComponentIdentifier<TComponent2>();
+        return ref GetPairData<TComponent1>(componentId1, componentId2);
     }
 
-    public ref TComp GetPairFirstComp<TComp>(Entity second)
-        where TComp : unmanaged, IComponent
+    public ref TComponent GetPairFirstComp<TComponent>(Entity second)
+        where TComponent : unmanaged, IComponent
     {
-        var compId = _world.GetComponentIdentifier<TComp>();
-        return ref GetPairData<TComp>(compId, new Identifier(_world, second._handle));
+        var compId = _world.GetComponentIdentifier<TComponent>();
+        return ref GetPairData<TComponent>(compId, new Identifier(_world, second._handle));
     }
 
-    public ref TComp GetPairSecondComp<TComp>(Entity first)
-       where TComp : unmanaged, IComponent
+    public ref TComponent GetPairSecondComp<TComponent>(Entity first)
+        where TComponent : unmanaged, IComponent
     {
-        var compId = _world.GetComponentIdentifier<TComp>();
-        return ref GetPairData<TComp>(new Identifier(_world, first._handle), compId);
+        var compId = _world.GetComponentIdentifier<TComponent>();
+        return ref GetPairData<TComponent>(new Identifier(_world, first._handle), compId);
     }
 
-    public ref TComp2 GetPairSecondComp<TComp1, TComp2>()
-    where TComp1 : unmanaged, IComponent
-    where TComp2 : unmanaged, IComponent
+    public ref TComponent2 GetPairSecondComp<TComponent1, TComponent2>()
+        where TComponent1 : unmanaged, IComponent
+        where TComponent2 : unmanaged, IComponent
     {
-        var comp1id = _world.GetComponentIdentifier<TComp1>();
-        var comp2id = _world.GetComponentIdentifier<TComp2>();
-        return ref GetPairData<TComp2>(comp1id, comp2id);
+        var componentId1 = _world.GetComponentIdentifier<TComponent1>();
+        var componentId2 = _world.GetComponentIdentifier<TComponent2>();
+        return ref GetPairData<TComponent2>(componentId1, componentId2);
     }
 
     private ref TComp GetPairData<TComp>(Identifier first, Identifier second)
-         where TComp : unmanaged, IComponent
+        where TComp : unmanaged, IComponent
     {
         var id = ecs_pair(first.Handle, second.Handle);
         var pointer = ecs_get_id(_world.Handle, _handle, id);
@@ -285,28 +285,28 @@ public readonly unsafe struct Entity
         return ecs_has_id(_world.Handle, _handle, id);
     }
 
-    public bool HasPairFirstComp<TComp>(Entity second)
-        where TComp : unmanaged, IComponent
+    public bool HasPairFirstComp<TComponent>(Entity second)
+        where TComponent : unmanaged, IComponent
     {
-        var compId = _world.GetComponentIdentifier<TComp>();
+        var compId = _world.GetComponentIdentifier<TComponent>();
         var id = ecs_pair(compId.Handle, second._handle);
         return ecs_has_id(_world.Handle, _handle, id);
     }
 
-    public bool HasPairComp<TComp1, TComp2>()
-    where TComp1 : unmanaged, IComponent
-    where TComp2 : unmanaged, IComponent
+    public bool HasPairComp<TComponent1, TComponent2>()
+        where TComponent1 : unmanaged, IComponent
+        where TComponent2 : unmanaged, IComponent
     {
-        var compId1 = _world.GetComponentIdentifier<TComp1>();
-        var compId2 = _world.GetComponentIdentifier<TComp2>();
+        var compId1 = _world.GetComponentIdentifier<TComponent1>();
+        var compId2 = _world.GetComponentIdentifier<TComponent2>();
         var id = ecs_pair(compId1.Handle, compId2.Handle);
         return ecs_has_id(_world.Handle, _handle, id);
     }
 
-    public bool HasPairSecondComp<TComp>(Entity first)
-        where TComp : unmanaged, IComponent
+    public bool HasPairSecondComp<TComponent>(Entity first)
+        where TComponent : unmanaged, IComponent
     {
-        var compId = _world.GetComponentIdentifier<TComp>();
+        var compId = _world.GetComponentIdentifier<TComponent>();
         var id = ecs_pair(first._handle, compId.Handle);
         return ecs_has_id(_world.Handle, _handle, id);
     }

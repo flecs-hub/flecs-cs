@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Xml.Linq;
 using JetBrains.Annotations;
 using static flecs_hub.flecs;
 
@@ -49,14 +48,14 @@ public unsafe class World
         var structSize = Unsafe.SizeOf<TComponent>();
         var structAlignment = structLayoutAttribute!.Pack;
 
-        ecs_entity_desc_t edesc = default;
-        edesc.name = componentNameC;
-        edesc.symbol = componentNameC;
-        ecs_component_desc_t desc = default;
-        desc.entity = ecs_entity_init(Handle, &edesc);
-        desc.type.size = structSize;
-        desc.type.alignment = structAlignment;
-        var id = ecs_component_init(Handle, &desc);
+        ecs_entity_desc_t entityDesc = default;
+        entityDesc.name = componentNameC;
+        entityDesc.symbol = componentNameC;
+        ecs_component_desc_t componentDesc = default;
+        componentDesc.entity = ecs_entity_init(Handle, &entityDesc);
+        componentDesc.type.size = structSize;
+        componentDesc.type.alignment = structAlignment;
+        var id = ecs_component_init(Handle, &componentDesc);
         _componentIdentifiersByType[typeof(TComponent)] = id.Data.Data;
         SetHooks(hooks, id);
     }
@@ -108,15 +107,15 @@ public unsafe class World
     }
 
     private void FillSystemDescriptorCommon(
-        ref ecs_system_desc_t desc, CallbackIterator callback, ecs_entity_t phase, string? name)
+        ref ecs_system_desc_t systemDesc, CallbackIterator callback, ecs_entity_t phase, string? name)
     {
-        ecs_entity_desc_t edesc = default;
-        edesc.name = name ?? callback.Method.Name;
-        edesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
-        edesc.add[1] = phase;
-        desc.entity = ecs_entity_init(Handle, &edesc);
-        desc.callback.Data.Pointer = &SystemCallback;
-        desc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
+        ecs_entity_desc_t entityDesc = default;
+        entityDesc.name = name ?? callback.Method.Name;
+        entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        entityDesc.add[1] = phase;
+        systemDesc.entity = ecs_entity_init(Handle, &entityDesc);
+        systemDesc.callback.Data.Pointer = &SystemCallback;
+        systemDesc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
     }
 
     [UnmanagedCallersOnly]
