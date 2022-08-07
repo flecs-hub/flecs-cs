@@ -92,10 +92,10 @@ internal static class Program
         {
             Console.Write(i + ": ");
 
-            var roleString = identifier.RoleString();
-            if (roleString != "UNKNOWN")
+            var idFlagsStr = identifier.RoleString();
+            if (idFlagsStr != "UNKNOWN")
             {
-                Console.Write("Role: " + roleString + ", ");
+                Console.Write("ID Flags: " + idFlagsStr + ", ");
             }
 
             if (identifier.IsPair)
