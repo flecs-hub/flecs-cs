@@ -17,14 +17,7 @@ public readonly unsafe struct Identifier
         Handle = handle;
     }
 
-    public bool IsPair
-    {
-        get
-        {
-            var value = Handle.Data & ECS_ROLE_MASK;
-            return value == ECS_PAIR.Data;
-        }
-    }
+    public bool IsPair => ecs_id_is_pair(Handle);
 
     public string String()
     {
@@ -37,8 +30,8 @@ public readonly unsafe struct Identifier
     public string RoleString()
     {
         var id = default(ecs_id_t);
-        id.Data = Handle.Data & ECS_ROLE_MASK;
-        var cString = ecs_role_str(id);
+        id.Data = Handle.Data & ECS_ID_FLAGS_MASK;
+        var cString = ecs_id_flag_str(id);
         var result = Marshal.PtrToStringAnsi(cString._pointer)!;
         return result;
     }

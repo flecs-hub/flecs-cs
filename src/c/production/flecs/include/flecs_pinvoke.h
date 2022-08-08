@@ -28,6 +28,12 @@ PINVOKE_API ecs_entity_t pinvoke_EcsChildOf()
     return EcsChildOf;
 }
 
+PINVOKE_API ecs_entity_t pinvoke_EcsSlotOf()
+{
+    return EcsSlotOf;
+}
+
+
 // Entity tags
 PINVOKE_API ecs_entity_t pinvoke_EcsPrefab()
 {

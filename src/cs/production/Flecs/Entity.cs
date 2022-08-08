@@ -197,6 +197,12 @@ public readonly unsafe struct Entity
         return ref Unsafe.AsRef<TComp>(pointer);
     }
 
+    public Entity GetTarget(Entity relation)
+    {
+        var target = ecs_get_target(_world.Handle, _handle, relation._handle, 0);
+        return new Entity(_world, target);
+    }
+
     public void AddParent(Entity entity)
     {
         var id = ecs_pair(EcsChildOf, entity._handle);
@@ -206,6 +212,12 @@ public readonly unsafe struct Entity
     public void IsA(Entity entity)
     {
         var id = ecs_pair(EcsIsA, entity._handle);
+        ecs_add_id(_world.Handle, _handle, id);
+    }
+
+    public void AddSlotOf(Entity entity)
+    {
+        var id = ecs_pair(EcsSlotOf, entity._handle);
         ecs_add_id(_world.Handle, _handle, id);
     }
 

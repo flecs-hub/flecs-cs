@@ -15,7 +15,9 @@ namespace flecs_hub
         public static ecs_entity_t EcsIsA => pinvoke_EcsIsA();
         public static ecs_entity_t EcsDependsOn => pinvoke_EcsDependsOn();
         public static ecs_entity_t EcsChildOf => pinvoke_EcsChildOf();
-        
+
+        public static ecs_entity_t EcsSlotOf => pinvoke_EcsSlotOf();
+
         // Entity tags
         public static ecs_entity_t EcsPrefab => pinvoke_EcsPrefab();
         
