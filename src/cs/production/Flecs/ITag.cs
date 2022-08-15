@@ -6,6 +6,6 @@ namespace Flecs;
 /// <summary>
 ///     Marker interface for a Flecs tag.
 /// </summary>
-public interface ITag
+public interface ITag : IFlecsComponent
 {
 }

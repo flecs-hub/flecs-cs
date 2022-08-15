@@ -33,7 +33,6 @@ PINVOKE_API ecs_entity_t pinvoke_EcsSlotOf()
     return EcsSlotOf;
 }
 
-
 // Entity tags
 PINVOKE_API ecs_entity_t pinvoke_EcsPrefab()
 {
@@ -41,7 +40,57 @@ PINVOKE_API ecs_entity_t pinvoke_EcsPrefab()
 }
 
 // System tags
+PINVOKE_API ecs_entity_t pinvoke_EcsPreFrame()
+{
+    return EcsPreFrame;
+}
+
+PINVOKE_API ecs_entity_t pinvoke_EcsOnLoad()
+{
+    return EcsOnLoad;
+}
+
+PINVOKE_API ecs_entity_t pinvoke_EcsPostLoad()
+{
+    return EcsPostLoad;
+}
+
+PINVOKE_API ecs_entity_t pinvoke_EcsPreUpdate()
+{
+    return EcsPreUpdate;
+}
+
 PINVOKE_API ecs_entity_t pinvoke_EcsOnUpdate()
 {
     return EcsOnUpdate;
+}
+
+PINVOKE_API ecs_entity_t pinvoke_EcsOnValidate()
+{
+    return EcsOnValidate;
+}
+
+PINVOKE_API ecs_entity_t pinvoke_EcsPostUpdate()
+{
+    return EcsPostUpdate;
+}
+
+PINVOKE_API ecs_entity_t pinvoke_EcsPreStore()
+{
+    return EcsPreStore;
+}
+
+PINVOKE_API ecs_entity_t pinvoke_EcsOnStore()
+{
+    return EcsOnStore;
+}
+
+PINVOKE_API ecs_entity_t pinvoke_EcsPostFrame()
+{
+    return EcsPostFrame;
+}
+
+PINVOKE_API ecs_entity_t pinvoke_EcsPhase()
+{
+    return EcsPhase;
 }

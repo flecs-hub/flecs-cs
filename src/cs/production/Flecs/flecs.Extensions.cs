@@ -20,9 +20,20 @@ namespace flecs_hub
 
         // Entity tags
         public static ecs_entity_t EcsPrefab => pinvoke_EcsPrefab();
-        
+
         // System tags
+        public static ecs_entity_t EcsPreFrame => pinvoke_EcsPreFrame();
+        public static ecs_entity_t EcsOnLoad => pinvoke_EcsOnLoad();
+        public static ecs_entity_t EcsPostLoad => pinvoke_EcsPostLoad();
+        public static ecs_entity_t EcsPreUpdate => pinvoke_EcsPreUpdate();
         public static ecs_entity_t EcsOnUpdate => pinvoke_EcsOnUpdate();
+        public static ecs_entity_t EcsOnValidate => pinvoke_EcsOnValidate();
+        public static ecs_entity_t EcsPostUpdate => pinvoke_EcsPostUpdate();
+        public static ecs_entity_t EcsPreStore => pinvoke_EcsPreStore();
+        public static ecs_entity_t EcsOnStore => pinvoke_EcsOnStore();
+        public static ecs_entity_t EcsPostFrame => pinvoke_EcsPostFrame();
+        public static ecs_entity_t EcsPhase => pinvoke_EcsPhase();
+
 
         internal static ulong ecs_pair(ecs_entity_t pred, ecs_entity_t obj)
         {

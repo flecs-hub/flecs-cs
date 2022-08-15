@@ -12,7 +12,7 @@ namespace Flecs;
 public readonly unsafe struct Entity
 {
     private readonly World _world;
-    private readonly ecs_entity_t _handle;
+    internal readonly ecs_entity_t _handle;
 
     internal Entity(World world, ecs_entity_t handle)
     {
@@ -39,11 +39,21 @@ public readonly unsafe struct Entity
         ecs_add_id(_world.Handle, _handle, tagId.Handle);
     }
 
+    public void AddTag(Entity entity)
+    {
+        ecs_add_id(_world.Handle, _handle, entity._handle);
+    }
+
     public void RemoveTag<TTag>()
         where TTag : unmanaged, ITag
     {
         var tagId = _world.GetTagIdentifier<TTag>();
         ecs_remove_id(_world.Handle, _handle, tagId.Handle);
+    }
+
+    public void RemoveTag(Entity entity)
+    {
+        ecs_remove_id(_world.Handle, _handle, entity._handle);
     }
 
     public void AddPair<TTag1, TTag2>()
@@ -433,6 +443,11 @@ public readonly unsafe struct Entity
         return ecs_has_id(_world.Handle, _handle, id);
     }
 
+    public void DependsOn(Entity entity)
+    {
+        AddPair(new Entity(_world, EcsDependsOn), entity);
+    }
+
     public bool IsChildOf(Entity entity)
     {
         var pair = ecs_childof(entity._handle);
@@ -447,6 +462,7 @@ public readonly unsafe struct Entity
         Marshal.FreeHGlobal(cString._pointer);
         return result;
     }
+
 
     public EntityIterator Children()
     {
