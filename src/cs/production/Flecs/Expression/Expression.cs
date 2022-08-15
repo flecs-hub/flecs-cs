@@ -46,7 +46,7 @@ public class Expression
         private string _entity1 = string.Empty;
         private string _entity2 = string.Empty;
         private string _source = "$This";
-        private string _modifier = string.Empty;
+        private string _accessModifier = string.Empty; // empty == default == [InOut]
         private string _access = ",";
         private string _prefix = string.Empty;
 
@@ -127,12 +127,32 @@ public class Expression
             return this;
         }
 
+        public void In()
+        {
+            _accessModifier = "[In]";
+        }
+
+        public void Out()
+        {
+            _accessModifier = "[Out]";
+        }
+
+        public void None()
+        {
+            _accessModifier = "[None]";
+        }
+
+        public void InOut() // default, empty == inout
+        {
+            _accessModifier = "[InOut]";
+        }
+
         private void Reset()
         {
             _entity1 = string.Empty;
             _entity2 = string.Empty;
             _source = "$This";
-            _modifier = string.Empty;
+            _accessModifier = string.Empty;
             _access = ",";
             _prefix = string.Empty;
         }
@@ -146,7 +166,7 @@ public class Expression
 
             if (_access != string.Empty)
             {
-                _stringBuilder.Append(_modifier).Append(' ');
+                _stringBuilder.Append(_accessModifier).Append(' ');
             }
 
             _stringBuilder.Append(_prefix).Append(_entity1)
