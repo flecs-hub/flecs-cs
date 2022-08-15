@@ -53,6 +53,21 @@ public readonly unsafe struct Iterator
         return result;
     }
 
+    public bool HasQueryChanged()
+    {
+        return ecs_query_changed(null, Handle);
+    }
+
+    public void QuerySkip()
+    {
+        ecs_query_skip(Handle);
+    }
+
+    public bool IsSelf(int index)
+    {
+        return ecs_field_is_self(Handle, index);
+    }
+
     public IteratorEvent Event()
     {
         var result = new IteratorEvent(_world, Handle->@event);
