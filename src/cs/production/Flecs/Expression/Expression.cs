@@ -129,25 +129,25 @@ public class Expression
 
         public TermBuilder In()
         {
-            _accessModifier = "[In]";
+            _accessModifier = "[in]";
             return this;
         }
 
         public TermBuilder Out()
         {
-            _accessModifier = "[Out]";
+            _accessModifier = "[out]";
             return this;
         }
 
         public TermBuilder None()
         {
-            _accessModifier = "[None]";
+            _accessModifier = "[none]";
             return this;
         }
 
         public TermBuilder InOut() // default, empty == inout
         {
-            _accessModifier = "[InOut]";
+            _accessModifier = "[inout]";
             return this;
         }
 
