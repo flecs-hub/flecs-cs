@@ -12,7 +12,7 @@ namespace Flecs;
 public readonly unsafe struct Entity
 {
     private readonly World _world;
-    private readonly ecs_entity_t _handle;
+    internal readonly ecs_entity_t _handle;
 
     internal Entity(World world, ecs_entity_t handle)
     {

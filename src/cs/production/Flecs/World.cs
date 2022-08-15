@@ -73,6 +73,12 @@ public unsafe class World
     }
 
     public void RegisterSystem(
+        CallbackIterator callback, Entity phase, string filterExpression, string? name = null)
+    {
+        RegisterSystem(callback, phase._handle, filterExpression, name);
+    }
+
+    public void RegisterSystem(
         CallbackIterator callback, ecs_entity_t phase, string filterExpression, string? name = null)
     {
         ecs_system_desc_t desc = default;
@@ -133,6 +139,16 @@ public unsafe class World
         desc.name = name;
         var entity = ecs_entity_init(Handle, &desc);
         var result = new Entity(this, entity);
+        return result;
+    }
+
+    public Entity CreateEntity(ecs_entity_t fromHandle)
+    {
+        // ToDo: think about a better solution here
+        // if done this way, need to check existance in this world, but there needs to be a way
+        // to convert built-in ecs_entity_t to Entities without a World (see System Phase method too)
+        // for distributed process/application context, this should validate id and create entity if not existing
+        var result = new Entity(this, fromHandle);
         return result;
     }
 
