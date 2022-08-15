@@ -463,7 +463,6 @@ public readonly unsafe struct Entity
         return result;
     }
 
-
     public EntityIterator Children()
     {
         var term = default(ecs_term_t);
