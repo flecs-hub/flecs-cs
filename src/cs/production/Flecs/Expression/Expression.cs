@@ -127,24 +127,28 @@ public class Expression
             return this;
         }
 
-        public void In()
+        public TermBuilder In()
         {
             _accessModifier = "[In]";
+            return this;
         }
 
-        public void Out()
+        public TermBuilder Out()
         {
             _accessModifier = "[Out]";
+            return this;
         }
 
-        public void None()
+        public TermBuilder None()
         {
             _accessModifier = "[None]";
+            return this;
         }
 
-        public void InOut() // default, empty == inout
+        public TermBuilder InOut() // default, empty == inout
         {
             _accessModifier = "[InOut]";
+            return this;
         }
 
         private void Reset()
