@@ -24,6 +24,7 @@ public readonly unsafe struct EntityIterator
     }
 
     public float DeltaTime() => Handle.delta_time;
+
     public float DeltaSystemTime() => Handle.delta_system_time;
 
     public bool HasNext()
