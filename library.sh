@@ -13,3 +13,5 @@ $SCRIPTS_DIRECTORY/c/library/main.sh \
     "flecs" \
     "" \
     "" \
+	
+read
