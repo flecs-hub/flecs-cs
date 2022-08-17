@@ -385,6 +385,13 @@ public readonly unsafe struct Entity
         return result.ToString();
     }
 
+    public bool HasComponent<TComponent>()
+        where TComponent : unmanaged, IComponent
+    {
+        var compId = _world.GetComponentIdentifier<TComponent>();
+        return ecs_has_id(_world.Handle, _handle, compId.Handle);
+    }
+
     public bool HasPair<TTag1, TTag2>()
         where TTag1 : unmanaged, ITag
         where TTag2 : unmanaged, ITag
