@@ -22,6 +22,10 @@ public readonly unsafe struct Iterator
         Handle = it;
     }
 
+    public float DeltaTime() => Handle->delta_time;
+
+    public float DeltaSystemTime() => Handle->delta_system_time;
+
     public Span<T> Field<T>(int index)
     {
         var structSize = Marshal.SizeOf<T>();
