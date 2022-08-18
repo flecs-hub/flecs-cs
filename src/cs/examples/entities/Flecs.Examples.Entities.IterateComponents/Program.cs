@@ -51,7 +51,7 @@ internal static class Program
         bob.SetComponent(new Position { X = 10, Y = 20 });
         bob.SetComponent(new Velocity { X = 1, Y = 1 });
         bob.Add<Human>();
-        bob.AddPair<Eats, Apples>();
+        bob.Add<Eats, Apples>();
 
         // Iterate & components of Bob
         Console.WriteLine("Bob's components:");

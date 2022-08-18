@@ -70,7 +70,7 @@ internal static class Program
         var bob = world.CreateEntity("Bob");
         bob.SetComponent(new Position { X = 0, Y = 0 });
         bob.SetComponent(new Velocity { X = 2, Y = 2 });
-        bob.AddPair<Eats, Apples>();
+        bob.Add<Eats, Apples>();
 
         // Run systems twice. Usually this function is called once per frame
         world.Progress(0);

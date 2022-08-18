@@ -46,13 +46,13 @@ internal static class Program
         // When one element of a pair is a component and the other element is a tag, 
         // the pair assumes the type of the component.
         var e1 = world.CreateEntity("e1");
-        e1.SetPair<Requires, Gigawatts>(new Requires() { Amount = 1.21f });
+        e1.Set<Requires, Gigawatts>(new Requires() { Amount = 1.21f });
         ref var requires1 = ref e1.GetPairFirst<Requires, Gigawatts>();
         Console.WriteLine($"<{nameof(Requires)}, {nameof(Gigawatts)}> (first is value) {nameof(Requires)}: {requires1.Amount}");
 
         // The component can be either the first or second part of a pair:
         var e2 = world.CreateEntity("e2");
-        e2.SetPair<Gigawatts, Requires>(new Requires() { Amount = 2.5f });
+        e2.Set<Gigawatts, Requires>(new Requires() { Amount = 2.5f });
         ref var requires2 = ref e2.GetPairSecond<Gigawatts, Requires>();
         Console.WriteLine($"<{nameof(Gigawatts)}, {nameof(Requires)}> (second is value) {nameof(Requires)}: {requires2.Amount}");
 
@@ -72,8 +72,8 @@ internal static class Program
         e4.SetPairSecondComp<Expires, Position>(new Position() { X = 0.5f, Y = 1f });
         ref var pos = ref e4.GetPairSecondComp<Expires, Position>();
         Console.WriteLine($"<{nameof(Expires)}, {nameof(Position)}> (2 comps, second is value) {nameof(Position)}: {pos.X}/{pos.Y}");
-        Console.WriteLine($"has <{nameof(Expires)}, {nameof(Position)}>: {e4.HasPairComp<Expires, Position>()}");
-        Console.WriteLine($"has <{nameof(Position)}, {nameof(Expires)}>: {e4.HasPairComp<Position, Expires>()}");
+        Console.WriteLine($"has <{nameof(Expires)}, {nameof(Position)}>: {e4.Has<Expires, Position>()}");
+        Console.WriteLine($"has <{nameof(Position)}, {nameof(Expires)}>: {e4.Has<Position, Expires>()}");
         Console.WriteLine();
 
         var eRuntimeTag = world.CreateEntity("RuntimeTag");

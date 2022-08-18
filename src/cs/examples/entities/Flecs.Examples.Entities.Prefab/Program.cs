@@ -72,7 +72,7 @@ internal static class Program
         // By default components in an inheritance hierarchy are shared between
         // entities. The override function ensures that instances have a private
         // copy of the component.
-        spaceShip.SetComponentOverride(new Position { X = 0, Y = 0 });
+        spaceShip.SetOverride(new Position { X = 0, Y = 0 });
 
         var freighter = world.CreatePrefab("Freighter");
         // This ensures the entity inherits all components from spaceship.

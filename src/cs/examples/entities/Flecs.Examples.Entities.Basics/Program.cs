@@ -44,7 +44,7 @@ internal static class Program
         Console.WriteLine("Alice's type: " + alice.Type().String());
 
         // Remove tag
-        alice.RemoveTag<Walking>();
+        alice.Remove<Walking>();
 
         // Iterate all entities with Position
         var it = world.EntityIterator<Position>();
