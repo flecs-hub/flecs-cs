@@ -36,8 +36,8 @@ internal static class Program
         Console.WriteLine("bob has (Grows, Pears) (dynamic): " + bob.Has(grows, pears));
         Console.WriteLine("bob has (Pears, Grows) (dynamic): " + bob.Has(pears, grows));
 
-        Console.WriteLine("bob has (Eats, Apples) (dynamic): " + bob.HasPairFirst<Eats>(apples));
-        Console.WriteLine("bob has (Apples, Eats) (dynamic): " + bob.HasPairSecond<Eats>(apples));
+        Console.WriteLine("bob has (Eats, Apples) (dynamic): " + bob.Has<Eats>(apples));
+        Console.WriteLine("bob has (Apples, Eats) (dynamic): " + bob.HasSecond<Eats>(apples));
 
         Console.WriteLine("bob has (Eats, People): " + bob.Has<Eats, People>());
         Console.WriteLine("bob has (People, Eats): " + bob.Has<People, Eats>());

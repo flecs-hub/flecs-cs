@@ -33,11 +33,11 @@ internal static class Program
         world.RegisterComponent<Speed>();
 
         var e1 = world.CreateEntity("e1");
-        e1.SetComponent(new Position());
-        e1.SetComponent(new Velocity());
+        e1.Set(new Position());
+        e1.Set(new Velocity());
         var e2 = world.CreateEntity("e2");
-        e2.SetComponent(new Position());
-        e2.SetComponent(new Speed());
+        e2.Set(new Position());
+        e2.Set(new Speed());
         world.RegisterSystem(MoveOptionalVel, EcsOnUpdate, $"{world.GetFlecsTypeName(typeof(Position))}, ?{world.GetFlecsTypeName(typeof(Velocity))}");
         world.RegisterSystem(MoveOr, EcsOnUpdate, $"{world.GetFlecsTypeName(typeof(Position))}, "
             + $"{world.GetFlecsTypeName(typeof(Velocity))} || {world.GetFlecsTypeName(typeof(Speed))}");

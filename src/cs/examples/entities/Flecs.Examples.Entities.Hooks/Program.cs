@@ -43,7 +43,7 @@ internal static class Program
         entity.Add<String>();
         
         Console.WriteLine("entity.SetComponent<String>()(\"Hello World\")");
-        entity.SetComponent(new String { Value = "Hello World" });
+        entity.Set(new String { Value = "Hello World" });
         
         Console.WriteLine("entity.AddTag<Tag>()");
         // This operation changes the entity's archetype, which invokes a move

@@ -48,8 +48,8 @@ internal static class Program
         // Create an entity which all of the above
         var bob = world.CreateEntity("bob");
         
-        bob.SetComponent(new Position { X = 10, Y = 20 });
-        bob.SetComponent(new Velocity { X = 1, Y = 1 });
+        bob.Set(new Position { X = 10, Y = 20 });
+        bob.Set(new Velocity { X = 1, Y = 1 });
         bob.Add<Human>();
         bob.Add<Eats, Apples>();
 
