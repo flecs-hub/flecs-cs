@@ -39,10 +39,10 @@ public readonly unsafe struct Iterator
     }
 
     public bool FieldIs<T>(int index)
-        where T : unmanaged, IComponent
+        where T : unmanaged, IEcsComponent
     {
         var id = ecs_field_id(Handle, index);
-        var compId = _world.GetComponentIdentifier<T>();
+        var compId = _world.GetIdentifier<T>();
         return id == compId.Handle;
     }
 

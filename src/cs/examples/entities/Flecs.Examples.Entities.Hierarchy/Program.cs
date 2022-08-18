@@ -37,27 +37,27 @@ internal static class Program
         // create entities as children of other entities.
 
         var sun = world.CreateEntity("Sun");
-        sun.AddTag<Star>();
+        sun.Add<Star>();
         sun.SetComponent(new Position { X = 1, Y = 1 });
         
         var mercury = world.CreateEntity("Mercury");
         mercury.AddParent(sun);
-        mercury.AddTag<Planet>();
+        mercury.Add<Planet>();
         mercury.SetComponent(new Position { X = 1, Y = 1 });
         
         var venus = world.CreateEntity("Venus");
         venus.AddParent(sun);
-        venus.AddTag<Planet>();
+        venus.Add<Planet>();
         venus.SetComponent(new Position { X = 2, Y = 2 });
         
         var earth = world.CreateEntity("Earth");
         earth.AddParent(sun);
-        earth.AddTag<Planet>();
+        earth.Add<Planet>();
         earth.SetComponent(new Position { X = 3, Y = 3 });
         
         var moon = world.CreateEntity("Moon");
         moon.AddParent(earth);
-        moon.AddTag<Moon>();
+        moon.Add<Moon>();
         moon.SetComponent(new Position { X = 0.1f, Y = 0.1f });
         
         // Is the Moon a child of Earth?

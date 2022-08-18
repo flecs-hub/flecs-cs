@@ -52,8 +52,8 @@ public unsafe class World
     internal static Dictionary<IntPtr, World> Pointers = new();
 
     internal readonly ecs_world_t* Handle;
+    // tags = components without data
     private Dictionary<Type, ulong> _componentIdentifiersByType = new();
-    private Dictionary<Type, ulong> _tagIdentifiersByType = new();
 
     public int ExitCode { get; private set; }
 
@@ -104,7 +104,7 @@ public unsafe class World
         desc.name = typeName;
         var id = ecs_entity_init(Handle, &desc);
         Debug.Assert(id.Data != 0, "ECS_INVALID_PARAMETER");
-        _tagIdentifiersByType[type] = id.Data.Data;
+        _componentIdentifiersByType[type] = id.Data.Data;
     }
 
     public void RegisterSystem(
@@ -188,17 +188,6 @@ public unsafe class World
         return result;
     }
 
-    // public Query CreateQuery(ref QueryDescriptor descriptor)
-    // {
-    //     ecs_query_t* query;
-    //     fixed (ecs_query_desc_t* desc = &descriptor)
-    //     {
-    //        query = ecs_query_init(Handle, desc);
-    //     }
-    //
-    //     return new Query(this, query);
-    // }
-
     public EntityIterator EntityIterator<TComponent>()
         where TComponent : unmanaged, IComponent
     {
@@ -246,31 +235,15 @@ public unsafe class World
         return GetFlecsTypeName(typeof(T));
     }
 
-    public Identifier GetComponentIdentifier<TComponent>()
-        where TComponent : unmanaged, IComponent
+    public Identifier GetIdentifier<T>()
+          where T : unmanaged, IEcsComponent
     {
-        var type = typeof(TComponent);
+        var type = typeof(T);
         var containsKey = _componentIdentifiersByType.TryGetValue(type, out var value);
         if (!containsKey)
         {
-            RegisterComponent<TComponent>();
+            RegisterComponent<T>();
             value = _componentIdentifiersByType[type];
-        }
-
-        var id = default(ecs_id_t);
-        id.Data = value;
-        return new Identifier(this, id);
-    }
-
-    public Identifier GetTagIdentifier<TTag>()
-        where TTag : unmanaged, ITag
-    {
-        var type = typeof(TTag);
-        var containsKey = _tagIdentifiersByType.TryGetValue(type, out var value);
-        if (!containsKey)
-        {
-            RegisterTag<TTag>();
-            value = _tagIdentifiersByType[type];
         }
 
         var id = default(ecs_id_t);

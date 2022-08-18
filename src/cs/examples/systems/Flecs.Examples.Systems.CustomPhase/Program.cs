@@ -17,11 +17,11 @@ internal static class Program
         var world = new World(args);
 
         var physics = world.CreateEntity("physics");
-        physics.AddTag(world.EcsPhase);
+        physics.Add(world.EcsPhase);
         physics.DependsOn(world.EcsDependsOn);
 
         var collision = world.CreateEntity("collision");
-        collision.AddTag(world.EcsPhase);
+        collision.Add(world.EcsPhase);
         collision.DependsOn(physics);
 
         world.RegisterSystem(System1, physics, "");

@@ -23,7 +23,7 @@
     </PropertyGroup>
     <ItemGroup>
       <Content Remove="flecs.cs" />
-      <Content Remove="IFlecsComponent.cs" />
+      <Content Remove="IEcsComponent.cs" />
     </ItemGroup>
     
     <!-- NuGet package references -->

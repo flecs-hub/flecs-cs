@@ -24,7 +24,7 @@ internal static class Program
 
         var bob = world.CreateEntity("Bob");
         bob.SetComponent(new Position { X = 10, Y = 20 });
-        bob.AddTag<Walking>();
+        bob.Add<Walking>();
 
         var position = bob.GetComponent<Position>();
         Console.WriteLine("Bob's initial position: {" + position.X + ", " + position.Y + "}");
@@ -37,7 +37,7 @@ internal static class Program
 
         var alice = world.CreateEntity("Alice");
         alice.SetComponent(new Position { X = 10, Y = 20 });
-        alice.AddTag<Walking>();
+        alice.Add<Walking>();
 
         // Print all the components the entity has. This will output:
         //    Position, Walking, (Identifier,Name)
