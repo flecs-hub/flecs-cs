@@ -14,6 +14,41 @@ namespace Flecs;
 [PublicAPI]
 public unsafe class World
 {
+    // Relationships
+    public Entity EcsIsA => new Entity(this, pinvoke_EcsIsA());
+
+    public Entity EcsDependsOn => new Entity(this, pinvoke_EcsDependsOn());
+
+    public Entity EcsChildOf => new Entity(this, pinvoke_EcsChildOf());
+
+    public Entity EcsSlotOf => new Entity(this, pinvoke_EcsSlotOf());
+
+    // Entity tags
+    public Entity EcsPrefab => new Entity(this, pinvoke_EcsPrefab());
+
+    // System tags
+    public Entity EcsPreFrame => new Entity(this, pinvoke_EcsPreFrame());
+
+    public Entity EcsOnLoad => new Entity(this, pinvoke_EcsOnLoad());
+
+    public Entity EcsPostLoad => new Entity(this, pinvoke_EcsPostLoad());
+
+    public Entity EcsPreUpdate => new Entity(this, pinvoke_EcsPreUpdate());
+
+    public Entity EcsOnUpdate => new Entity(this, pinvoke_EcsOnUpdate());
+
+    public Entity EcsOnValidate => new Entity(this, pinvoke_EcsOnValidate());
+
+    public Entity EcsPostUpdate => new Entity(this, pinvoke_EcsPostUpdate());
+
+    public Entity EcsPreStore => new Entity(this, pinvoke_EcsPreStore());
+
+    public Entity EcsOnStore => new Entity(this, pinvoke_EcsOnStore());
+
+    public Entity EcsPostFrame => new Entity(this, pinvoke_EcsPostFrame());
+
+    public Entity EcsPhase => new Entity(this, pinvoke_EcsPhase());
+
     internal static Dictionary<IntPtr, World> Pointers = new();
 
     internal readonly ecs_world_t* Handle;
@@ -89,10 +124,10 @@ public unsafe class World
     }
 
     public void RegisterSystem<TComponent1>(
-        CallbackIterator callback, ecs_entity_t phase, string? name = null)
+        CallbackIterator callback, Entity phase, string? name = null)
     {
         ecs_system_desc_t desc = default;
-        FillSystemDescriptorCommon(ref desc, callback, phase, name);
+        FillSystemDescriptorCommon(ref desc, callback, phase._handle, name);
 
         desc.query.filter.expr = GetFlecsTypeName<TComponent1>();
         ecs_system_init(Handle, &desc);
@@ -104,7 +139,7 @@ public unsafe class World
         ecs_system_desc_t desc = default;
         desc.query.filter.name = name ?? callback.Method.Name;
         var phase = EcsOnUpdate;
-        FillSystemDescriptorCommon(ref desc, callback, phase, name);
+        FillSystemDescriptorCommon(ref desc, callback, phase._handle, name);
 
         var componentName1 = GetFlecsTypeName<TComponent1>();
         var componentName2 = GetFlecsTypeName<TComponent2>();
@@ -117,7 +152,7 @@ public unsafe class World
     {
         ecs_entity_desc_t entityDesc = default;
         entityDesc.name = name ?? callback.Method.Name;
-        entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn._handle, phase) : default;
         entityDesc.add[1] = phase;
         systemDesc.entity = ecs_entity_init(Handle, &entityDesc);
         systemDesc.callback.Data.Pointer = &SystemCallback;
