@@ -6,6 +6,6 @@ namespace Flecs;
 /// <summary>
 ///     Marker interface for a Flecs component.
 /// </summary>
-public interface IComponent : IFlecsComponent
+public interface IComponent : IEcsComponent
 {
 }
