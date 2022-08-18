@@ -177,16 +177,6 @@ public unsafe class World
         return result;
     }
 
-    public Entity CreateEntity(ecs_entity_t fromHandle)
-    {
-        // ToDo: think about a better solution here
-        // if done this way, need to check existance in this world, but there needs to be a way
-        // to convert built-in ecs_entity_t to Entities without a World (see System Phase method too)
-        // for distributed process/application context, this should validate id and create entity if not existing
-        var result = new Entity(this, fromHandle);
-        return result;
-    }
-
     public Entity CreatePrefab(string name)
     {
         var desc = default(ecs_entity_desc_t);
