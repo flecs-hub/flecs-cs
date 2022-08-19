@@ -19,7 +19,7 @@ public class Expression
     }
 
     public TermBuilder Term<T>()
-        where T : unmanaged, IFlecsComponent
+        where T : unmanaged, IEcsComponent
     {
         var termBuilder = new TermBuilder(_world);
         termBuilder.First<T>();
@@ -27,8 +27,8 @@ public class Expression
     }
 
     public TermBuilder Term<T1, T2>()
-      where T1 : unmanaged, IFlecsComponent
-      where T2 : unmanaged, IFlecsComponent
+      where T1 : unmanaged, IEcsComponent
+      where T2 : unmanaged, IEcsComponent
     {
         var termBuilder = new TermBuilder(_world);
         termBuilder.First<T1>();
