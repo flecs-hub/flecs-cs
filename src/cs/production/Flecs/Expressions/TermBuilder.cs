@@ -28,7 +28,7 @@ public class TermBuilder
     }
 
     public TermBuilder First<T>()
-        where T : unmanaged, IFlecsComponent
+        where T : unmanaged, IEcsComponent
     => First(_world.GetFlecsTypeName<T>());
 
     public TermBuilder First(string name)
@@ -38,7 +38,7 @@ public class TermBuilder
     }
 
     public TermBuilder Second<T>()
-       where T : unmanaged, IFlecsComponent
+       where T : unmanaged, IEcsComponent
    => Second(_world.GetFlecsTypeName<T>());
 
     public TermBuilder Second(string name)
@@ -72,7 +72,7 @@ public class TermBuilder
     }
 
     public TermBuilder Term<T>()
-        where T : unmanaged, IFlecsComponent
+        where T : unmanaged, IEcsComponent
     {
         FlushToBuilder();
         First<T>();
@@ -80,8 +80,8 @@ public class TermBuilder
     }
 
     public TermBuilder Term<T1, T2>()
-        where T1 : unmanaged, IFlecsComponent
-        where T2 : unmanaged, IFlecsComponent
+        where T1 : unmanaged, IEcsComponent
+        where T2 : unmanaged, IEcsComponent
     {
         var termBuilder = new TermBuilder(_world);
         termBuilder.First<T1>();
