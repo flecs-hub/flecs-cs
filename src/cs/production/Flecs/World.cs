@@ -14,11 +14,46 @@ namespace Flecs;
 [PublicAPI]
 public unsafe class World
 {
+    // Relationships
+    public Entity EcsIsA => new Entity(this, pinvoke_EcsIsA());
+
+    public Entity EcsDependsOn => new Entity(this, pinvoke_EcsDependsOn());
+
+    public Entity EcsChildOf => new Entity(this, pinvoke_EcsChildOf());
+
+    public Entity EcsSlotOf => new Entity(this, pinvoke_EcsSlotOf());
+
+    // Entity tags
+    public Entity EcsPrefab => new Entity(this, pinvoke_EcsPrefab());
+
+    // System tags
+    public Entity EcsPreFrame => new Entity(this, pinvoke_EcsPreFrame());
+
+    public Entity EcsOnLoad => new Entity(this, pinvoke_EcsOnLoad());
+
+    public Entity EcsPostLoad => new Entity(this, pinvoke_EcsPostLoad());
+
+    public Entity EcsPreUpdate => new Entity(this, pinvoke_EcsPreUpdate());
+
+    public Entity EcsOnUpdate => new Entity(this, pinvoke_EcsOnUpdate());
+
+    public Entity EcsOnValidate => new Entity(this, pinvoke_EcsOnValidate());
+
+    public Entity EcsPostUpdate => new Entity(this, pinvoke_EcsPostUpdate());
+
+    public Entity EcsPreStore => new Entity(this, pinvoke_EcsPreStore());
+
+    public Entity EcsOnStore => new Entity(this, pinvoke_EcsOnStore());
+
+    public Entity EcsPostFrame => new Entity(this, pinvoke_EcsPostFrame());
+
+    public Entity EcsPhase => new Entity(this, pinvoke_EcsPhase());
+
     internal static Dictionary<IntPtr, World> Pointers = new();
 
     internal readonly ecs_world_t* Handle;
+    // tags = components without data
     private Dictionary<Type, ulong> _componentIdentifiersByType = new();
-    private Dictionary<Type, ulong> _tagIdentifiersByType = new();
 
     public int ExitCode { get; private set; }
 
@@ -69,7 +104,7 @@ public unsafe class World
         desc.name = typeName;
         var id = ecs_entity_init(Handle, &desc);
         Debug.Assert(id.Data != 0, "ECS_INVALID_PARAMETER");
-        _tagIdentifiersByType[type] = id.Data.Data;
+        _componentIdentifiersByType[type] = id.Data.Data;
     }
 
     public void RegisterSystem(
@@ -89,10 +124,10 @@ public unsafe class World
     }
 
     public void RegisterSystem<TComponent1>(
-        CallbackIterator callback, ecs_entity_t phase, string? name = null)
+        CallbackIterator callback, Entity phase, string? name = null)
     {
         ecs_system_desc_t desc = default;
-        FillSystemDescriptorCommon(ref desc, callback, phase, name);
+        FillSystemDescriptorCommon(ref desc, callback, phase._handle, name);
 
         desc.query.filter.expr = GetFlecsTypeName<TComponent1>();
         ecs_system_init(Handle, &desc);
@@ -104,7 +139,7 @@ public unsafe class World
         ecs_system_desc_t desc = default;
         desc.query.filter.name = name ?? callback.Method.Name;
         var phase = EcsOnUpdate;
-        FillSystemDescriptorCommon(ref desc, callback, phase, name);
+        FillSystemDescriptorCommon(ref desc, callback, phase._handle, name);
 
         var componentName1 = GetFlecsTypeName<TComponent1>();
         var componentName2 = GetFlecsTypeName<TComponent2>();
@@ -117,7 +152,7 @@ public unsafe class World
     {
         ecs_entity_desc_t entityDesc = default;
         entityDesc.name = name ?? callback.Method.Name;
-        entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn, phase) : default;
+        entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn._handle, phase) : default;
         entityDesc.add[1] = phase;
         systemDesc.entity = ecs_entity_init(Handle, &entityDesc);
         systemDesc.callback.Data.Pointer = &SystemCallback;
@@ -142,16 +177,6 @@ public unsafe class World
         return result;
     }
 
-    public Entity CreateEntity(ecs_entity_t fromHandle)
-    {
-        // ToDo: think about a better solution here
-        // if done this way, need to check existance in this world, but there needs to be a way
-        // to convert built-in ecs_entity_t to Entities without a World (see System Phase method too)
-        // for distributed process/application context, this should validate id and create entity if not existing
-        var result = new Entity(this, fromHandle);
-        return result;
-    }
-
     public Entity CreatePrefab(string name)
     {
         var desc = default(ecs_entity_desc_t);
@@ -162,17 +187,6 @@ public unsafe class World
         var result = new Entity(this, entity);
         return result;
     }
-
-    // public Query CreateQuery(ref QueryDescriptor descriptor)
-    // {
-    //     ecs_query_t* query;
-    //     fixed (ecs_query_desc_t* desc = &descriptor)
-    //     {
-    //        query = ecs_query_init(Handle, desc);
-    //     }
-    //
-    //     return new Query(this, query);
-    // }
 
     public EntityIterator EntityIterator<TComponent>()
         where TComponent : unmanaged, IComponent
@@ -221,31 +235,15 @@ public unsafe class World
         return GetFlecsTypeName(typeof(T));
     }
 
-    public Identifier GetComponentIdentifier<TComponent>()
-        where TComponent : unmanaged, IComponent
+    public Identifier GetIdentifier<T>()
+          where T : unmanaged, IEcsComponent
     {
-        var type = typeof(TComponent);
+        var type = typeof(T);
         var containsKey = _componentIdentifiersByType.TryGetValue(type, out var value);
         if (!containsKey)
         {
-            RegisterComponent<TComponent>();
+            RegisterComponent<T>();
             value = _componentIdentifiersByType[type];
-        }
-
-        var id = default(ecs_id_t);
-        id.Data = value;
-        return new Identifier(this, id);
-    }
-
-    public Identifier GetTagIdentifier<TTag>()
-        where TTag : unmanaged, ITag
-    {
-        var type = typeof(TTag);
-        var containsKey = _tagIdentifiersByType.TryGetValue(type, out var value);
-        if (!containsKey)
-        {
-            RegisterTag<TTag>();
-            value = _tagIdentifiersByType[type];
         }
 
         var id = default(ecs_id_t);

@@ -26,21 +26,21 @@ internal static class Program
         var pears = world.CreateEntity("Pears");
 
         var bob = world.CreateEntity("Bob");
-        bob.AddPairSecond<Eats>(apples);
-        bob.AddPairSecond<Eats>(pears);
-        bob.AddPair<Eats, People>();
+        bob.AddSecond<Eats>(apples);
+        bob.AddSecond<Eats>(pears);
+        bob.Add<Eats, People>();
 
         // Pairs can also be constructed from two entity ids
-        bob.AddPair(grows, pears);
+        bob.Add(grows, pears);
 
-        Console.WriteLine("bob has (Grows, Pears) (dynamic): " + bob.HasPair(grows, pears));
-        Console.WriteLine("bob has (Pears, Grows) (dynamic): " + bob.HasPair(pears, grows));
+        Console.WriteLine("bob has (Grows, Pears) (dynamic): " + bob.Has(grows, pears));
+        Console.WriteLine("bob has (Pears, Grows) (dynamic): " + bob.Has(pears, grows));
 
-        Console.WriteLine("bob has (Eats, Apples) (dynamic): " + bob.HasPairFirst<Eats>(apples));
-        Console.WriteLine("bob has (Apples, Eats) (dynamic): " + bob.HasPairSecond<Eats>(apples));
+        Console.WriteLine("bob has (Eats, Apples) (dynamic): " + bob.Has<Eats>(apples));
+        Console.WriteLine("bob has (Apples, Eats) (dynamic): " + bob.HasSecond<Eats>(apples));
 
-        Console.WriteLine("bob has (Eats, People): " + bob.HasPair<Eats, People>());
-        Console.WriteLine("bob has (People, Eats): " + bob.HasPair<People, Eats>());
+        Console.WriteLine("bob has (Eats, People): " + bob.Has<Eats, People>());
+        Console.WriteLine("bob has (People, Eats): " + bob.Has<People, Eats>());
 
 
         Console.WriteLine("\n");

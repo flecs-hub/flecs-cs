@@ -39,15 +39,15 @@ internal static class Program
 
         var entity = world.CreateEntity("Entity");
 
-        Console.WriteLine("entity.AddComponent<String>()");
-        entity.AddComponent<String>();
+        Console.WriteLine("entity.Add<String>()");
+        entity.Add<String>();
         
         Console.WriteLine("entity.SetComponent<String>()(\"Hello World\")");
-        entity.SetComponent(new String { Value = "Hello World" });
+        entity.Set(new String { Value = "Hello World" });
         
         Console.WriteLine("entity.AddTag<Tag>()");
         // This operation changes the entity's archetype, which invokes a move
-        entity.AddTag<Tag>();
+        entity.Add<Tag>();
         
         Console.WriteLine("entity.Delete()");
         entity.Delete();

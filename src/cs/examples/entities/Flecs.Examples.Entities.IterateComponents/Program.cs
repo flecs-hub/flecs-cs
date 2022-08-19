@@ -48,10 +48,10 @@ internal static class Program
         // Create an entity which all of the above
         var bob = world.CreateEntity("bob");
         
-        bob.SetComponent(new Position { X = 10, Y = 20 });
-        bob.SetComponent(new Velocity { X = 1, Y = 1 });
-        bob.AddTag<Human>();
-        bob.AddPair<Eats, Apples>();
+        bob.Set(new Position { X = 10, Y = 20 });
+        bob.Set(new Velocity { X = 1, Y = 1 });
+        bob.Add<Human>();
+        bob.Add<Eats, Apples>();
 
         // Iterate & components of Bob
         Console.WriteLine("Bob's components:");
@@ -59,7 +59,7 @@ internal static class Program
 
         // We can use the same function to iterate the components of a component
         Console.WriteLine("Position's components:");
-        IterateComponents(Entity.FromIdentifier(world.GetComponentIdentifier<Position>()));
+        IterateComponents(Entity.FromIdentifier(world.GetIdentifier<Position>()));
 
         return world.Fini();
     }

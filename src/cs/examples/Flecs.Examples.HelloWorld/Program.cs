@@ -68,9 +68,9 @@ internal static class Program
 
         // Create an entity with name Bob, add Position and food preference
         var bob = world.CreateEntity("Bob");
-        bob.SetComponent(new Position { X = 0, Y = 0 });
-        bob.SetComponent(new Velocity { X = 2, Y = 2 });
-        bob.AddPair<Eats, Apples>();
+        bob.Set(new Position { X = 0, Y = 0 });
+        bob.Set(new Velocity { X = 2, Y = 2 });
+        bob.Add<Eats, Apples>();
 
         // Run systems twice. Usually this function is called once per frame
         world.Progress(0);

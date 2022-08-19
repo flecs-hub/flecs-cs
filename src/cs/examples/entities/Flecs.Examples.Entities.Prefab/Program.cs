@@ -63,34 +63,34 @@ internal static class Program
         // Create a prefab hierarchy. Prefabs are entities that by default are
         // ignored by queries.
         var spaceShip = world.CreatePrefab("SpaceShip");
-        spaceShip.SetComponent(new ImpulseSpeed { Value = 50 });
-        spaceShip.SetComponent(new Defense { Value = 50 });
+        spaceShip.Set(new ImpulseSpeed { Value = 50 });
+        spaceShip.Set(new Defense { Value = 50 });
         //setting as overridable, every ship instance can be damaged individually
-        spaceShip.SetPairSecondCompOverride(hull, new Amount() { Max = 200, Current = 200});
-        spaceShip.SetPairSecondCompOverride(shield, new Amount() { Max = 200, Current = 200 });
+        spaceShip.SetOverride(hull, new Amount() { Max = 200, Current = 200});
+        spaceShip.SetOverride(shield, new Amount() { Max = 200, Current = 200 });
 
         // By default components in an inheritance hierarchy are shared between
         // entities. The override function ensures that instances have a private
         // copy of the component.
-        spaceShip.SetComponentOverride(new Position { X = 0, Y = 0 });
+        spaceShip.SetOverride(new Position { X = 0, Y = 0 });
 
         var freighter = world.CreatePrefab("Freighter");
         // This ensures the entity inherits all components from spaceship.
         freighter.IsA(spaceShip);
-        freighter.SetComponent(new FreightCapacity { Value = 100 });
-        freighter.SetComponent(new Defense { Value = 50 });
+        freighter.Set(new FreightCapacity { Value = 100 });
+        freighter.Set(new Defense { Value = 50 });
 
         var mammothFreighter = world.CreatePrefab("MammothFreighter");
         mammothFreighter.IsA(freighter);
-        mammothFreighter.SetComponent(new FreightCapacity { Value = 500 });
-        mammothFreighter.SetComponent(new Defense { Value = 300 });
+        mammothFreighter.Set(new FreightCapacity { Value = 500 });
+        mammothFreighter.Set(new Defense { Value = 300 });
 
         var frigate = world.CreatePrefab("Frigate");
         // This ensures the entity inherits all components from spaceship.
         frigate.IsA(spaceShip);
-        frigate.SetComponent(new Attack { Value = 100 });
-        frigate.SetComponent(new Defense { Value = 75 });
-        frigate.SetComponent(new ImpulseSpeed { Value = 125 });
+        frigate.Set(new Attack { Value = 100 });
+        frigate.Set(new Defense { Value = 75 });
+        frigate.Set(new ImpulseSpeed { Value = 125 });
 
         // Create an entity from a prefab.
         // The instance will have a private copy of the Position component, because
@@ -111,11 +111,11 @@ internal static class Program
         var impulseSpeed = freighter1.GetComponent<ImpulseSpeed>();
         Console.WriteLine("Impulse speed: " + impulseSpeed.Value);
 
-        ref var freighter1Hull = ref freighter1.GetPairSecondComp<Amount>(hull);
+        ref var freighter1Hull = ref freighter1.GetSecond<Amount>(hull);
         freighter1Hull.Current -= 100;
 
-        Console.WriteLine($"Freigher 1 hull: {freighter1.GetPairSecondComp<Amount>(hull).Current}");
-        Console.WriteLine($"Freigher 2 hull: {freighter2.GetPairSecondComp<Amount>(hull).Current}");
+        Console.WriteLine($"Freigher 1 hull: {freighter1.GetSecond<Amount>(hull).Current}");
+        Console.WriteLine($"Freigher 2 hull: {freighter2.GetSecond<Amount>(hull).Current}");
 
         return world.Fini();
     }
