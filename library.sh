@@ -14,4 +14,6 @@ $SCRIPTS_DIRECTORY/c/library/main.sh \
     "" \
     "" \
 	
-read
+if [[ -z "$1" ]]; then
+    read
+fi
