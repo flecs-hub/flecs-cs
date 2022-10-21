@@ -20,17 +20,26 @@ public class ReaderCCode : IReaderCCode
         options.InputHeaderFilePath =
             "../src/c/production/flecs/include/flecs_pinvoke.h";
         options.UserIncludeDirectories = new[] { "../ext/flecs/include" }.ToImmutableArray();
-
-        if (Native.OperatingSystem == NativeOperatingSystem.macOS)
-        {
-            var platform = new Dictionary<TargetPlatform, ReaderCCodeOptionsPlatform>();
-       
-            platform.Add(TargetPlatform.aarch64_apple_darwin, new ReaderCCodeOptionsPlatform());
-            // platform.Add(TargetPlatform.x86_64_apple_darwin, new ReaderCCodeOptionsPlatform());
-            options.Platforms = platform.ToImmutableDictionary();
-        }
-
         options.OutputAbstractSyntaxTreesFileDirectory =
             "./ast";
+
+        var platforms = new Dictionary<TargetPlatform, ReaderCCodeOptionsPlatform>();
+        if (Native.OperatingSystem == NativeOperatingSystem.macOS)
+        {
+            platforms.Add(TargetPlatform.aarch64_apple_darwin, new ReaderCCodeOptionsPlatform());
+            platforms.Add(TargetPlatform.x86_64_apple_darwin, new ReaderCCodeOptionsPlatform());
+        }
+        else if (Native.OperatingSystem == NativeOperatingSystem.Windows)
+        {
+            platforms.Add(TargetPlatform.aarch64_pc_windows_msvc, new ReaderCCodeOptionsPlatform());
+            platforms.Add(TargetPlatform.x86_64_pc_windows_msvc, new ReaderCCodeOptionsPlatform());
+        }
+        else if (Native.OperatingSystem == NativeOperatingSystem.Linux)
+        {
+            platforms.Add(TargetPlatform.aarch64_unknown_linux_gnu, new ReaderCCodeOptionsPlatform());
+            platforms.Add(TargetPlatform.x86_64_unknown_linux_gnu, new ReaderCCodeOptionsPlatform());
+        }
+        
+        options.Platforms = platforms.ToImmutableDictionary();
     }
 }
