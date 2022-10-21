@@ -88,7 +88,7 @@ jobs:
 
       - name: "Generate C# code"
         shell: bash
-        run: cd ./bindgen && ./write_csharp_code.sh"
+        run: cd ./bindgen && ./write_csharp_code.sh
 
       - name: "Upload generated C# code"
         uses: actions/upload-artifact@v2
