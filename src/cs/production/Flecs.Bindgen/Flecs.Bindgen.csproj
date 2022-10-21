@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="bottlenoselabs.C2CS.Plugin" Version="0.0.0-pre">
+        <PackageReference Include="bottlenoselabs.C2CS.Plugin">
             <Private>false</Private>
             <ExcludeAssets>runtime</ExcludeAssets>
         </PackageReference>
