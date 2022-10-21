@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems", "Systems", "{3606
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Systems.CustomPhase", "src\cs\examples\systems\Flecs.Examples.Systems.CustomPhase\Flecs.Examples.Systems.CustomPhase.csproj", "{81CFEB14-4C31-4CEF-BE4B-B281EC42D060}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs.Bindgen", "src\cs\production\Flecs.Bindgen\Flecs.Bindgen.csproj", "{77B989F1-D8C3-4358-BAAC-C005A0C4BE3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{81CFEB14-4C31-4CEF-BE4B-B281EC42D060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81CFEB14-4C31-4CEF-BE4B-B281EC42D060}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81CFEB14-4C31-4CEF-BE4B-B281EC42D060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77B989F1-D8C3-4358-BAAC-C005A0C4BE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B989F1-D8C3-4358-BAAC-C005A0C4BE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B989F1-D8C3-4358-BAAC-C005A0C4BE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B989F1-D8C3-4358-BAAC-C005A0C4BE3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +117,7 @@ Global
 		{B8C4D7B7-45C4-46A8-8C7E-03C36F5949B2} = {3DA02832-2DA5-49CC-929D-6DB290DA28EC}
 		{36062DD2-C7DC-4074-B1EC-218636DD4B76} = {9E1476CE-E22E-44FD-ABC4-93625DDBBA99}
 		{81CFEB14-4C31-4CEF-BE4B-B281EC42D060} = {36062DD2-C7DC-4074-B1EC-218636DD4B76}
+		{77B989F1-D8C3-4358-BAAC-C005A0C4BE3B} = {39423871-7923-4AFB-A756-35E17FCBA274}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4B6B4B9-1CB6-414C-BF33-521394D6CD71}

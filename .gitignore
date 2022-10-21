@@ -17,6 +17,7 @@ obj/
 
 # C2CS
 /bindgen/ast/
+/bindgen/plugins
 
 # macOS
 .DS_store
