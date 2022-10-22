@@ -4,6 +4,8 @@ using static flecs_hub.flecs;
 
 namespace Flecs.Examples.Systems.CustomPhase;
 
+#pragma warning disable CS0649
+
 internal static class Program
 {
     internal struct Position : IComponent

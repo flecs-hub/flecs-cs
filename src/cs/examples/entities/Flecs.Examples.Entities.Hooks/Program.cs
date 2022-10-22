@@ -43,7 +43,7 @@ internal static class Program
         entity.Add<String>();
         
         Console.WriteLine("entity.SetComponent<String>()(\"Hello World\")");
-        entity.Set(new String { Value = "Hello World" });
+        entity.Set(new String { Value = (flecs.Runtime.CString)"Hello World" });
         
         Console.WriteLine("entity.AddTag<Tag>()");
         // This operation changes the entity's archetype, which invokes a move
@@ -78,9 +78,8 @@ internal static class Program
         ref var source = ref context.GetSource<String>();
         ref var destination = ref context.GetDestination<String>();
         var value = source.Value.ToString();
-        flecs.Runtime.CStrings.FreeCString(source.Value);
         source.Value = default;
-        destination.Value = value;
+        destination.Value = (flecs.Runtime.CString)value;
     }
 
     // The move hook should move resources from one location to another.

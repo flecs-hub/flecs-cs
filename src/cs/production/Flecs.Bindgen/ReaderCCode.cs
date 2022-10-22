@@ -23,23 +23,50 @@ public class ReaderCCode : IReaderCCode
         options.OutputAbstractSyntaxTreesFileDirectory =
             "./ast";
 
+        ConfigurePlatforms(options);
+    }
+
+    private static void ConfigurePlatforms(ReaderCCodeOptions options)
+    {
         var platforms = new Dictionary<TargetPlatform, ReaderCCodeOptionsPlatform>();
-        if (Native.OperatingSystem == NativeOperatingSystem.macOS)
+
+        var hostOperatingSystem = Native.OperatingSystem;
+        switch (hostOperatingSystem)
         {
-            platforms.Add(TargetPlatform.aarch64_apple_darwin, new ReaderCCodeOptionsPlatform());
-            platforms.Add(TargetPlatform.x86_64_apple_darwin, new ReaderCCodeOptionsPlatform());
+            case NativeOperatingSystem.Windows:
+                ConfigureHostOsWindows(options, platforms);
+                break;
+            case NativeOperatingSystem.macOS:
+                ConfigureHostOsMac(options, platforms);
+                break;
+            case NativeOperatingSystem.Linux:
+                ConfigureHostOsLinux(options, platforms);
+                break;
+            default:
+                throw new NotImplementedException();
         }
-        else if (Native.OperatingSystem == NativeOperatingSystem.Windows)
-        {
-            platforms.Add(TargetPlatform.aarch64_pc_windows_msvc, new ReaderCCodeOptionsPlatform());
-            platforms.Add(TargetPlatform.x86_64_pc_windows_msvc, new ReaderCCodeOptionsPlatform());
-        }
-        else if (Native.OperatingSystem == NativeOperatingSystem.Linux)
-        {
-            platforms.Add(TargetPlatform.aarch64_unknown_linux_gnu, new ReaderCCodeOptionsPlatform());
-            platforms.Add(TargetPlatform.x86_64_unknown_linux_gnu, new ReaderCCodeOptionsPlatform());
-        }
-        
+
         options.Platforms = platforms.ToImmutableDictionary();
+    }
+
+    private static void ConfigureHostOsWindows(ReaderCCodeOptions options,
+        Dictionary<TargetPlatform, ReaderCCodeOptionsPlatform> platforms)
+    {
+        platforms.Add(TargetPlatform.aarch64_pc_windows_msvc, new ReaderCCodeOptionsPlatform());
+        platforms.Add(TargetPlatform.x86_64_pc_windows_msvc, new ReaderCCodeOptionsPlatform());
+    }
+
+    private static void ConfigureHostOsMac(ReaderCCodeOptions options,
+        Dictionary<TargetPlatform, ReaderCCodeOptionsPlatform> platforms)
+    {
+        platforms.Add(TargetPlatform.aarch64_apple_darwin, new ReaderCCodeOptionsPlatform());
+        platforms.Add(TargetPlatform.x86_64_apple_darwin, new ReaderCCodeOptionsPlatform());
+    }
+    
+    private static void ConfigureHostOsLinux(ReaderCCodeOptions options,
+        Dictionary<TargetPlatform, ReaderCCodeOptionsPlatform> platforms)
+    {
+        platforms.Add(TargetPlatform.aarch64_unknown_linux_gnu, new ReaderCCodeOptionsPlatform());
+        platforms.Add(TargetPlatform.x86_64_unknown_linux_gnu, new ReaderCCodeOptionsPlatform());
     }
 }

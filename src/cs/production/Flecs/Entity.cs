@@ -377,7 +377,7 @@ public readonly unsafe struct Entity
 
     public string FullPathString()
     {
-        var cString = ecs_get_path_w_sep(_world.Handle, default, _handle, ".", default);
+        var cString = ecs_get_path_w_sep(_world.Handle, default, _handle, (Runtime.CString)".", default);
         var result = Marshal.PtrToStringAnsi(cString._pointer)!;
         Marshal.FreeHGlobal(cString._pointer);
         return result;
