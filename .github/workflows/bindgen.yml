@@ -35,11 +35,7 @@ jobs:
 
       - name: "Read C code: Linux dependencies"
         if: runner.os == 'Linux'
-        run: sudo apt-get install libclang1-14 gcc-aarch64-linux-gnu
-
-      - name: "Find Clang"
-        if: runner.os == 'Linux'
-        run: find / -name libclang.so* 2>/dev/null
+        run: sudo apt-get install gcc-aarch64-linux-gnu
 
       - name: "Read C code"
         shell: bash
