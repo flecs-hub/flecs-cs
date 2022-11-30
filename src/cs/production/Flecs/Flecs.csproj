@@ -4,12 +4,13 @@
     <PropertyGroup>
         <_IsEnabledSourceCode>false</_IsEnabledSourceCode>
         <AssemblyName>Flecs-cs</AssemblyName>
+        <NoWarn>$(NoWarn);CS8981</NoWarn>
     </PropertyGroup>
     <Import Project="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../../../flecs.props'))" />
     
     <!-- MSBuild settings -->
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <ImplicitUsings>false</ImplicitUsings>
         <Nullable>enable</Nullable>

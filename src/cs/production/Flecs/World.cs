@@ -141,7 +141,7 @@ public unsafe class World
         CallbackIterator callback, string? name = null)
     {
         ecs_system_desc_t desc = default;
-        desc.query.filter.name = (Runtime.CString)(name ?? callback.Method.Name);
+        // desc.query.filter.name = (Runtime.CString)(name ?? callback.Method.Name);
         var phase = EcsOnUpdate;
         FillSystemDescriptorCommon(ref desc, callback, phase._handle, name);
 
