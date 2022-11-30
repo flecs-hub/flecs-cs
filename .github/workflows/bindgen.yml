@@ -35,7 +35,7 @@ jobs:
 
       - name: "Read C code: Linux dependencies"
         if: runner.os == 'Linux'
-        run: sudo apt-get install gcc-aarch64-linux-gnu
+        run: sudo apt-get install clang gcc-aarch64-linux-gnu
 
       - name: "Read C code"
         shell: bash
