@@ -13,7 +13,7 @@ Automatically updated C# bindings for https://github.com/SanderMertens/flecs wit
 
 ### Generate binding / wrapper C# code from `flecs.h` C header file (automatically done by GitHub actions)
 
-1. Download and install [.NET 6](https://dotnet.microsoft.com/download).
+1. Download and install [.NET 7](https://dotnet.microsoft.com/download).
 2. Fork the repository using GitHub or clone the repository manually with submodules: `git clone --recurse-submodules https://github.com/flecs-hub/flecs-cs`.
 3. Install the lastest version of C2CS tool: `dotnet tool install -g bottlenoselabs.C2CS.Tool`
 3. Use C2CS to extract the abstract syntax trees for either Windows, macOS, or Linux: `cd ./bindgen && c2cs`. It's recommended that you do this once on a Windows machine with C/C++ SDK, once on a macOS machine with XCode / CommandLineTools, and once on a Linux machine with dev tools. For more information on why and how this works see https://github.com/lithiumtoast/c2cs.
