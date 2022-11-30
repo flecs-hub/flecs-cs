@@ -16,7 +16,7 @@ Automatically updated C# bindings for https://github.com/SanderMertens/flecs wit
 1. Download and install [.NET 7](https://dotnet.microsoft.com/download).
 2. Fork the repository using GitHub or clone the repository manually with submodules: `git clone --recurse-submodules https://github.com/flecs-hub/flecs-cs`.
 3. Install the lastest version of C2CS tool: `dotnet tool install -g bottlenoselabs.C2CS.Tool`
-3. Use C2CS to extract the abstract syntax trees for either Windows, macOS, or Linux: `cd ./bindgen && c2cs`. It's recommended that you do this once on a Windows machine with C/C++ SDK, once on a macOS machine with XCode / CommandLineTools, and once on a Linux machine with dev tools. For more information on why and how this works see https://github.com/lithiumtoast/c2cs.
+3. Use C2CS to extract the abstract syntax trees for either Windows, macOS, or Linux: `cd ./bindgen && read_c_code.sh`. It's recommended that you do this once on a Windows machine with C/C++ SDK, once on a macOS machine with XCode / CommandLineTools, and once on a Linux machine with dev tools. For more information on why and how this works see https://github.com/lithiumtoast/c2cs.
 4. Move the resulting abstract syntax trees `.json` files from the previous step in the `./bindgen/ast/` directory across machines onto a single machine (any OS). 
 5. Use C2CS to generate the C# code from the abstract syntax trees: `cd ./bindgen && write_csharp_code.sh`. If all is well you should now have an updated `./src/cs/production/Flecs/flecs.cs` file.
 
