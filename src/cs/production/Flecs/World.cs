@@ -86,6 +86,10 @@ public unsafe class World
         CheckStructLayout(structLayoutAttribute);
         var structSize = Unsafe.SizeOf<TComponent>();
         var structAlignment = structLayoutAttribute!.Pack;
+        if (structAlignment == 0)
+        {
+            structAlignment = 1;
+        }
 
         ecs_entity_desc_t entityDesc = default;
         entityDesc.name = componentNameC;
@@ -141,7 +145,7 @@ public unsafe class World
         CallbackIterator callback, string? name = null)
     {
         ecs_system_desc_t desc = default;
-        desc.query.filter.name = (Runtime.CString)(name ?? callback.Method.Name);
+        // desc.query.filter.name = (Runtime.CString)(name ?? callback.Method.Name);
         var phase = EcsOnUpdate;
         FillSystemDescriptorCommon(ref desc, callback, phase._handle, name);
 

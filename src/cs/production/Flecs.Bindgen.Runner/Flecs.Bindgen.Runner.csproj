@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="bottlenoselabs.C2CS.Plugin" Version="4.0.5" />
+      <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
+    </ItemGroup>
+
+</Project>
