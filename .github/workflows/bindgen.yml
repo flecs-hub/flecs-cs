@@ -33,13 +33,13 @@ jobs:
         shell: bash
         run: dotnet tool install --global bottlenoselabs.C2CS.Tool
 
-      - name: "Find Clang"
-        if: runner.os == 'Linux'
-        run: find / -name libclang.so
-
       - name: "Read C code: Linux dependencies"
         if: runner.os == 'Linux'
-        run: sudo apt-get install clang gcc-aarch64-linux-gnu
+        run: sudo apt-get install libclang1-14 gcc-aarch64-linux-gnu
+
+      - name: "Find Clang"
+        if: runner.os == 'Linux'
+        run: find / -name libclang.so 2>/dev/null
 
       - name: "Read C code"
         shell: bash
