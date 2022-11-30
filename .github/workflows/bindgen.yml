@@ -39,7 +39,7 @@ jobs:
 
       - name: "Find Clang"
         if: runner.os == 'Linux'
-        run: find / -name libclang.so 2>/dev/null
+        run: find / -name libclang.so* 2>/dev/null
 
       - name: "Read C code"
         shell: bash
