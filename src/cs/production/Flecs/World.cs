@@ -86,6 +86,10 @@ public unsafe class World
         CheckStructLayout(structLayoutAttribute);
         var structSize = Unsafe.SizeOf<TComponent>();
         var structAlignment = structLayoutAttribute!.Pack;
+        if (structAlignment == 0)
+        {
+            structAlignment = 1;
+        }
 
         ecs_entity_desc_t entityDesc = default;
         entityDesc.name = componentNameC;
