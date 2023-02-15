@@ -76,13 +76,13 @@ public unsafe struct ComponentHooks
 
     internal static void Fill(World world, ref ComponentHooks hooks, ecs_type_hooks_t* desc)
     {
-        desc->ctor.Data.Pointer = &CallbackConstructor;
-        desc->dtor.Data.Pointer = &CallbackDeconstructor;
-        desc->copy.Data.Pointer = &CallbackCopy;
-        desc->move.Data.Pointer = &CallbackMove;
-        desc->on_add.Data.Pointer = &CallbackOnAdd;
-        desc->on_set.Data.Pointer = &CallbackOnSet;
-        desc->on_remove.Data.Pointer = &CallbackOnRemove;
+        desc->ctor.Pointer = &CallbackConstructor;
+        desc->dtor.Pointer = &CallbackDeconstructor;
+        desc->copy.Pointer = &CallbackCopy;
+        desc->move.Pointer = &CallbackMove;
+        desc->on_add.Pointer = &CallbackOnAdd;
+        desc->on_set.Pointer = &CallbackOnSet;
+        desc->on_remove.Pointer = &CallbackOnRemove;
         desc->binding_ctx = (void*)CallbacksHelper.CreateComponentHooksCallbackContext(world, hooks);
     }
 }
