@@ -1,7 +1,7 @@
 {
-  "inputFilePath": "..\\src\\c\\production\\flecs\\include\\flecs_pinvoke.h",
+  "inputFilePath": "../src/c/production/flecs/include/flecs_pinvoke.h",
   "userIncludeDirectories": [
-    "..\\..\\..\\..\\src\\c\\production\\ffi_helper/include"
+    "../ext/flecs/include"
     ],
   "platforms": {
     "x86_64-pc-windows-msvc": {},
