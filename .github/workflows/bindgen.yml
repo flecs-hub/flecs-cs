@@ -13,9 +13,9 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - { name: Windows, os: windows-latest, rid: win, confi_filename: config-windows.json }
-          - { name: macOS, os: macos-latest, rid: osx, cconfi_filename: config-macos.json }
-          - { name: Linux, os: ubuntu-latest, rid: linux, confi_filename: config-linux.json }
+          - { name: Windows, os: windows-latest, rid: win, config_filename: config-windows.json }
+          - { name: macOS, os: macos-latest, rid: osx, config_filename: config-macos.json }
+          - { name: Linux, os: ubuntu-latest, rid: linux, config_filename: config-linux.json }
 
     steps:
       - name: "Clone Git repository"
