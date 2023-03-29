@@ -86,7 +86,7 @@ jobs:
 
       - name: "Read C code: generate cross-platform AST"
         shell: bash
-        run: cd ./bindgen && castaffi merge --inputDirectoryPath "./ast" --outputFilePath "./ast-cross-platform.json"
+        run: cd ./bindgen && castffi merge --inputDirectoryPath "./ast" --outputFilePath "./ast-cross-platform.json"
 
       - name: "Upload cross-platform AST"
         uses: actions/upload-artifact@v2
