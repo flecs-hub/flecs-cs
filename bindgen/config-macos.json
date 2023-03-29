@@ -1,0 +1,10 @@
+{
+  "inputFilePath": "../src/c/production/flecs/include/flecs_pinvoke.h",
+  "userIncludeDirectories": [
+    "../ext/flecs/include"
+    ],
+  "platforms": {
+    "aarch64-apple-darwin": {},
+    "x86_64-apple-darwin": {}
+  }
+}

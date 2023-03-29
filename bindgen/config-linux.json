@@ -1,0 +1,10 @@
+{
+  "inputFilePath": "../src/c/production/flecs/include/flecs_pinvoke.h",
+  "userIncludeDirectories": [
+    "../ext/flecs/include"
+    ],
+  "platforms": {
+    "x86_64-unknown-linux-gnu": {},
+    "aarch64-unknown-linux-gnu": {}
+  }
+}
