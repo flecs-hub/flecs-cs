@@ -38,7 +38,7 @@ jobs:
 
       - name: "Read C code: extract ${{ matrix.platform.rid }}"
         shell: bash
-        run: cd ./bindgen && castffi extract --config ./${{ matrix.platform.config_filename }}
+        run: cd ./bindgen && castffi extract --config "./${{ matrix.platform.config_filename }}"
 
       - name: "Upload C code platform abstract syntax trees"
         uses: actions/upload-artifact@v2
