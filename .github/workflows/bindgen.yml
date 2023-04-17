@@ -48,7 +48,7 @@ jobs:
 
   bindgen-cross-platform-ast-job:
     name: "Bindgen AST cross-platform"
-    needs: [bindgen-ast-job]
+    needs: [bindgen-platform-ast-job]
     runs-on: ubuntu-latest
 
     steps:
