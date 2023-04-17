@@ -16,13 +16,13 @@ jobs:
       - name: "Clone Git repository"
         uses: actions/checkout@v2 
         with:
-          submodules: 'true'
+          submodules: 'false'
 
       - name: "Download changes to commit"
         uses: actions/download-artifact@v1
         with:
           name: "bindgen-cs"
-          path: "./src/cs/production/Flecs/"
+          path: "./src/cs/production/Flecs"
 
       - name: "Add + commit + push (if necessary)"
         uses: EndBug/add-and-commit@v7
