@@ -5,8 +5,8 @@ on:
 
 jobs:
 
-  bindgen-ast-job:
-    name: "Bindgen AST target-platform"
+  bindgen-platform-ast-job:
+    name: "Bindgen AST platform"
     runs-on: ${{ matrix.platform.os }}
     if: github.actor == 'dependabot[bot]' || github.actor == 'lithiumtoast' || github.actor == 'BlackPhoenix134'
     strategy:
@@ -46,7 +46,7 @@ jobs:
           name: "ast-${{ matrix.platform.rid }}"
           path: "./bindgen/ast"
 
-  bindgen-cs-job:
+  bindgen-cross-platform-ast-job:
     name: "Bindgen AST cross-platform"
     needs: [bindgen-ast-job]
     runs-on: ubuntu-latest
@@ -57,19 +57,19 @@ jobs:
         with:
           submodules: 'false'
 
-      - name: "Download C code platform abstrast syntax trees (win)"
+      - name: "Download C code platform abstract syntax trees (win)"
         uses: actions/download-artifact@v1
         with:
           name: "ast-win"
           path: "./bindgen/ast"
 
-      - name: "Download C code platform abstrast syntax trees (osx)"
+      - name: "Download C code platform abstract syntax trees (osx)"
         uses: actions/download-artifact@v1
         with:
           name: "ast-osx"
           path: "./bindgen/ast"
 
-      - name: "Download C code platform abstrast syntax trees (linux)"
+      - name: "Download C code platform abstract syntax trees (linux)"
         uses: actions/download-artifact@v1
         with:
           name: "ast-linux"
@@ -91,11 +91,41 @@ jobs:
       - name: "Upload cross-platform AST"
         uses: actions/upload-artifact@v2
         with:
-          name: "bindgen-cs"
+          name: "ast-cross-platform"
           path: "./bindgen/ast-cross-platform.json"
 
-      # - name: "Upload generated C# code"
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: "bindgen-cs"
-      #     path: "./src/cs/production/Flecs/flecs.cs"
+  bindgen-cs-job:
+    name: "Bindgen C#"
+    needs: [bindgen-cross-platform-ast-job]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Clone Git repository"
+        uses: actions/checkout@v2
+        with:
+          submodules: 'false'
+
+      - name: "Download C code cross-platform abstract syntax tree"
+        uses: actions/download-artifact@v1
+        with:
+          name: "ast-cross-platform"
+          path: "./bindgen/ast"
+
+      - name: "Install .NET"
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.x'
+
+      - name: "Install C2CS"
+        shell: bash
+        run: dotnet tool install --global bottlenoselabs.C2CS.Tool
+
+      - name: "Generate C# code"
+        shell: bash
+        run: cd ./bindgen && c2cs --config "./config-cs.json"
+
+      - name: "Upload generated C# code"
+        uses: actions/upload-artifact@v2
+        with:
+          name: "bindgen-cs"
+          path: "./src/cs/production/Flecs/flecs.cs"

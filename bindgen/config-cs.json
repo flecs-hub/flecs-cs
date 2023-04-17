@@ -1,0 +1,7 @@
+{
+    "inputFilePath": "./ast-cross-platform.json",
+    "outputFilePath": "./../src/cs/production/flecs.cs",
+    "namespaceName": "flecs_hub",
+    "className": "flecs"
+  }
+  
