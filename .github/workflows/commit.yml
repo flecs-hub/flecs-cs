@@ -19,10 +19,14 @@ jobs:
           submodules: 'false'
 
       - name: "Download changes to commit"
-        uses: actions/download-artifact@v1
+        id: download
+        uses: actions/download-artifact@v3
         with:
           name: "bindgen-cs"
           path: "./src/cs/production/Flecs"
+
+      - name: "Echo download path"
+        run: echo ${{steps.download.outputs.download-path}}
 
       - name: "Add + commit + push (if necessary)"
         uses: EndBug/add-and-commit@v7
