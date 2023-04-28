@@ -84,7 +84,7 @@ jobs:
         shell: bash
         run: dotnet tool install --global bottlenoselabs.CAstFfi.Tool
 
-      - name: "Read C code: generate cross-platform AST"
+      - name: "Generate cross-platform AST"
         shell: bash
         run: cd ./bindgen && castffi merge --inputDirectoryPath "./ast" --outputFilePath "./ast-cross-platform.json"
 
