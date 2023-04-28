@@ -34,7 +34,7 @@ jobs:
 
       - name: "Read C code: Linux dependencies"
         if: runner.os == 'Linux'
-        run: sudo apt-get install gcc-aarch64-linux-gnu libc6-dev-arm64-cross
+        run: sudo apt-get install gcc-aarch64-linux-gnu
 
       - name: "Read C code: extract ${{ matrix.platform.rid }}"
         shell: bash

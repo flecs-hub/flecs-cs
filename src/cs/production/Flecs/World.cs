@@ -163,7 +163,7 @@ public unsafe class World
         entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn._handle, phase) : default;
         entityDesc.add[1] = phase;
         systemDesc.entity = ecs_entity_init(Handle, &entityDesc);
-        systemDesc.callback.Pointer = &SystemCallback;
+        systemDesc.callback.Data.Pointer = &SystemCallback;
         systemDesc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
     }
 
