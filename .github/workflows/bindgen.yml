@@ -13,9 +13,9 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - { name: Windows, os: windows-latest, rid: win, config_filename: config-extract-windows.json }
-          - { name: macOS, os: macos-latest, rid: osx, config_filename: config-extract-macos.json }
-          - { name: Linux, os: ubuntu-latest, rid: linux, config_filename: config-extract-linux.json }
+          - { name: Windows, os: windows-latest, rid: win }
+          - { name: macOS, os: macos-latest, rid: osx }
+          - { name: Linux, os: ubuntu-latest, rid: linux }
 
     steps:
       - name: "Clone Git repository"
@@ -33,7 +33,7 @@ jobs:
 
       - name: "Read C code: extract ${{ matrix.platform.rid }}"
         shell: bash
-        run: cd ./bindgen && castffi extract --config "./${{ matrix.platform.config_filename }}"
+        run: cd ./bindgen && ./extract.sh
 
       - name: "Upload C code platform abstract syntax trees"
         uses: actions/upload-artifact@v2
@@ -76,7 +76,7 @@ jobs:
 
       - name: "Generate cross-platform AST"
         shell: bash
-        run: cd ./bindgen && castffi merge --inputDirectoryPath "./ast" --outputFilePath "./ast-cross-platform.json"
+        run: cd ./bindgen && ./merge.sh
 
       - name: "Upload cross-platform AST"
         uses: actions/upload-artifact@v2
@@ -107,7 +107,7 @@ jobs:
 
       - name: "Generate C# code"
         shell: bash
-        run: cd ./bindgen && c2cs generate --config "./config-generate-cs.json"
+        run: cd ./bindgen && ./generate.sh
 
       - name: "Upload generated C# code"
         uses: actions/upload-artifact@v2
