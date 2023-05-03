@@ -1,0 +1,5 @@
+{
+  "cMakeDirectoryPath": "../src/c/production/flecs",
+  "outputDirectoryPath": "../lib",
+  "deleteBuildFiles": true
+}
