@@ -107,7 +107,7 @@ jobs:
 
       - name: "Generate C# code"
         shell: bash
-        run: cd ./bindgen && c2cs --config "./config-generate-cs.json"
+        run: cd ./bindgen && c2cs generate --config "./config-generate-cs.json"
 
       - name: "Upload generated C# code"
         uses: actions/upload-artifact@v2
