@@ -13,20 +13,15 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - { name: Windows, os: windows-latest, rid: win, config_filename: config-windows.json }
-          - { name: macOS, os: macos-latest, rid: osx, config_filename: config-macos.json }
-          - { name: Linux, os: ubuntu-latest, rid: linux, config_filename: config-linux.json }
+          - { name: Windows, os: windows-latest, rid: win, config_filename: config-extract-windows.json }
+          - { name: macOS, os: macos-latest, rid: osx, config_filename: config-extract-macos.json }
+          - { name: Linux, os: ubuntu-latest, rid: linux, config_filename: config-extract-linux.json }
 
     steps:
       - name: "Clone Git repository"
         uses: actions/checkout@v2
         with:
           submodules: 'true'
-
-      - name: "Install .NET"
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '7.0.x'
 
       - name: "Install CAstFfi"
         shell: bash
@@ -75,11 +70,6 @@ jobs:
           name: "ast-linux"
           path: "./bindgen/ast"
 
-      - name: "Install .NET"
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '7.0.x'
-
       - name: "Install CAstFfi"
         shell: bash
         run: dotnet tool install --global bottlenoselabs.CAstFfi.Tool
@@ -111,18 +101,13 @@ jobs:
           name: "ast-cross-platform"
           path: "./bindgen"
 
-      - name: "Install .NET"
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '7.0.x'
-
       - name: "Install C2CS"
         shell: bash
         run: dotnet tool install --global bottlenoselabs.C2CS.Tool
 
       - name: "Generate C# code"
         shell: bash
-        run: cd ./bindgen && c2cs --config "./config-cs.json"
+        run: cd ./bindgen && c2cs --config "./config-generate-cs.json"
 
       - name: "Upload generated C# code"
         uses: actions/upload-artifact@v2
