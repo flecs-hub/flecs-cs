@@ -6,7 +6,7 @@ if ! [[ -x "$(command -v c2cs)" ]]; then
   exit 1
 fi
 
-c2cs library --config "./bindgen/config-build-c-library.json"
+c2cs library --config "$DIRECTORY/bindgen/config-build-c-library.json"
 	
 if [[ -z "$1" ]]; then
     read

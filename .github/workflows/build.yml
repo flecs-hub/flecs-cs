@@ -36,6 +36,10 @@ jobs:
           path: "./lib"
           key: "libs-${{ matrix.platform.rid }}-${{ hashFiles('ext/flecs/**/*') }}-${{ hashFiles('src/c/**/*') }}"
 
+      - name: "Install C2CS"
+        shell: bash
+        run: dotnet tool install --global bottlenoselabs.C2CS.Tool
+
       - name: "Build native libraries"
         if: steps.cache-libs.outputs.cache-hit != 'true'
         shell: bash
