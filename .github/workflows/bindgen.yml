@@ -82,7 +82,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: "ast-cross-platform"
-          path: "./bindgen/ast-cross-platform.json"
+          path: "./bidngen/x-ast/ast-cross-platform.json"
 
   bindgen-cs-job:
     name: "Bindgen C#"
