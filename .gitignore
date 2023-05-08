@@ -17,8 +17,7 @@ obj/
 
 # C2CS
 /bindgen/ast/
-/bindgen/cross-platform-ast.json
-/bindgen/plugins
+/bidgen/x-ast/
 
 # macOS
 .DS_store
