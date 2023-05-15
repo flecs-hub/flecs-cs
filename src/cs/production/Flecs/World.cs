@@ -81,7 +81,6 @@ public unsafe class World
     {
         var type = typeof(TComponent);
         var componentName = GetFlecsTypeName(type);
-        var componentNameC = (Runtime.CString)componentName;
         var structLayoutAttribute = type.StructLayoutAttribute;
         CheckStructLayout(structLayoutAttribute);
         var structSize = Unsafe.SizeOf<TComponent>();
@@ -92,8 +91,8 @@ public unsafe class World
         }
 
         ecs_entity_desc_t entityDesc = default;
-        entityDesc.name = componentNameC;
-        entityDesc.symbol = componentNameC;
+        entityDesc.name = componentName;
+        entityDesc.symbol = componentName;
         ecs_component_desc_t componentDesc = default;
         componentDesc.entity = ecs_entity_init(Handle, &entityDesc);
         componentDesc.type.size = structSize;
@@ -109,7 +108,7 @@ public unsafe class World
         ecs_entity_desc_t desc = default;
         var type = typeof(TTag);
         var typeName = GetFlecsTypeName<TTag>();
-        desc.name = (Runtime.CString)typeName;
+        desc.name = typeName;
         var id = ecs_entity_init(Handle, &desc);
         Debug.Assert(id.Data != 0, "ECS_INVALID_PARAMETER");
         _componentIdentifiersByType[type] = id.Data.Data;
@@ -127,7 +126,7 @@ public unsafe class World
         ecs_system_desc_t desc = default;
         FillSystemDescriptorCommon(ref desc, callback, phase, name);
 
-        desc.query.filter.expr = (Runtime.CString)filterExpression;
+        desc.query.filter.expr = filterExpression;
         ecs_system_init(Handle, &desc);
     }
 
@@ -137,7 +136,7 @@ public unsafe class World
         ecs_system_desc_t desc = default;
         FillSystemDescriptorCommon(ref desc, callback, phase._handle, name);
 
-        desc.query.filter.expr = (Runtime.CString)GetFlecsTypeName<TComponent1>();
+        desc.query.filter.expr = GetFlecsTypeName<TComponent1>();
         ecs_system_init(Handle, &desc);
     }
 
@@ -151,7 +150,7 @@ public unsafe class World
 
         var componentName1 = GetFlecsTypeName<TComponent1>();
         var componentName2 = GetFlecsTypeName<TComponent2>();
-        desc.query.filter.expr = (Runtime.CString)(componentName1 + ", " + componentName2);
+        desc.query.filter.expr = componentName1 + ", " + componentName2;
         ecs_system_init(Handle, &desc);
     }
 
@@ -159,7 +158,7 @@ public unsafe class World
         ref ecs_system_desc_t systemDesc, CallbackIterator callback, ecs_entity_t phase, string? name)
     {
         ecs_entity_desc_t entityDesc = default;
-        entityDesc.name = (Runtime.CString)(name ?? callback.Method.Name);
+        entityDesc.name = name ?? callback.Method.Name;
         entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn._handle, phase) : default;
         entityDesc.add[1] = phase;
         systemDesc.entity = ecs_entity_init(Handle, &entityDesc);
@@ -179,7 +178,7 @@ public unsafe class World
     public Entity CreateEntity(string name)
     {
         var desc = default(ecs_entity_desc_t);
-        desc.name = (Runtime.CString)name;
+        desc.name = name;
         var entity = ecs_entity_init(Handle, &desc);
         var result = new Entity(this, entity);
         return result;
@@ -188,7 +187,7 @@ public unsafe class World
     public Entity CreatePrefab(string name)
     {
         var desc = default(ecs_entity_desc_t);
-        desc.name = (Runtime.CString)name;
+        desc.name = name;
         desc.add[0] = pinvoke_EcsPrefab();
 
         var entity = ecs_entity_init(Handle, &desc);
