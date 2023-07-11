@@ -40,10 +40,8 @@ internal static class Program
         world.RegisterComponent<Position>();
         world.RegisterTag<Gigawatts>();
         world.RegisterTag<MustHave>();
-      
-      
 
-        // When one element of a pair is a component and the other element is a tag, 
+        // When one element of a pair is a component and the other element is a tag,
         // the pair assumes the type of the component.
         var e1 = world.CreateEntity("e1");
         e1.Set<Requires, Gigawatts>(new Requires() { Amount = 1.21f });
@@ -56,18 +54,18 @@ internal static class Program
         ref var requires2 = ref e2.GetSecond<Gigawatts, Requires>();
         Console.WriteLine($"<{nameof(Gigawatts)}, {nameof(Requires)}> (second is value) {nameof(Requires)}: {requires2.Amount}");
 
-        // Note that <Requires, Gigawatts> and <Gigawatts, Requires> are two 
+        // Note that <Requires, Gigawatts> and <Gigawatts, Requires> are two
         // different pairs, and can be added to an entity at the same time.
 
-        // If both parts of a pair are components, the pair assumes the type of 
+        // If both parts of a pair are components, the pair assumes the type of
         // the first element:#
-        //cs binding: GetPairFirstComp <- component value of first
+        // cs binding: GetPairFirstComp <- component value of first
         var e3 = world.CreateEntity("e3");
         e3.Set<Expires, Position>(new Expires() { Timeout = 2.5f });
         ref var expires = ref e3.Get<Expires, Position>();
         Console.WriteLine($"<{nameof(Expires)}, {nameof(Position)}> (2 comps, first is value) {nameof(Expires)}: {expires.Timeout}");
 
-        //cs binding: GetPairSecondComp <- component value of second
+        // cs binding: GetPairSecondComp <- component value of second
         var e4 = world.CreateEntity("e4");
         e4.Set<Expires, Position>(new Position() { X = 0.5f, Y = 1f });
         ref var pos = ref e4.GetSecond<Expires, Position>();
@@ -158,4 +156,3 @@ internal static class Program
         Console.WriteLine();
     }
 }
-

@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using static flecs_hub.flecs;
 
 namespace Flecs;
+
 public readonly unsafe struct EntityType
 {
     private readonly World _world;

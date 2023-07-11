@@ -12,11 +12,11 @@ public struct Position : IComponent
 public struct Star : ITag
 {
 }
-    
+
 public struct Planet : ITag
 {
 }
-    
+
 public struct Moon : ITag
 {
 }
@@ -26,7 +26,7 @@ internal static class Program
     private static int Main(string[] args)
     {
         var world = new World(args);
-        
+
         world.RegisterComponent<Position>();
         world.RegisterTag<Star>();
         world.RegisterTag<Planet>();
@@ -39,27 +39,27 @@ internal static class Program
         var sun = world.CreateEntity("Sun");
         sun.Add<Star>();
         sun.Set(new Position { X = 1, Y = 1 });
-        
+
         var mercury = world.CreateEntity("Mercury");
         mercury.AddParent(sun);
         mercury.Add<Planet>();
         mercury.Set(new Position { X = 1, Y = 1 });
-        
+
         var venus = world.CreateEntity("Venus");
         venus.AddParent(sun);
         venus.Add<Planet>();
         venus.Set(new Position { X = 2, Y = 2 });
-        
+
         var earth = world.CreateEntity("Earth");
         earth.AddParent(sun);
         earth.Add<Planet>();
         earth.Set(new Position { X = 3, Y = 3 });
-        
+
         var moon = world.CreateEntity("Moon");
         moon.AddParent(earth);
         moon.Add<Moon>();
         moon.Set(new Position { X = 0.1f, Y = 0.1f });
-        
+
         // Is the Moon a child of Earth?
         Console.WriteLine("Is Moon a child entity of Earth?: " + moon.IsChildOf(earth));
         Console.WriteLine("Is Earth a child entity of Moon?: " + earth.IsChildOf(moon));

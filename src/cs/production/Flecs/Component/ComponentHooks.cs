@@ -18,6 +18,18 @@ public unsafe struct ComponentHooks
     public CallbackIterator? OnSet;
     public CallbackIterator? OnRemove;
 
+    internal static void Fill(World world, ref ComponentHooks hooks, ecs_type_hooks_t* desc)
+    {
+        desc->ctor.Data.Pointer = &CallbackConstructor;
+        desc->dtor.Data.Pointer = &CallbackDeconstructor;
+        desc->copy.Data.Pointer = &CallbackCopy;
+        desc->move.Data.Pointer = &CallbackMove;
+        desc->on_add.Data.Pointer = &CallbackOnAdd;
+        desc->on_set.Data.Pointer = &CallbackOnSet;
+        desc->on_remove.Data.Pointer = &CallbackOnRemove;
+        desc->binding_ctx = (void*)CallbacksHelper.CreateComponentHooksCallbackContext(world, hooks);
+    }
+
     [UnmanagedCallersOnly]
     private static void CallbackConstructor(void* pointer, int count, ecs_type_info_t* typeInfo)
     {
@@ -72,17 +84,5 @@ public unsafe struct ComponentHooks
         ref var data = ref CallbacksHelper.GetComponentHooksCallbackContext(it->binding_ctx);
         var iterator = new Iterator(data.World, it);
         data.Hooks.OnRemove?.Invoke(iterator);
-    }
-
-    internal static void Fill(World world, ref ComponentHooks hooks, ecs_type_hooks_t* desc)
-    {
-        desc->ctor.Data.Pointer = &CallbackConstructor;
-        desc->dtor.Data.Pointer = &CallbackDeconstructor;
-        desc->copy.Data.Pointer = &CallbackCopy;
-        desc->move.Data.Pointer = &CallbackMove;
-        desc->on_add.Data.Pointer = &CallbackOnAdd;
-        desc->on_set.Data.Pointer = &CallbackOnSet;
-        desc->on_remove.Data.Pointer = &CallbackOnRemove;
-        desc->binding_ctx = (void*)CallbacksHelper.CreateComponentHooksCallbackContext(world, hooks);
     }
 }

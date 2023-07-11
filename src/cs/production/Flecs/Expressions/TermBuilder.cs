@@ -1,11 +1,7 @@
 ﻿// Copyright (c) Flecs Hub (https://github.com/flecs-hub). All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Flecs;
 
@@ -18,8 +14,8 @@ public class TermBuilder
     private string _access = ",";
     private string _prefix = string.Empty;
 
-    protected StringBuilder _stringBuilder;
-    protected World _world;
+    private readonly StringBuilder _stringBuilder;
+    private readonly World _world;
 
     public TermBuilder(World world)
     {
@@ -119,6 +115,12 @@ public class TermBuilder
         return this;
     }
 
+    public string Build()
+    {
+        FlushToBuilder();
+        return _stringBuilder.ToString();
+    }
+
     private void Reset()
     {
         _entity1 = string.Empty;
@@ -136,7 +138,7 @@ public class TermBuilder
             _stringBuilder.Append(_access).Append(' ');
         }
 
-        if (_access != string.Empty)
+        if (!string.IsNullOrEmpty(_access))
         {
             _stringBuilder.Append(_accessModifier).Append(' ');
         }
@@ -144,18 +146,12 @@ public class TermBuilder
         _stringBuilder.Append(_prefix).Append(_entity1)
             .Append('(').Append(_source);
 
-        if (_entity2 != string.Empty)
+        if (!string.IsNullOrEmpty(_entity2))
         {
             _stringBuilder.Append(", ").Append(_entity2);
         }
 
         _stringBuilder.Append(')');
         Reset();
-    }
-
-    public string Build()
-    {
-        FlushToBuilder();
-        return _stringBuilder.ToString();
     }
 }

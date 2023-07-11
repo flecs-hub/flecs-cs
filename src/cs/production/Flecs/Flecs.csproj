@@ -1,38 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    
-    <!-- flecs -->
-    <PropertyGroup>
-        <_IsEnabledSourceCode>false</_IsEnabledSourceCode>
-        <AssemblyName>Flecs-cs</AssemblyName>
-        <NoWarn>$(NoWarn);CS8981</NoWarn>
-    </PropertyGroup>
-    <Import Project="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../../../flecs.props'))" />
-    
-    <!-- MSBuild settings -->
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <ImplicitUsings>false</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
 
-    <!-- bottlenose.MSBuild.Tools project settings -->
-    <PropertyGroup>
-        <EnableAnalyzers>true</EnableAnalyzers>
-        <EnableAnalyzersStyleCop>true</EnableAnalyzersStyleCop>
-        <StyleCopSettingsFilePath>$(MSBuildThisFileDirectory)/Properties/StyleCop.json</StyleCopSettingsFilePath>
-    </PropertyGroup>
-    <ItemGroup>
-      <Content Remove="flecs.cs" />
-      <Content Remove="IEcsComponent.cs" />
-    </ItemGroup>
-    
-    <!-- NuGet package references -->
-    <ItemGroup>
-      <PackageReference Include="bottlenoselabs.MSBuild.Tools" Version="1.1.3">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-    </ItemGroup>
+	<!-- flecs -->
+	<PropertyGroup>
+		<AssemblyName>Flecs-cs</AssemblyName>
+	</PropertyGroup>
+
+	<!-- MSBuild settings -->
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<ImplicitUsings>false</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Flecs-cs</AssemblyName>
+		<NoWarn>$(NoWarn);CS8981</NoWarn>
+	</PropertyGroup>
+
+	<!-- NuGet package references -->
+	<ItemGroup>
+	  <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
+	</ItemGroup>
 
 </Project>

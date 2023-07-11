@@ -11,8 +11,8 @@ namespace Flecs;
 [PublicAPI]
 public readonly unsafe struct Entity
 {
-    private readonly World _world;
     internal readonly ecs_entity_t _handle;
+    private readonly World _world;
 
     internal Entity(World world, ecs_entity_t handle)
     {
@@ -188,25 +188,6 @@ public readonly unsafe struct Entity
         SetPairDataOverride(second, firstId, secondId);
     }
 
-    private void SetPairData<TComponent>(TComponent component, Identifier left, Identifier right)
-        where TComponent : unmanaged, IComponent
-    {
-        var id = ecs_pair(left.Handle, right.Handle);
-        var structSize = Unsafe.SizeOf<TComponent>();
-        var pointer = Unsafe.AsPointer(ref component);
-        ecs_set_id(_world.Handle, _handle, id, (ulong)structSize, pointer);
-    }
-
-    private void SetPairDataOverride<TComponent>(TComponent component, Identifier left, Identifier right)
-        where TComponent : unmanaged, IComponent
-    {
-        var id = ecs_pair(left.Handle, right.Handle);
-        var structSize = Unsafe.SizeOf<TComponent>();
-        var pointer = Unsafe.AsPointer(ref component);
-        ecs_override_id(_world.Handle, _handle, id);
-        ecs_set_id(_world.Handle, _handle, id, (ulong)structSize, pointer);
-    }
-
     public ref TComponent Get<TComponent, TEscComponent>()
         where TComponent : unmanaged, IComponent
         where TEscComponent : unmanaged, IEcsComponent
@@ -237,14 +218,6 @@ public readonly unsafe struct Entity
     {
         var compId = _world.GetIdentifier<TComponent>();
         return ref GetPairData<TComponent>(new Identifier(_world, first._handle), compId);
-    }
-
-    private ref TComp GetPairData<TComp>(Identifier first, Identifier second)
-        where TComp : unmanaged, IComponent
-    {
-        var id = ecs_pair(first.Handle, second.Handle);
-        var pointer = ecs_get_id(_world.Handle, _handle, id);
-        return ref Unsafe.AsRef<TComp>(pointer);
     }
 
     public Entity GetTarget(Entity relation)
@@ -390,5 +363,32 @@ public readonly unsafe struct Entity
         var iterator = ecs_term_iter(_world.Handle, &term);
         var result = new EntityIterator(_world, iterator);
         return result;
+    }
+
+    private ref TComp GetPairData<TComp>(Identifier first, Identifier second)
+        where TComp : unmanaged, IComponent
+    {
+        var id = ecs_pair(first.Handle, second.Handle);
+        var pointer = ecs_get_id(_world.Handle, _handle, id);
+        return ref Unsafe.AsRef<TComp>(pointer);
+    }
+
+    private void SetPairData<TComponent>(TComponent component, Identifier left, Identifier right)
+        where TComponent : unmanaged, IComponent
+    {
+        var id = ecs_pair(left.Handle, right.Handle);
+        var structSize = Unsafe.SizeOf<TComponent>();
+        var pointer = Unsafe.AsPointer(ref component);
+        ecs_set_id(_world.Handle, _handle, id, (ulong)structSize, pointer);
+    }
+
+    private void SetPairDataOverride<TComponent>(TComponent component, Identifier left, Identifier right)
+        where TComponent : unmanaged, IComponent
+    {
+        var id = ecs_pair(left.Handle, right.Handle);
+        var structSize = Unsafe.SizeOf<TComponent>();
+        var pointer = Unsafe.AsPointer(ref component);
+        ecs_override_id(_world.Handle, _handle, id);
+        ecs_set_id(_world.Handle, _handle, id, (ulong)structSize, pointer);
     }
 }

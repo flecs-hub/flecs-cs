@@ -4,6 +4,7 @@
 using System;
 
 namespace Flecs;
+
 public class FlecsException : Exception
 {
     public FlecsException()

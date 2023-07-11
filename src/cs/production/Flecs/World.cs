@@ -15,37 +15,37 @@ namespace Flecs;
 public unsafe class World
 {
     // Relationships
-    public Entity EcsIsA => new Entity(this, pinvoke_EcsIsA());
+    public Entity EcsIsA => new(this, pinvoke_EcsIsA());
 
-    public Entity EcsDependsOn => new Entity(this, pinvoke_EcsDependsOn());
+    public Entity EcsDependsOn => new(this, pinvoke_EcsDependsOn());
 
-    public Entity EcsChildOf => new Entity(this, pinvoke_EcsChildOf());
+    public Entity EcsChildOf => new(this, pinvoke_EcsChildOf());
 
-    public Entity EcsSlotOf => new Entity(this, pinvoke_EcsSlotOf());
+    public Entity EcsSlotOf => new(this, pinvoke_EcsSlotOf());
 
     // Entity tags
-    public Entity EcsPrefab => new Entity(this, pinvoke_EcsPrefab());
+    public Entity EcsPrefab => new(this, pinvoke_EcsPrefab());
 
     // System tags
-    public Entity EcsPreFrame => new Entity(this, pinvoke_EcsPreFrame());
+    public Entity EcsPreFrame => new(this, pinvoke_EcsPreFrame());
 
-    public Entity EcsOnLoad => new Entity(this, pinvoke_EcsOnLoad());
+    public Entity EcsOnLoad => new(this, pinvoke_EcsOnLoad());
 
-    public Entity EcsPostLoad => new Entity(this, pinvoke_EcsPostLoad());
+    public Entity EcsPostLoad => new(this, pinvoke_EcsPostLoad());
 
-    public Entity EcsPreUpdate => new Entity(this, pinvoke_EcsPreUpdate());
+    public Entity EcsPreUpdate => new(this, pinvoke_EcsPreUpdate());
 
-    public Entity EcsOnUpdate => new Entity(this, pinvoke_EcsOnUpdate());
+    public Entity EcsOnUpdate => new(this, pinvoke_EcsOnUpdate());
 
-    public Entity EcsOnValidate => new Entity(this, pinvoke_EcsOnValidate());
+    public Entity EcsOnValidate => new(this, pinvoke_EcsOnValidate());
 
-    public Entity EcsPostUpdate => new Entity(this, pinvoke_EcsPostUpdate());
+    public Entity EcsPostUpdate => new(this, pinvoke_EcsPostUpdate());
 
-    public Entity EcsPreStore => new Entity(this, pinvoke_EcsPreStore());
+    public Entity EcsPreStore => new(this, pinvoke_EcsPreStore());
 
-    public Entity EcsOnStore => new Entity(this, pinvoke_EcsOnStore());
+    public Entity EcsOnStore => new(this, pinvoke_EcsOnStore());
 
-    public Entity EcsPostFrame => new Entity(this, pinvoke_EcsPostFrame());
+    public Entity EcsPostFrame => new(this, pinvoke_EcsPostFrame());
 
     public Entity EcsPhase => new Entity(this, pinvoke_EcsPhase());
 
@@ -154,27 +154,6 @@ public unsafe class World
         ecs_system_init(Handle, &desc);
     }
 
-    private void FillSystemDescriptorCommon(
-        ref ecs_system_desc_t systemDesc, CallbackIterator callback, ecs_entity_t phase, string? name)
-    {
-        ecs_entity_desc_t entityDesc = default;
-        entityDesc.name = name ?? callback.Method.Name;
-        entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn._handle, phase) : default;
-        entityDesc.add[1] = phase;
-        systemDesc.entity = ecs_entity_init(Handle, &entityDesc);
-        systemDesc.callback.Data.Pointer = &SystemCallback;
-        systemDesc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
-    }
-
-    [UnmanagedCallersOnly]
-    private static void SystemCallback(ecs_iter_t* it)
-    {
-        CallbacksHelper.GetSystemCallbackContext((IntPtr)it->binding_ctx, out var data);
-
-        var iterator = new Iterator(data.World, it);
-        data.Callback(iterator);
-    }
-
     public Entity CreateEntity(string name)
     {
         var desc = default(ecs_entity_desc_t);
@@ -210,28 +189,6 @@ public unsafe class World
         return ecs_progress(Handle, deltaTime);
     }
 
-    private void SetHooks(ComponentHooks? hooksNullable, ecs_entity_t id)
-    {
-        if (hooksNullable == null)
-        {
-            return;
-        }
-
-        var hooksDesc = default(ecs_type_hooks_t);
-        var hooks = hooksNullable.Value;
-        ComponentHooks.Fill(this, ref hooks, &hooksDesc);
-        ecs_set_hooks_id(Handle, id, &hooksDesc);
-    }
-
-    private static void CheckStructLayout(StructLayoutAttribute? structLayoutAttribute)
-    {
-        if (structLayoutAttribute == null || structLayoutAttribute.Value == LayoutKind.Auto)
-        {
-            throw new FlecsException(
-                "Component must have a StructLayout attribute with LayoutKind sequential or explicit. This is to ensure that the struct fields are not reorganized by the C# compiler.");
-        }
-    }
-
     public string GetFlecsTypeName(Type type)
     {
         return type.FullName!.Replace("+", ".", StringComparison.InvariantCulture);
@@ -256,5 +213,48 @@ public unsafe class World
         var id = default(ecs_id_t);
         id.Data = value;
         return new Identifier(this, id);
+    }
+
+    private void FillSystemDescriptorCommon(
+        ref ecs_system_desc_t systemDesc, CallbackIterator callback, ecs_entity_t phase, string? name)
+    {
+        ecs_entity_desc_t entityDesc = default;
+        entityDesc.name = name ?? callback.Method.Name;
+        entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn._handle, phase) : default;
+        entityDesc.add[1] = phase;
+        systemDesc.entity = ecs_entity_init(Handle, &entityDesc);
+        systemDesc.callback.Data.Pointer = &SystemCallback;
+        systemDesc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
+    }
+
+    [UnmanagedCallersOnly]
+    private static void SystemCallback(ecs_iter_t* it)
+    {
+        CallbacksHelper.GetSystemCallbackContext((IntPtr)it->binding_ctx, out var data);
+
+        var iterator = new Iterator(data.World, it);
+        data.Callback(iterator);
+    }
+
+    private void SetHooks(ComponentHooks? hooksNullable, ecs_entity_t id)
+    {
+        if (hooksNullable == null)
+        {
+            return;
+        }
+
+        var hooksDesc = default(ecs_type_hooks_t);
+        var hooks = hooksNullable.Value;
+        ComponentHooks.Fill(this, ref hooks, &hooksDesc);
+        ecs_set_hooks_id(Handle, id, &hooksDesc);
+    }
+
+    private static void CheckStructLayout(StructLayoutAttribute? structLayoutAttribute)
+    {
+        if (structLayoutAttribute == null || structLayoutAttribute.Value == LayoutKind.Auto)
+        {
+            throw new FlecsException(
+                "Component must have a StructLayout attribute with LayoutKind sequential or explicit. This is to ensure that the struct fields are not reorganized by the C# compiler.");
+        }
     }
 }

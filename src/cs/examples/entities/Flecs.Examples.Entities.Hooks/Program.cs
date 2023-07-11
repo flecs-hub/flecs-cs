@@ -19,7 +19,7 @@ public struct Tag : ITag
 
 internal static class Program
 {
-    static int Main(string[] args)
+    private static int Main(string[] args)
     {
         var world = new World(args);
 

@@ -15,10 +15,10 @@ public struct Walking : ITag
 
 internal static class Program
 {
-    static int Main(string[] args)
+    private static int Main(string[] args)
     {
         var world = new World(args);
-        
+
         world.RegisterComponent<Position>();
         world.RegisterTag<Walking>();
 
@@ -28,7 +28,7 @@ internal static class Program
 
         var position = bob.GetComponent<Position>();
         Console.WriteLine("Bob's initial position: {" + position.X + ", " + position.Y + "}");
-        
+
         // Print all the components the entity has. This will output:
         //    Position, Walking, (Identifier,Name)
         Console.WriteLine("Bob's type: " + bob.Type().String());
@@ -48,10 +48,10 @@ internal static class Program
 
         // Iterate all entities with Position
         var it = world.EntityIterator<Position>();
-        while (it.HasNext()) 
+        while (it.HasNext())
         {
             var p = it.Field<Position>(1);
-            for (var i = 0; i < it.Count; i ++)
+            for (var i = 0; i < it.Count; i++)
             {
                 var entity = it.Entity(i);
                 var entityName = entity.Name();

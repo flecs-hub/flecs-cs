@@ -6,12 +6,10 @@ namespace Flecs.Examples.Entities.RelationBasic;
 
 public struct Eats : ITag
 {
-
 }
 
 public struct People : ITag
 {
-
 }
 
 internal static class Program
@@ -41,7 +39,6 @@ internal static class Program
 
         Console.WriteLine("bob has (Eats, People): " + bob.Has<Eats, People>());
         Console.WriteLine("bob has (People, Eats): " + bob.Has<People, Eats>());
-
 
         Console.WriteLine("\n");
         IterateComponents(bob);
@@ -104,4 +101,3 @@ internal static class Program
         Console.WriteLine();
     }
 }
-

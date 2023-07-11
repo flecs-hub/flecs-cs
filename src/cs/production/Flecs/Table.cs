@@ -10,8 +10,8 @@ namespace Flecs;
 [PublicAPI]
 public readonly unsafe struct Table
 {
-    private readonly ecs_world_t* _worldHandle;
     public readonly ecs_table_t* Handle;
+    private readonly ecs_world_t* _worldHandle;
 
     internal Table(ecs_world_t* world, ecs_table_t* handle)
     {

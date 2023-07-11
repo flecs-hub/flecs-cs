@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
 
 using System;
-using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using static flecs_hub.flecs;
 
@@ -11,8 +11,8 @@ namespace Flecs;
 [PublicAPI]
 public readonly unsafe struct Iterator
 {
-    private readonly World _world;
     internal readonly ecs_iter_t* Handle;
+    private readonly World _world;
 
     public int Count => Handle->count;
 
@@ -28,8 +28,8 @@ public readonly unsafe struct Iterator
 
     public Span<T> Field<T>(int index)
     {
-        var structSize = Marshal.SizeOf<T>();
-        var pointer = ecs_field_w_size(Handle, (ulong) structSize, index);
+        var structSize = Unsafe.SizeOf<T>();
+        var pointer = ecs_field_w_size(Handle, (ulong)structSize, index);
         return new Span<T>(pointer, Handle->count);
     }
 

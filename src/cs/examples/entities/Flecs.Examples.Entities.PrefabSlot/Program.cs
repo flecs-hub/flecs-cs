@@ -1,19 +1,13 @@
-﻿using System.Runtime.InteropServices;
-using static flecs_hub.flecs;
-using System.Security.Cryptography;
-
-namespace Flecs.Examples.Entities.PrefabSlot;
-
+﻿namespace Flecs.Examples.Entities.PrefabSlot;
 
 internal static class Program
 {
     private static int Main(string[] args)
     {
         var world = new World(args);
-        //        ecs_world_t* ecs = ecs_init_w_args(argc, argv);
+        // ecs_world_t* ecs = ecs_init_w_args(argc, argv);
 
-        //        // Create the same prefab hierarchy as from the hierarchy example, but now
-        //        // with the SlotOf relationship.
+        // Create the same prefab hierarchy as from the hierarchy example, but now with the SlotOf relationship.
 
         var spaceShipPrefab = world.CreatePrefab("SpaceShip");
         var enginePrefab = world.CreatePrefab("Engine");
@@ -24,7 +18,7 @@ internal static class Program
         cockpitPrefab.AddParent(spaceShipPrefab);
         cockpitPrefab.AddSlotOf(spaceShipPrefab);
 
-        // Add an additional child to the Cockpit prefab to demonstrate how 
+        // Add an additional child to the Cockpit prefab to demonstrate how
         // slots can be different from the parent. This slot could have been
         // added to the Cockpit prefab, but instead we register it on the top
         // level SpaceShip prefab.
@@ -36,12 +30,10 @@ internal static class Program
         var shipInstance = world.CreateEntity("SpaceShipInstance");
         shipInstance.IsA(spaceShipPrefab);
 
-
         // Get the instantiated entities for the prefab slots
         Entity engineInstance = shipInstance.GetTarget(enginePrefab);
         Entity cockpitInstance = shipInstance.GetTarget(cockpitPrefab);
         Entity pilotSeatInstance = shipInstance.GetTarget(pilotSeat);
-
 
         Console.WriteLine($"Instance engine: {engineInstance.FullPathString()}");
         Console.WriteLine($"Instance cockpit: {cockpitInstance.FullPathString()}");

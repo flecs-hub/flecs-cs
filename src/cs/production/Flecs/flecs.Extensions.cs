@@ -5,12 +5,13 @@ using System.Runtime.CompilerServices;
 
 namespace flecs_hub
 {
+
     public static unsafe partial class flecs
     {
         // Roles
         public static ecs_id_t ECS_PAIR => pinvoke_ECS_PAIR();
         public static ecs_id_t ECS_OVERRIDE => pinvoke_ECS_OVERRIDE();
-        
+
         // Relationships
         public static ecs_entity_t EcsIsA => pinvoke_EcsIsA();
         public static ecs_entity_t EcsDependsOn => pinvoke_EcsDependsOn();
@@ -56,7 +57,7 @@ namespace flecs_hub
             var value = ECS_PAIR_FIRST(entity.Data.Data);
             return ecs_get_alive(world, *(ecs_entity_t*)&value);
         }
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static ecs_entity_t ecs_pair_second(ecs_world_t* world, ecs_entity_t entity)
         {

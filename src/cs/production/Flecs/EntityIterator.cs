@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
 using static flecs_hub.flecs;
@@ -12,8 +13,8 @@ namespace Flecs;
 [PublicAPI]
 public readonly unsafe struct EntityIterator
 {
-    private readonly ecs_world_t* _world;
     internal readonly ecs_iter_t Handle;
+    private readonly ecs_world_t* _world;
 
     public int Count => Handle.count;
 
@@ -42,8 +43,8 @@ public readonly unsafe struct EntityIterator
         fixed (EntityIterator* @this = &this)
         {
             var handlePointer = &@this->Handle;
-            var structSize = Marshal.SizeOf<T>();
-            var pointer = ecs_field_w_size(handlePointer, (ulong) structSize, index);
+            var structSize = Unsafe.SizeOf<T>();
+            var pointer = ecs_field_w_size(handlePointer, (ulong)structSize, index);
             return new Span<T>(pointer, Handle.count);
         }
     }

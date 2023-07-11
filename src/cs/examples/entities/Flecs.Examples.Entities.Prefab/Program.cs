@@ -22,13 +22,13 @@ public struct FreightCapacity : IComponent
 
 [StructLayout(LayoutKind.Sequential)]
 public struct ImpulseSpeed : IComponent
-{   
+{
     public double Value;
 }
 
 [StructLayout(LayoutKind.Sequential)]
 public struct Position : IComponent
-{   
+{
     public double X;
     public double Y;
 }
@@ -65,7 +65,7 @@ internal static class Program
         var spaceShip = world.CreatePrefab("SpaceShip");
         spaceShip.Set(new ImpulseSpeed { Value = 50 });
         spaceShip.Set(new Defense { Value = 50 });
-        //setting as overridable, every ship instance can be damaged individually
+        // setting as overridable, every ship instance can be damaged individually
         spaceShip.SetOverride(hull, new Amount() { Max = 200, Current = 200});
         spaceShip.SetOverride(shield, new Amount() { Max = 200, Current = 200 });
 
@@ -105,7 +105,7 @@ internal static class Program
         //    Position,(Identifier,Name),(IsA,MammothFreighter)
         var instanceTypeString = freighter1.Type().String();
         Console.WriteLine("Instance type: " + instanceTypeString);
-        
+
         // Even though the instance doesn't have a private copy of ImpulseSpeed, we
         // can still get it using the regular API (outputs 50)
         var impulseSpeed = freighter1.GetComponent<ImpulseSpeed>();

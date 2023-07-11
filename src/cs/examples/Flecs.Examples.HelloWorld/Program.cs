@@ -41,7 +41,7 @@ internal static class Program
         var tableString = iterator.Table().String();
         Console.WriteLine("Move entities with table: " + tableString);
 
-        // Iterate entities for the current group 
+        // Iterate entities for the current group
         for (var i = 0; i < iterator.Count; i++)
         {
             ref var position = ref p[i];
@@ -56,7 +56,7 @@ internal static class Program
     {
         // Create the world
         var world = new World(args);
-        
+
         world.RegisterComponent<Position>();
         world.RegisterComponent<Velocity>();
         world.RegisterTag<Eats>();
@@ -75,7 +75,7 @@ internal static class Program
         // Run systems twice. Usually this function is called once per frame
         world.Progress(0);
         world.Progress(0);
-        
+
         // See if Bob has moved (he has)
         var p = bob.GetComponent<Position>();
         Console.WriteLine("Bob's position is {" + p.X + ", " + p.Y + "}");

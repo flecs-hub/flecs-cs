@@ -26,9 +26,9 @@ internal static class Program
         collision.Add(world.EcsPhase);
         collision.DependsOn(physics);
 
-        world.RegisterSystem(System1, physics, "");
-        world.RegisterSystem(System2, collision, "");
-        world.RegisterSystem(System3, EcsOnUpdate, "");
+        world.RegisterSystem(System1, physics, string.Empty);
+        world.RegisterSystem(System2, collision, string.Empty);
+        world.RegisterSystem(System3, EcsOnUpdate, string.Empty);
 
         world.Progress(0);
 
@@ -50,4 +50,3 @@ internal static class Program
         Console.WriteLine("Sys3 OnUpdate");
     }
 }
-

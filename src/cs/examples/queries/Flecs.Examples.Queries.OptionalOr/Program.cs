@@ -33,14 +33,19 @@ internal static class Program
         world.RegisterComponent<Speed>();
 
         var e1 = world.CreateEntity("e1");
-        e1.Set(new Position());
-        e1.Set(new Velocity());
+        e1.Set(default(Position));
+        e1.Set(default(Velocity));
         var e2 = world.CreateEntity("e2");
-        e2.Set(new Position());
-        e2.Set(new Speed());
-        world.RegisterSystem(MoveOptionalVel, EcsOnUpdate, $"{world.GetFlecsTypeName(typeof(Position))}, ?{world.GetFlecsTypeName(typeof(Velocity))}");
-        world.RegisterSystem(MoveOr, EcsOnUpdate, $"{world.GetFlecsTypeName(typeof(Position))}, "
-            + $"{world.GetFlecsTypeName(typeof(Velocity))} || {world.GetFlecsTypeName(typeof(Speed))}");
+        e2.Set(default(Position));
+        e2.Set(default(Speed));
+        world.RegisterSystem(
+            MoveOptionalVel,
+            EcsOnUpdate,
+            $"{world.GetFlecsTypeName(typeof(Position))}, ?{world.GetFlecsTypeName(typeof(Velocity))}");
+        world.RegisterSystem(
+            MoveOr,
+            EcsOnUpdate,
+            $"{world.GetFlecsTypeName(typeof(Position))}, " + $"{world.GetFlecsTypeName(typeof(Velocity))} || {world.GetFlecsTypeName(typeof(Speed))}");
 
         world.Progress(0);
 
@@ -93,8 +98,7 @@ internal static class Program
         }
         else
         {
-            //top could be written as else
+            // top could be written as else
         }
     }
 }
-
