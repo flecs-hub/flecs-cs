@@ -1,15 +1,16 @@
 ﻿using System.Runtime.InteropServices;
+using bottlenoselabs.C2CS.Runtime;
 using flecs_hub;
 
 namespace Flecs.Examples.Entities.Hooks;
 
 // Component hooks are callbacks that can be registered for a type that are
 // invoked during different parts of the component lifecycle.
-    
+
 [StructLayout(LayoutKind.Sequential)]
 public struct String : IComponent
 {
-    public flecs.Runtime.CString Value;
+    public CString Value;
 }
 
 public struct Tag : ITag
@@ -41,14 +42,14 @@ internal static class Program
 
         Console.WriteLine("entity.Add<String>()");
         entity.Add<String>();
-        
+
         Console.WriteLine("entity.SetComponent<String>()(\"Hello World\")");
-        entity.Set(new String { Value = (flecs.Runtime.CString)"Hello World" });
-        
+        entity.Set(new String { Value = (CString)"Hello World" });
+
         Console.WriteLine("entity.AddTag<Tag>()");
         // This operation changes the entity's archetype, which invokes a move
         entity.Add<Tag>();
-        
+
         Console.WriteLine("entity.Delete()");
         entity.Delete();
 
@@ -70,7 +71,7 @@ internal static class Program
         ref var component = ref context.Get<String>();
         Marshal.FreeHGlobal(component.Value);
     }
-    
+
     // The copy hook should copy resources from one location to another.
     private static void ComponentHookCopy(ref ComponentCopyContext context)
     {
@@ -79,7 +80,7 @@ internal static class Program
         ref var destination = ref context.GetDestination<String>();
         var value = source.Value.ToString();
         source.Value = default;
-        destination.Value = (flecs.Runtime.CString)value;
+        destination.Value = (CString)value;
     }
 
     // The move hook should move resources from one location to another.

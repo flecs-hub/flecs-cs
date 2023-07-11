@@ -59,7 +59,7 @@ public unsafe class World
 
     public World(string[] args)
     {
-        var argv = args.Length == 0 ? default : Runtime.CStrings.CStringArray(args);
+        var argv = args.Length == 0 ? default : CStrings.CStringArray(args);
         Handle = ecs_init_w_args(args.Length, argv);
         Pointers.Add((IntPtr)Handle, this);
 
