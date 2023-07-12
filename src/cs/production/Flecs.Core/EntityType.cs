@@ -25,8 +25,8 @@ public readonly unsafe struct EntityType
     public string String()
     {
         var cString = ecs_type_str(_world.Handle, _handle);
-        var result = Marshal.PtrToStringAnsi(cString._pointer)!;
-        Marshal.FreeHGlobal(cString._pointer);
+        var result = Marshal.PtrToStringAnsi(cString.Pointer)!;
+        Marshal.FreeHGlobal(cString.Pointer);
         return result;
     }
 }

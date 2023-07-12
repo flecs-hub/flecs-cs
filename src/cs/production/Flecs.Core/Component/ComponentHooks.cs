@@ -20,6 +20,15 @@ public unsafe struct ComponentHooks
 
     internal static void Fill(World world, ref ComponentHooks hooks, ecs_type_hooks_t* desc)
     {
+#if UNITY_5_3_OR_NEWER
+        desc->ctor.Data.Pointer = Marshal.GetFunctionPointerForDelegate<FnPtr_VoidPtr_Int_EcsTypeInfoTPtr_Void.@delegate>(CallbackConstructor);
+        desc->dtor.Data.Pointer = Marshal.GetFunctionPointerForDelegate<FnPtr_VoidPtr_Int_EcsTypeInfoTPtr_Void.@delegate>(CallbackDeconstructor);
+        desc->copy.Data.Pointer = Marshal.GetFunctionPointerForDelegate<FnPtr_VoidPtr_VoidPtr_Int_EcsTypeInfoTPtr_Void.@delegate>(CallbackCopy);
+        desc->move.Data.Pointer = Marshal.GetFunctionPointerForDelegate<FnPtr_VoidPtr_VoidPtr_Int_EcsTypeInfoTPtr_Void.@delegate>(CallbackMove);
+        desc->on_add.Data.Pointer = Marshal.GetFunctionPointerForDelegate<FnPtr_EcsIterTPtr_Void.@delegate>(CallbackOnAdd);
+        desc->on_set.Data.Pointer = Marshal.GetFunctionPointerForDelegate<FnPtr_EcsIterTPtr_Void.@delegate>(CallbackOnSet);
+        desc->on_remove.Data.Pointer = Marshal.GetFunctionPointerForDelegate<FnPtr_EcsIterTPtr_Void.@delegate>(CallbackOnRemove);
+#else
         desc->ctor.Data.Pointer = &CallbackConstructor;
         desc->dtor.Data.Pointer = &CallbackDeconstructor;
         desc->copy.Data.Pointer = &CallbackCopy;
@@ -27,10 +36,13 @@ public unsafe struct ComponentHooks
         desc->on_add.Data.Pointer = &CallbackOnAdd;
         desc->on_set.Data.Pointer = &CallbackOnSet;
         desc->on_remove.Data.Pointer = &CallbackOnRemove;
+#endif
         desc->binding_ctx = (void*)CallbacksHelper.CreateComponentHooksCallbackContext(world, hooks);
     }
 
+#if !UNITY_5_3_OR_NEWER
     [UnmanagedCallersOnly]
+#endif
     private static void CallbackConstructor(void* pointer, int count, ecs_type_info_t* typeInfo)
     {
         ref var data = ref CallbacksHelper.GetComponentHooksCallbackContext(typeInfo->hooks.binding_ctx);
@@ -38,7 +50,9 @@ public unsafe struct ComponentHooks
         data.Hooks.Constructor?.Invoke(ref context);
     }
 
+#if !UNITY_5_3_OR_NEWER
     [UnmanagedCallersOnly]
+#endif
     private static void CallbackDeconstructor(void* pointer, int count, ecs_type_info_t* typeInfo)
     {
         ref var data = ref CallbacksHelper.GetComponentHooksCallbackContext(typeInfo->hooks.binding_ctx);
@@ -46,7 +60,9 @@ public unsafe struct ComponentHooks
         data.Hooks.Deconstructor?.Invoke(ref context);
     }
 
+#if !UNITY_5_3_OR_NEWER
     [UnmanagedCallersOnly]
+#endif
     private static void CallbackCopy(void* destinationPointer, void* sourcePointer, int count, ecs_type_info_t* typeInfo)
     {
         ref var data = ref CallbacksHelper.GetComponentHooksCallbackContext(typeInfo->hooks.binding_ctx);
@@ -54,7 +70,9 @@ public unsafe struct ComponentHooks
         data.Hooks.Copy?.Invoke(ref context);
     }
 
+#if !UNITY_5_3_OR_NEWER
     [UnmanagedCallersOnly]
+#endif
     private static void CallbackMove(void* destinationPointer, void* sourcePointer, int count, ecs_type_info_t* typeInfo)
     {
         ref var data = ref CallbacksHelper.GetComponentHooksCallbackContext(typeInfo->hooks.binding_ctx);
@@ -62,7 +80,9 @@ public unsafe struct ComponentHooks
         data.Hooks.Move?.Invoke(ref context);
     }
 
+#if !UNITY_5_3_OR_NEWER
     [UnmanagedCallersOnly]
+#endif
     private static void CallbackOnAdd(ecs_iter_t* it)
     {
         ref var data = ref CallbacksHelper.GetComponentHooksCallbackContext(it->binding_ctx);
@@ -70,7 +90,9 @@ public unsafe struct ComponentHooks
         data.Hooks.OnAdd?.Invoke(iterator);
     }
 
+#if !UNITY_5_3_OR_NEWER
     [UnmanagedCallersOnly]
+#endif
     private static void CallbackOnSet(ecs_iter_t* it)
     {
         ref var data = ref CallbacksHelper.GetComponentHooksCallbackContext(it->binding_ctx);
@@ -78,7 +100,9 @@ public unsafe struct ComponentHooks
         data.Hooks.OnSet?.Invoke(iterator);
     }
 
+#if !UNITY_5_3_OR_NEWER
     [UnmanagedCallersOnly]
+#endif
     private static void CallbackOnRemove(ecs_iter_t* it)
     {
         ref var data = ref CallbacksHelper.GetComponentHooksCallbackContext(it->binding_ctx);

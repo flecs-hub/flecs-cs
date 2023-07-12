@@ -65,7 +65,7 @@ public unsafe class World
 
         for (var i = 0; i < args.Length; i++)
         {
-            Marshal.FreeHGlobal(argv[i]._pointer);
+            Marshal.FreeHGlobal(argv[i].Pointer);
         }
     }
 
@@ -223,11 +223,17 @@ public unsafe class World
         entityDesc.add[0] = phase.Data != 0 ? ecs_pair(EcsDependsOn._handle, phase) : default;
         entityDesc.add[1] = phase;
         systemDesc.entity = ecs_entity_init(Handle, &entityDesc);
+#if UNITY_5_3_OR_NEWER
+        systemDesc.callback.Data.Pointer = Marshal.GetFunctionPointerForDelegate<FnPtr_EcsIterTPtr_Void.@delegate>(SystemCallback);
+#else
         systemDesc.callback.Data.Pointer = &SystemCallback;
+#endif
         systemDesc.binding_ctx = (void*)CallbacksHelper.CreateSystemCallbackContext(this, callback);
     }
 
+#if !UNITY_5_3_OR_NEWER
     [UnmanagedCallersOnly]
+#endif
     private static void SystemCallback(ecs_iter_t* it)
     {
         CallbacksHelper.GetSystemCallbackContext((IntPtr)it->binding_ctx, out var data);

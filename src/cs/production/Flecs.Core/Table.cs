@@ -22,8 +22,8 @@ public readonly unsafe struct Table
     public string String()
     {
         var cString = ecs_table_str(_worldHandle, Handle);
-        var result = Marshal.PtrToStringAnsi(cString._pointer)!;
-        Marshal.FreeHGlobal(cString._pointer);
+        var result = Marshal.PtrToStringAnsi(cString)!;
+        Marshal.FreeHGlobal(cString);
         return result;
     }
 }

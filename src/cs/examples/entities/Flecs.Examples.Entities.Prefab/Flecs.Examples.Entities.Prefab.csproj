@@ -10,7 +10,7 @@
 
     <!-- Project references -->
     <ItemGroup>
-      <ProjectReference Include="..\..\..\production\Flecs\Flecs.csproj" />
+      <ProjectReference Include="..\..\..\production\Flecs.Core\Flecs.Core.csproj" />
     </ItemGroup>
 
 </Project>

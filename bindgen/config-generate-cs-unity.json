@@ -1,0 +1,9 @@
+{
+    "inputFilePath": "./x-ast/ast-cross-platform.json",
+    "outputFileDirectory": "./../src/cs/production/Flecs.Unity/Generated",
+    "namespaceName": "flecs_hub",
+    "className": "flecs",
+    "isEnabledGeneratingRuntimeCode": false,
+    "isEnabledFunctionPointers": false
+  }
+  

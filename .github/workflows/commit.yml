@@ -18,12 +18,19 @@ jobs:
         with:
           submodules: 'false'
 
-      - name: "Download changes to commit"
+      - name: "Download changes to commit: .NET 7+"
         id: download
         uses: actions/download-artifact@v3
         with:
           name: "bindgen-cs"
-          path: "./src/cs/production/Flecs/Generated"
+          path: "./src/cs/production/Flecs.Core/Generated"
+      
+      - name: "Download changes to commit: Unity"
+        id: download
+        uses: actions/download-artifact@v3
+        with:
+          name: "bindgen-cs"
+          path: "./src/cs/production/Flecs.Unity/Generated"
 
       - name: "Echo download path"
         run: echo ${{steps.download.outputs.download-path}}

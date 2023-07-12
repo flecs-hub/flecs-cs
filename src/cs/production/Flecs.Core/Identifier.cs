@@ -22,8 +22,8 @@ public readonly unsafe struct Identifier
     public string String()
     {
         var cString = ecs_id_str(World.Handle, Handle);
-        var result = Marshal.PtrToStringAnsi(cString._pointer)!;
-        Marshal.FreeHGlobal(cString._pointer);
+        var result = Marshal.PtrToStringAnsi(cString.Pointer)!;
+        Marshal.FreeHGlobal(cString.Pointer);
         return result;
     }
 
@@ -32,7 +32,7 @@ public readonly unsafe struct Identifier
         var id = default(ecs_id_t);
         id.Data = Handle.Data & ECS_ID_FLAGS_MASK;
         var cString = ecs_id_flag_str(id);
-        var result = Marshal.PtrToStringAnsi(cString._pointer)!;
+        var result = Marshal.PtrToStringAnsi(cString.Pointer)!;
         return result;
     }
 
