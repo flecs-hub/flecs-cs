@@ -109,8 +109,14 @@ jobs:
         shell: bash
         run: cd ./bindgen && ./generate.sh
 
-      - name: "Upload generated C# code"
+      - name: "Upload generated C# code: .NET 7+"
         uses: actions/upload-artifact@v2
         with:
-          name: "bindgen-cs"
-          path: "./src/cs/production/Flecs/Generated"
+          name: "bindgen-cs-core"
+          path: "./src/cs/production/Flecs.Core/Generated"
+
+      - name: "Upload generated C# code: Unity"
+        uses: actions/upload-artifact@v2
+        with:
+          name: "bindgen-cs-unity"
+          path: "./src/cs/production/Flecs.Unity/Generated"

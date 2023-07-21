@@ -85,14 +85,14 @@ jobs:
         uses: actions/download-artifact@v1
         continue-on-error: true
         with:
-          name: "bindgen-cs"
+          name: "bindgen-cs-core"
           path: "./src/cs/production/Flecs.Core/Generated"
 
       - name: "Download generated C# code: Unity"
         uses: actions/download-artifact@v1
         continue-on-error: true
         with:
-          name: "bindgen-cs"
+          name: "bindgen-cs-unity"
           path: "./src/cs/production/Flecs.Unity/Generated"
 
       - name: ".NET Build"

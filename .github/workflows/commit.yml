@@ -21,13 +21,13 @@ jobs:
       - name: "Download changes to commit: .NET 7+"
         uses: actions/download-artifact@v3
         with:
-          name: "bindgen-cs"
+          name: "bindgen-cs-core"
           path: "./src/cs/production/Flecs.Core/Generated"
       
       - name: "Download changes to commit: Unity"
         uses: actions/download-artifact@v3
         with:
-          name: "bindgen-cs"
+          name: "bindgen-cs-unity"
           path: "./src/cs/production/Flecs.Unity/Generated"
 
       - name: "Echo download path"
