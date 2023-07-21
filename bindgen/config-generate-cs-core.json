@@ -4,6 +4,7 @@
     "namespaceName": "flecs_hub",
     "className": "flecs",
     "isEnabledGeneratingRuntimeCode": false,
+    "isEnabledLibraryImport": true,
     "isEnabledFunctionPointers": true,
     "isEnabledFileScopedNamespace": true
   }
