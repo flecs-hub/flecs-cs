@@ -19,14 +19,12 @@ jobs:
           submodules: 'false'
 
       - name: "Download changes to commit: .NET 7+"
-        id: download
         uses: actions/download-artifact@v3
         with:
           name: "bindgen-cs"
           path: "./src/cs/production/Flecs.Core/Generated"
       
       - name: "Download changes to commit: Unity"
-        id: download
         uses: actions/download-artifact@v3
         with:
           name: "bindgen-cs"
