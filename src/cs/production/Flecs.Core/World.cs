@@ -192,7 +192,13 @@ public unsafe class World
 
     public string GetFlecsTypeName(Type type)
     {
+#if !UNITY_5_3_OR_NEWER
+#pragma warning disable CA1307
+        return type.FullName!.Replace("+", ".");
+#pragma warning restore CA1307
+#else
         return type.FullName!.Replace("+", ".", StringComparison.InvariantCulture);
+#endif
     }
 
     public string GetFlecsTypeName<T>()
