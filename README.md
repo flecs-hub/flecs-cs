@@ -11,13 +11,13 @@ Automatically updated C# bindings for https://github.com/SanderMertens/flecs wit
 3. Build the native library by running `library.sh`. To execute `.sh` scripts on Windows, use Git Bash which can be installed with Git itself: https://git-scm.com/download/win. The `library.sh` script requires that CMake is installed and in your path and that [`C2CS`](https://github.com/bottlenoselabs/c2cs) is installed.
 4. 
    - .NET 7+: Add the `src/cs/production/Flecs.Core/Flecs.Core.csproj` C# project to your solution as an existing project and then reference it within your own solution.
-   - Unity: Add the `src/cs/production/Flecs.Unity/Flecs.Unity.csproj` C# project to your solution as an existing project and then reference it within your own solution.
+   - Unity: Build the `src/cs/production/Flecs.Unity/Flecs.Unity.csproj` C# project and create the resulting `Flecs.Unity.dll`; follow Unity's documentation for using the compiled C# code as a `.dll`: https://docs.unity3d.com/Manual/UsingDLL.
 
 ## Developers: Documentation
 
 ### C# Examples
 
-For examples in C#, see [./src/cs/examples](https://github.com/flecs-hub/flecs-cs/tree/main/src/cs/examples), or open up the solution `.sln` file in VisualStudio / Rider.
+For examples in C# (.NET Core, not Unity), see [./src/cs/examples](https://github.com/flecs-hub/flecs-cs/tree/main/src/cs/examples), or open up the solution `.sln` file in VisualStudio / Rider.
 
 ### C Examples
 
