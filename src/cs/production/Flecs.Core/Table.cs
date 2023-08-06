@@ -3,7 +3,7 @@
 
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
-using static flecs_hub.flecs;
+using static flecs_hub.Interop.Flecs.PInvoke;
 
 namespace Flecs;
 

@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
 
 using System.Runtime.InteropServices;
-using static flecs_hub.flecs;
+using static flecs_hub.Interop.Flecs.PInvoke;
 
 namespace Flecs;
 

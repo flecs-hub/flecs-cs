@@ -113,10 +113,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: "bindgen-cs-core"
-          path: "./src/cs/production/Flecs.Core/Generated"
+          path: "./src/cs/production/Interop.Flecs.Core/Generated"
 
       - name: "Upload generated C# code: Unity"
         uses: actions/upload-artifact@v2
         with:
           name: "bindgen-cs-unity"
-          path: "./src/cs/production/Flecs.Unity/Generated"
+          path: "./src/cs/production/Interop.Flecs.Unity/Generated"

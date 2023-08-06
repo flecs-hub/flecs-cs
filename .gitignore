@@ -1,5 +1,5 @@
 # JetBrains
-/.idea/
+.idea/
 
 # VisualStudio
 .suo
@@ -8,6 +8,7 @@
 # C# build artifacts
 bin/
 obj/
+/artifacts/
 
 # C# packages
 /nupkg/

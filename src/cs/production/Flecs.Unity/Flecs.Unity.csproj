@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<!-- MSBuild settings -->
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -8,20 +9,31 @@
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 		<NoWarn>$(NoWarn);CA1016</NoWarn>
+		<RootNamespace>flecs_hub.Flecs</RootNamespace>
 	</PropertyGroup>
 
+	<!-- NuGet settings -->
+	<PropertyGroup>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+
+	<!-- NuGet package references -->
 	<ItemGroup>
-		<PackageReference Include="bottlenoselabs.C2CS.Runtime" Version="6.0.7" />
 		<PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
 	</ItemGroup>
 
+	<!-- Project references -->
+	<ItemGroup>
+		<ProjectReference Include="..\Interop.Flecs.Unity\Interop.Flecs.Unity.csproj" />
+	</ItemGroup>
+
+	<!-- Copy code from Flecs.Core -->
 	<ItemGroup>
 		<Compile Include="$(MSBuildThisFileDirectory)../Flecs.Core/**/*.cs">
 			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Compile>
-		<Compile Remove="$(MSBuildThisFileDirectory)../Flecs.Core/Generated/**/*.cs" />
 	</ItemGroup>
 
 </Project>

@@ -2,11 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
 
 using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using JetBrains.Annotations;
-using static flecs_hub.flecs;
+using static flecs_hub.Interop.Flecs.PInvoke;
 
 namespace Flecs;
 

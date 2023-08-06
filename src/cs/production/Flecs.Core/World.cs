@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using bottlenoselabs.C2CS.Runtime;
 using JetBrains.Annotations;
-using static flecs_hub.flecs;
+using static flecs_hub.Interop.Flecs.PInvoke;
 
 namespace Flecs;
 

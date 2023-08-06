@@ -8,9 +8,4 @@
         <ImplicitUsings>true</ImplicitUsings>
     </PropertyGroup>
 
-    <!-- Project references -->
-    <ItemGroup>
-      <ProjectReference Include="..\..\production\Flecs.Core\Flecs.Core.csproj" />
-    </ItemGroup>
-
 </Project>

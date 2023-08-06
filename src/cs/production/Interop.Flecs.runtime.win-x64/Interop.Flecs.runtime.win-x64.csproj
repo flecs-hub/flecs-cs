@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <!-- MSBuild settings -->
+    <PropertyGroup>
+        <TargetFramework>netstandard1.0</TargetFramework>
+        <ImplicitUsings>false</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <NoPackageAnalysis>true</NoPackageAnalysis>
+    </PropertyGroup>
+
+    <!-- NuGet settings -->
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <PackageId>flecs_hub.Interop.Flecs.runtime.win-x64</PackageId>
+        <PackageDescription>
+            Windows x64 native libraries for the `flecs_hub.Interop.Flecs` package.
+        </PackageDescription>
+        <RepositoryUrl>https://github.com/flecs-hub/flecs-cs</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>_README_PACKAGE.md</PackageReadmeFile>
+        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+        <DevelopmentDependency>true</DevelopmentDependency>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <IncludeSymbols>false</IncludeSymbols>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Update="_README_PACKAGE.md">
+            <Pack>true</Pack>
+            <PackagePath>/</PackagePath>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <!-- Dynamic link libraries -->
+    <ItemGroup>
+        <Content Include="$(GitRepositoryPath)/lib/*.dll">
+            <Link>%(Filename)%(Extension)</Link>
+            <PackagePath>runtimes/win-x64/native/%(Filename)%(Extension)</PackagePath>
+            <Pack>true</Pack>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+</Project>

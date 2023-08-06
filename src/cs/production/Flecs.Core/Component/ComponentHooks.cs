@@ -2,8 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the Git repository root directory for full license information.
 
 using System.Runtime.InteropServices;
+using flecs_hub.Interop.Flecs;
 using JetBrains.Annotations;
-using static flecs_hub.flecs;
+using static flecs_hub.Interop.Flecs.PInvoke;
 
 namespace Flecs;
 
@@ -73,7 +74,7 @@ public unsafe struct ComponentHooks
 #if !UNITY_5_3_OR_NEWER
     [UnmanagedCallersOnly]
 #endif
-    private static void CallbackMove(void* destinationPointer, void* sourcePointer, int count, ecs_type_info_t* typeInfo)
+    private static void CallbackMove(void* destinationPointer, void* sourcePointer, int count, PInvoke.ecs_type_info_t* typeInfo)
     {
         ref var data = ref CallbacksHelper.GetComponentHooksCallbackContext(typeInfo->hooks.binding_ctx);
         var context = new ComponentMoveContext(destinationPointer, sourcePointer, count);

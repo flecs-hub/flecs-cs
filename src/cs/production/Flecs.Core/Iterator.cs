@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using static flecs_hub.flecs;
+using static flecs_hub.Interop.Flecs.PInvoke;
 
 namespace Flecs;
 

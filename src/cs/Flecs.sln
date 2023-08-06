@@ -7,37 +7,47 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{9E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{39423871-7923-4AFB-A756-35E17FCBA274}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Core", "src\cs\production\Flecs.Core\Flecs.Core.csproj", "{5EB4443F-134E-43A0-9607-9F3504671E47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Core", "production\Flecs.Core\Flecs.Core.csproj", "{5EB4443F-134E-43A0-9607-9F3504671E47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{3DA02832-2DA5-49CC-929D-6DB290DA28EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.HelloWorld", "src\cs\examples\Flecs.Examples.HelloWorld\Flecs.Examples.HelloWorld.csproj", "{E5E0E0A5-DF34-403B-A2BD-93EFF21C4825}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.HelloWorld", "examples\Flecs.Examples.HelloWorld\Flecs.Examples.HelloWorld.csproj", "{E5E0E0A5-DF34-403B-A2BD-93EFF21C4825}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Hierarchy", "src\cs\examples\entities\Flecs.Examples.Entities.Hierarchy\Flecs.Examples.Entities.Hierarchy.csproj", "{603A7B38-8FEF-45A6-8EA7-1AE82D9504C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Hierarchy", "examples\entities\Flecs.Examples.Entities.Hierarchy\Flecs.Examples.Entities.Hierarchy.csproj", "{603A7B38-8FEF-45A6-8EA7-1AE82D9504C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Basics", "src\cs\examples\entities\Flecs.Examples.Entities.Basics\Flecs.Examples.Entities.Basics.csproj", "{5B604D6C-EDC7-4D7F-8CF4-D368CAE30A37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Basics", "examples\entities\Flecs.Examples.Entities.Basics\Flecs.Examples.Entities.Basics.csproj", "{5B604D6C-EDC7-4D7F-8CF4-D368CAE30A37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Hooks", "src\cs\examples\entities\Flecs.Examples.Entities.Hooks\Flecs.Examples.Entities.Hooks.csproj", "{CA4D5654-1D45-442E-9C18-F93B1F670263}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Hooks", "examples\entities\Flecs.Examples.Entities.Hooks\Flecs.Examples.Entities.Hooks.csproj", "{CA4D5654-1D45-442E-9C18-F93B1F670263}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.IterateComponents", "src\cs\examples\entities\Flecs.Examples.Entities.IterateComponents\Flecs.Examples.Entities.IterateComponents.csproj", "{449DE999-B69C-43D7-9848-0F4BDE7CCC24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.IterateComponents", "examples\entities\Flecs.Examples.Entities.IterateComponents\Flecs.Examples.Entities.IterateComponents.csproj", "{449DE999-B69C-43D7-9848-0F4BDE7CCC24}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Prefab", "src\cs\examples\entities\Flecs.Examples.Entities.Prefab\Flecs.Examples.Entities.Prefab.csproj", "{D298B204-9318-44F9-9330-A1EFAADCD205}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.Prefab", "examples\entities\Flecs.Examples.Entities.Prefab\Flecs.Examples.Entities.Prefab.csproj", "{D298B204-9318-44F9-9330-A1EFAADCD205}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.RelationComponents", "src\cs\examples\entities\Flecs.Examples.Entities.RelationComponents\Flecs.Examples.Entities.RelationComponents.csproj", "{63057DDB-7E98-465D-91AE-396037A0B282}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.RelationComponents", "examples\entities\Flecs.Examples.Entities.RelationComponents\Flecs.Examples.Entities.RelationComponents.csproj", "{63057DDB-7E98-465D-91AE-396037A0B282}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.RelationBasic", "src\cs\examples\entities\Flecs.Examples.Entities.RelationBasic\Flecs.Examples.Entities.RelationBasic.csproj", "{EC0A2533-C10C-412F-8D98-7B37AB53FA28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.RelationBasic", "examples\entities\Flecs.Examples.Entities.RelationBasic\Flecs.Examples.Entities.RelationBasic.csproj", "{EC0A2533-C10C-412F-8D98-7B37AB53FA28}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Queries", "Queries", "{04650426-AD83-4E99-B211-3C70309C6FCF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Queries.OptionalOr", "src\cs\examples\queries\Flecs.Examples.Queries.OptionalOr\Flecs.Examples.Queries.OptionalOr.csproj", "{4A8057DB-51F1-4BDB-B40C-1EAAD4620234}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Queries.OptionalOr", "examples\queries\Flecs.Examples.Queries.OptionalOr\Flecs.Examples.Queries.OptionalOr.csproj", "{4A8057DB-51F1-4BDB-B40C-1EAAD4620234}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.PrefabSlot", "src\cs\examples\entities\Flecs.Examples.Entities.PrefabSlot\Flecs.Examples.Entities.PrefabSlot.csproj", "{B8C4D7B7-45C4-46A8-8C7E-03C36F5949B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Entities.PrefabSlot", "examples\entities\Flecs.Examples.Entities.PrefabSlot\Flecs.Examples.Entities.PrefabSlot.csproj", "{B8C4D7B7-45C4-46A8-8C7E-03C36F5949B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems", "Systems", "{36062DD2-C7DC-4074-B1EC-218636DD4B76}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Systems.CustomPhase", "src\cs\examples\systems\Flecs.Examples.Systems.CustomPhase\Flecs.Examples.Systems.CustomPhase.csproj", "{81CFEB14-4C31-4CEF-BE4B-B281EC42D060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flecs.Examples.Systems.CustomPhase", "examples\systems\Flecs.Examples.Systems.CustomPhase\Flecs.Examples.Systems.CustomPhase.csproj", "{81CFEB14-4C31-4CEF-BE4B-B281EC42D060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs.Unity", "src\cs\production\Flecs.Unity\Flecs.Unity.csproj", "{45B80105-C0E9-42E0-9D70-D42B65958262}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flecs.Unity", "production\Flecs.Unity\Flecs.Unity.csproj", "{45B80105-C0E9-42E0-9D70-D42B65958262}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.Flecs.Core", "production\Interop.Flecs.Core\Interop.Flecs.Core.csproj", "{1C5CE028-B4F3-4D18-9BF5-8785103B6138}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.Flecs.Unity", "production\Interop.Flecs.Unity\Interop.Flecs.Unity.csproj", "{26B6B8F0-2CAE-4DFC-9F79-9313682F10BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.Flecs.runtime.linux-x64", "production\Interop.Flecs.runtime.linux-x64\Interop.Flecs.runtime.linux-x64.csproj", "{B6EA6A81-D9D9-4B20-B897-7A8DED05CB00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.Flecs.runtime.osx", "production\Interop.Flecs.runtime.osx\Interop.Flecs.runtime.osx.csproj", "{BFC9867A-C542-401D-AF76-7094D3D4261A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interop.Flecs.runtime.win-x64", "production\Interop.Flecs.runtime.win-x64\Interop.Flecs.runtime.win-x64.csproj", "{F205AFC3-2ED6-4F65-BD63-7077F3CE07C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +107,26 @@ Global
 		{45B80105-C0E9-42E0-9D70-D42B65958262}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45B80105-C0E9-42E0-9D70-D42B65958262}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45B80105-C0E9-42E0-9D70-D42B65958262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C5CE028-B4F3-4D18-9BF5-8785103B6138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C5CE028-B4F3-4D18-9BF5-8785103B6138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C5CE028-B4F3-4D18-9BF5-8785103B6138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C5CE028-B4F3-4D18-9BF5-8785103B6138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26B6B8F0-2CAE-4DFC-9F79-9313682F10BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B6B8F0-2CAE-4DFC-9F79-9313682F10BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B6B8F0-2CAE-4DFC-9F79-9313682F10BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B6B8F0-2CAE-4DFC-9F79-9313682F10BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6EA6A81-D9D9-4B20-B897-7A8DED05CB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6EA6A81-D9D9-4B20-B897-7A8DED05CB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6EA6A81-D9D9-4B20-B897-7A8DED05CB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6EA6A81-D9D9-4B20-B897-7A8DED05CB00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC9867A-C542-401D-AF76-7094D3D4261A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC9867A-C542-401D-AF76-7094D3D4261A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC9867A-C542-401D-AF76-7094D3D4261A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC9867A-C542-401D-AF76-7094D3D4261A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F205AFC3-2ED6-4F65-BD63-7077F3CE07C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F205AFC3-2ED6-4F65-BD63-7077F3CE07C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F205AFC3-2ED6-4F65-BD63-7077F3CE07C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F205AFC3-2ED6-4F65-BD63-7077F3CE07C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +148,11 @@ Global
 		{36062DD2-C7DC-4074-B1EC-218636DD4B76} = {9E1476CE-E22E-44FD-ABC4-93625DDBBA99}
 		{81CFEB14-4C31-4CEF-BE4B-B281EC42D060} = {36062DD2-C7DC-4074-B1EC-218636DD4B76}
 		{45B80105-C0E9-42E0-9D70-D42B65958262} = {39423871-7923-4AFB-A756-35E17FCBA274}
+		{1C5CE028-B4F3-4D18-9BF5-8785103B6138} = {39423871-7923-4AFB-A756-35E17FCBA274}
+		{26B6B8F0-2CAE-4DFC-9F79-9313682F10BA} = {39423871-7923-4AFB-A756-35E17FCBA274}
+		{B6EA6A81-D9D9-4B20-B897-7A8DED05CB00} = {39423871-7923-4AFB-A756-35E17FCBA274}
+		{BFC9867A-C542-401D-AF76-7094D3D4261A} = {39423871-7923-4AFB-A756-35E17FCBA274}
+		{F205AFC3-2ED6-4F65-BD63-7077F3CE07C0} = {39423871-7923-4AFB-A756-35E17FCBA274}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4B6B4B9-1CB6-414C-BF33-521394D6CD71}

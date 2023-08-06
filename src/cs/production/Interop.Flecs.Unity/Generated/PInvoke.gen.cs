@@ -19,10 +19,10 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 #endregion
 
-namespace flecs_hub
+namespace flecs_hub.Interop.Flecs
 {
 
-    public static unsafe partial class flecs
+    public static unsafe partial class PInvoke
     {
         private const string LibraryName = "flecs";
 

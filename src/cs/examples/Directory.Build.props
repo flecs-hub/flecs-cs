@@ -2,4 +2,15 @@
 
     <Import Project="../Directory.Build.props" />
 
+    <!-- Project references -->
+    <ItemGroup>
+        <ProjectReference Include="$(MSBuildThisFileDirectory)../production/Flecs.Core/Flecs.Core.csproj" />
+        <ProjectReference
+            Include="$(MSBuildThisFileDirectory)../production/Interop.Flecs.runtime.linux-x64/Interop.Flecs.runtime.linux-x64.csproj" />
+        <ProjectReference
+            Include="$(MSBuildThisFileDirectory)../production/Interop.Flecs.runtime.osx/Interop.Flecs.runtime.osx.csproj" />
+        <ProjectReference
+            Include="$(MSBuildThisFileDirectory)../production/Interop.Flecs.runtime.win-x64/Interop.Flecs.runtime.win-x64.csproj" />
+    </ItemGroup>
+
 </Project>

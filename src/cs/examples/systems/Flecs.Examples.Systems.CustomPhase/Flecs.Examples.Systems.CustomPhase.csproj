@@ -1,15 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <ImplicitUsings>true</ImplicitUsings>
-    </PropertyGroup>
-
-    <!-- Project references -->
-    <ItemGroup>
-      <ProjectReference Include="..\..\..\production\Flecs.Core\Flecs.Core.csproj" />
-    </ItemGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>true</ImplicitUsings>
+  </PropertyGroup>
 
 </Project>

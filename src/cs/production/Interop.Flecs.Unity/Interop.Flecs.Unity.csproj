@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<!-- MSBuild settings -->
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<RootNamespace>flecs_hub.Interop.Flecs</RootNamespace>
+		<ImplicitUsings>false</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<NoWarn>$(NoWarn);CS8981</NoWarn>
+	</PropertyGroup>
+
+	<!-- NuGet settings -->
+	<PropertyGroup>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Update="_README_PACKAGE.md">
+			<Pack>true</Pack>
+			<PackagePath>/</PackagePath>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<!-- NuGet package references -->
+	<ItemGroup>
+		<PackageReference Include="bottlenoselabs.C2CS.Runtime" Version="6.1.3"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="$(MSBuildThisFileDirectory)../Interop.Flecs.Core/**/*.cs">
+			<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Compile>
+		<Compile Remove="$(MSBuildThisFileDirectory)../Interop.Flecs.Core/Generated/**/*.cs"/>
+	</ItemGroup>
+
+</Project>
