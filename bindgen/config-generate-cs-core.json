@@ -2,7 +2,7 @@
     "inputFilePath": "./x-ast/ast-cross-platform.json",
     "outputFileDirectory": "./../src/cs/production/Interop.Flecs.Core/Generated",
     "namespaceName": "flecs_hub",
-    "className": "flecs",
+    "className": "PInvoke",
     "isEnabledGeneratingRuntimeCode": false,
     "isEnabledLibraryImport": true,
     "isEnabledFunctionPointers": true,
