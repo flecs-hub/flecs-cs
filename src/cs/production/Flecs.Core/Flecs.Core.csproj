@@ -6,7 +6,6 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<ImplicitUsings>false</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<AssemblyName>Flecs-cs</AssemblyName>
 		<RootNamespace>flecs_hub.Flecs</RootNamespace>
 	</PropertyGroup>
 

@@ -3,26 +3,21 @@
 	<!-- MSBuild settings -->
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<ImplicitUsings>disable</ImplicitUsings>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<RootNamespace>flecs_hub.Interop.Flecs</RootNamespace>
 		<ImplicitUsings>false</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-		<NoWarn>$(NoWarn);CS8981</NoWarn>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<NoWarn>$(NoWarn);CS8981;CA1016</NoWarn>
 	</PropertyGroup>
 
 	<!-- NuGet settings -->
 	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
-	<ItemGroup>
-		<None Update="_README_PACKAGE.md">
-			<Pack>true</Pack>
-			<PackagePath>/</PackagePath>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
 
 	<!-- NuGet package references -->
 	<ItemGroup>

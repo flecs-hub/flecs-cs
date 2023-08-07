@@ -40,6 +40,10 @@ jobs:
         shell: bash
         run: dotnet tool install --global bottlenoselabs.C2CS.Tool
 
+      - name: "Install Linux dependencies"
+        if: runner.os == 'Linux' && steps.cache-libs.outputs.cache-hit != 'true'
+        run: sudo apt-get update
+
       - name: "Build native libraries"
         if: steps.cache-libs.outputs.cache-hit != 'true'
         shell: bash
@@ -96,5 +100,5 @@ jobs:
           path: "./src/cs/production/Interop.Flecs.Unity/Generated"
 
       - name: ".NET Build"
-        run: dotnet build
+        run: dotnet build "./src/cs" --nologo --verbosity minimal --configuration Release
           

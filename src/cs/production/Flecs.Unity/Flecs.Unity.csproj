@@ -3,13 +3,14 @@
 	<!-- MSBuild settings -->
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<DefineConstants>$(DefineConstants);UNITY_5_3_OR_NEWER</DefineConstants>
+		<NoWarn>$(NoWarn);CA1016</NoWarn>
+		<RootNamespace>flecs_hub.Flecs</RootNamespace>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 		<NoWarn>$(NoWarn);CA1016</NoWarn>
-		<RootNamespace>flecs_hub.Flecs</RootNamespace>
 	</PropertyGroup>
 
 	<!-- NuGet settings -->

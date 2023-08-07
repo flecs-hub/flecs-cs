@@ -28,7 +28,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: "bindgen-cs-unity"
-          path: "./src/cs/production/Inteorp.Flecs.Unity/Generated"
+          path: "./src/cs/production/Interop.Flecs.Unity/Generated"
 
       - name: "Echo download path"
         run: echo ${{steps.download.outputs.download-path}}
