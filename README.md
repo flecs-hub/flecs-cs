@@ -1,5 +1,7 @@
 # flecs-cs
 
+Archived; see: https://github.com/BeanCheeseBurrito/Flecs.NET
+
 Automatically updated C# bindings for https://github.com/SanderMertens/flecs with native dynamic link libraries. Includes the lower-level unsafe C# "binding" which is 100% automatically generated. The higher level safe "wrapper" is still being worked on.
 
 ## How to use
